@@ -376,15 +376,20 @@ const LanguageContext = createContext<LanguageContextValue | null>(null);
 const LANGUAGE_STORAGE_KEY = "clamp-language";
 
 export function LanguageProvider({ children }: { children: ReactNode }) {
-  const [language, setLanguageState] = useState<Language>("en");
+  const [language, setLanguageState] = useState<Language>(() => {
+    if (typeof window === "undefined") {
+      return "en";
+    }
+
+    const storedLanguage = window.localStorage.getItem(LANGUAGE_STORAGE_KEY);
+    return storedLanguage === "en" || storedLanguage === "es"
+      ? storedLanguage
+      : "en";
+  });
 
   useEffect(() => {
-    const storedLanguage = window.localStorage.getItem(LANGUAGE_STORAGE_KEY);
-
-    if (storedLanguage === "en" || storedLanguage === "es") {
-      setLanguageState(storedLanguage);
-    }
-  }, []);
+    document.documentElement.lang = language;
+  }, [language]);
 
   const setLanguage = (nextLanguage: Language) => {
     setLanguageState(nextLanguage);
