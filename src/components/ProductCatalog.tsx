@@ -188,17 +188,17 @@ export default function ProductCatalog({
                   <div className="mt-4 border-t border-black/10 pt-3">
                     <div>
                       {product.brand && (
-                        <p className="mb-1.5 text-[0.7rem] font-black uppercase tracking-[0.12em] text-[#00000075]">
+                        <p className="mb-1.5 text-[0.7rem] font-normal uppercase tracking-[0.12em] text-[#666]">
                           {product.brand}
                         </p>
                       )}
                       <h3 className="text-xs font-black leading-tight tracking-[0.01em] sm:text-sm">
                         {product.name}
                       </h3>
-                      <p className="mt-1 text-xs font-medium text-black/45">
+                      <p className="mt-1 text-xs font-normal text-[#555]">
                         {product.category}
                       </p>
-                      <p className="mt-2 text-xs font-medium text-black/45">
+                      <p className="mt-2 text-xs font-normal text-[#444]">
                         {product.price ? (
                           <>
                             {product.price}€ {priceSuffix}
