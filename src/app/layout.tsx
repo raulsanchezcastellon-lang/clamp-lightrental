@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Montserrat } from "next/font/google";
 import { CartProvider } from "@/components/CartProvider";
+import CookieConsentBanner from "@/components/CookieConsentBanner";
 import { LanguageProvider } from "@/components/LanguageProvider";
 import WhatsAppButton from "@/components/WhatsAppButton";
 import {
@@ -138,6 +139,7 @@ export default function RootLayout({
         <LanguageProvider>
           <CartProvider>
             {children}
+            <CookieConsentBanner />
             <WhatsAppButton />
           </CartProvider>
         </LanguageProvider>

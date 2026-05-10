@@ -115,7 +115,12 @@ type TranslationKey =
   | "footer.legalNotice"
   | "footer.privacy"
   | "footer.cookies"
-  | "footer.rights";
+  | "footer.rights"
+  | "cookies.bannerTitle"
+  | "cookies.bannerText"
+  | "cookies.accept"
+  | "cookies.reject"
+  | "cookies.policy";
 
 const translations: Record<Language, Record<TranslationKey, string>> = {
   en: {
@@ -239,6 +244,12 @@ const translations: Record<Language, Record<TranslationKey, string>> = {
     "footer.privacy": "Privacy Policy",
     "footer.cookies": "Cookie Policy",
     "footer.rights": "All rights reserved.",
+    "cookies.bannerTitle": "Cookie preferences",
+    "cookies.bannerText":
+      "We use essential cookies to make the website work. With your permission, we may also use non-essential cookies to improve the experience and understand how the site is used.",
+    "cookies.accept": "Accept",
+    "cookies.reject": "Reject",
+    "cookies.policy": "Cookie policy",
   },
   es: {
     "nav.equipment": "Equipo",
@@ -362,6 +373,12 @@ const translations: Record<Language, Record<TranslationKey, string>> = {
     "footer.privacy": "Política de privacidad",
     "footer.cookies": "Política de cookies",
     "footer.rights": "Todos los derechos reservados.",
+    "cookies.bannerTitle": "Preferencias de cookies",
+    "cookies.bannerText":
+      "Usamos cookies esenciales para que la web funcione. Con tu permiso, también podríamos usar cookies no esenciales para mejorar la experiencia y entender cómo se utiliza la web.",
+    "cookies.accept": "Aceptar",
+    "cookies.reject": "Rechazar",
+    "cookies.policy": "Política de cookies",
   },
 };
 
