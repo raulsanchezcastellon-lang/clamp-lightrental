@@ -381,11 +381,12 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
       return "en";
     }
 
-    const storedLanguage = window.localStorage.getItem(LANGUAGE_STORAGE_KEY);
-    return storedLanguage === "en" || storedLanguage === "es"
-      ? storedLanguage
-      : "en";
-  });
+   const storedLanguage = window.localStorage.getItem(LANGUAGE_STORAGE_KEY);
+if (storedLanguage === "en" || storedLanguage === "es") {
+  return storedLanguage;
+}
+const browserLang = navigator.language || navigator.languages?.[0] || "en";
+return browserLang.toLowerCase().startsWith("es") ? "es" : "en";
 
   useEffect(() => {
     document.documentElement.lang = language;
