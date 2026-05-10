@@ -39,7 +39,7 @@ export const metadata: Metadata = {
   applicationName: SITE_NAME,
   category: "Lighting equipment rental",
   verification: {
-    google: "ac2607ba750e34ee",
+    google: "26sDH8y85x0GwmQ-NaSEwU338H7a3VPdhmYFToWCips",
   },
   alternates: {
     canonical: "/",
