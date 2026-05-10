@@ -89,6 +89,8 @@ type TranslationKey =
   | "homeFeatures.deliveryText"
   | "homeFeatures.supportTitle"
   | "homeFeatures.supportText"
+  | "homeSocial.eyebrow"
+  | "homeSocial.title"
   | "homeCta.title"
   | "homeCta.text"
   | "homeCta.button"
@@ -213,6 +215,8 @@ const translations: Record<Language, Record<TranslationKey, string>> = {
     "homeFeatures.supportTitle": "Technical Support",
     "homeFeatures.supportText":
       "Expert assistance available for every production and rental need",
+    "homeSocial.eyebrow": "On set",
+    "homeSocial.title": "Real gear, real shoots, real crews.",
     "homeCta.title": "Need lighting for your project?",
     "homeCta.text": "Contact us today for a tailored lighting solution.",
     "homeCta.button": "Send Inquiry",
@@ -348,6 +352,8 @@ const translations: Record<Language, Record<TranslationKey, string>> = {
     "homeFeatures.supportTitle": "Soporte técnico",
     "homeFeatures.supportText":
       "Asistencia experta para cada producción y necesidad de alquiler",
+    "homeSocial.eyebrow": "En set",
+    "homeSocial.title": "Material real, rodajes reales, equipos reales.",
     "homeCta.title": "¿Necesitas iluminación para tu proyecto?",
     "homeCta.text": "Contáctanos y prepararemos una solución a medida.",
     "homeCta.button": "Enviar consulta",
