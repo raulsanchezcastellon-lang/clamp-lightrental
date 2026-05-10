@@ -96,6 +96,9 @@ type TranslationKey =
   | "about.eyebrow"
   | "about.title"
   | "about.text"
+  | "about.p1"
+  | "about.p2"
+  | "about.p3"
   | "about.button"
   | "about.workTitle"
   | "about.intro"
@@ -138,11 +141,11 @@ const translations: Record<Language, Record<TranslationKey, string>> = {
     "homeIntro.eyebrow": "Who we are",
     "homeIntro.title": "Lighting rental for photo and video productions.",
     "homeIntro.p1":
-      "CLAMP is a lighting equipment rental company for photography and video productions, specialised in advertising shoots, commercials, and high-demand sets.",
+      "CLAMP is a lighting equipment rental company for photography and video, specialised in film productions and advertising shoots.",
     "homeIntro.p2":
-      "Based in Alicante and backed by more than 10 years of experience, we provide the technical equipment and skilled professionals needed to cover your on-set requirements - from single-day shoots to large-scale productions across the Spanish Mediterranean coast.",
+      "Based in Alicante and backed by more than 10 years of experience, we provide the technical equipment and skilled professionals needed to cover your on-set requirements.",
     "homeIntro.p3":
-      "Our rental catalogue includes professional studio lighting, portable LED systems, grip equipment, and power distribution solutions, all maintained to broadcast and advertising standards. Whether you need a full lighting package or specific units to complement your existing setup, we adapt to the scale and rhythm of your production.",
+      "",
     "featured.loading": "Loading featured products...",
     "featured.noImage": "No image",
     "featured.priceOnRequest": "Price on request",
@@ -218,6 +221,12 @@ const translations: Record<Language, Record<TranslationKey, string>> = {
     "about.title": "Lighting rental shaped around your production",
     "about.text":
       "CLAMP Light Rental provides professional lighting equipment and technical support for film, photo, commercial and event productions. We combine carefully maintained gear with a practical, flexible service so each project can move smoothly from prep to wrap.",
+    "about.p1":
+      "CLAMP is a lighting equipment rental company for photography and video productions, specialised in advertising shoots, commercials, and high-demand sets.",
+    "about.p2":
+      "Based in Alicante and backed by more than 10 years of experience, we provide the technical equipment and skilled professionals needed to cover your on-set requirements - from single-day shoots to large-scale productions across the Spanish Mediterranean coast.",
+    "about.p3":
+      "Our rental catalogue includes professional studio lighting, portable LED systems, grip equipment, and power distribution solutions, all maintained to broadcast and advertising standards. Whether you need a full lighting package or specific units to complement your existing setup, we adapt to the scale and rhythm of your production.",
     "about.button": "View equipment",
     "about.workTitle": "How we work",
     "about.intro":
@@ -267,11 +276,11 @@ const translations: Record<Language, Record<TranslationKey, string>> = {
     "homeIntro.eyebrow": "Quiénes somos",
     "homeIntro.title": "Alquiler de iluminación para foto y vídeo.",
     "homeIntro.p1":
-      "CLAMP es una empresa de alquiler de material de iluminación para producciones de fotografía y vídeo, especializada en shootings publicitarios, comerciales y sets de alta exigencia.",
+      "CLAMP es una empresa dedicada al alquiler de material de iluminación para fotografía y vídeo, especializada en rodajes y shootings de publicidad.",
     "homeIntro.p2":
-      "Localizada en Alicante y con más de 10 años de experiencia, contamos con el material técnico y los profesionales necesarios para cubrir tus necesidades en set, desde rodajes de un solo día hasta producciones de mayor escala en la costa mediterránea española.",
+      "Localizada en Alicante y con más de 10 años de experiencia, contamos con el material técnico y los profesionales necesarios para cubrir tus necesidades en set.",
     "homeIntro.p3":
-      "Nuestro catálogo de alquiler incluye iluminación profesional de estudio, sistemas LED portátiles, material de grip y soluciones de distribución eléctrica, todo mantenido bajo estándares de broadcast y publicidad. Tanto si necesitas un paquete completo de iluminación como unidades concretas para complementar tu setup, nos adaptamos a la escala y ritmo de tu producción.",
+      "",
     "featured.loading": "Cargando productos destacados...",
     "featured.noImage": "Sin imagen",
     "featured.priceOnRequest": "Precio bajo consulta",
@@ -347,6 +356,12 @@ const translations: Record<Language, Record<TranslationKey, string>> = {
     "about.title": "Alquiler de iluminación adaptado a tu producción",
     "about.text":
       "CLAMP Light Rental ofrece material profesional de iluminación y soporte técnico para producciones de cine, fotografía, publicidad y eventos. Combinamos equipo cuidado con un servicio práctico y flexible para que cada proyecto avance con fluidez.",
+    "about.p1":
+      "CLAMP es una empresa de alquiler de material de iluminación para producciones de fotografía y vídeo, especializada en shootings publicitarios, comerciales y sets de alta exigencia.",
+    "about.p2":
+      "Localizada en Alicante y con más de 10 años de experiencia, contamos con el material técnico y los profesionales necesarios para cubrir tus necesidades en set, desde rodajes de un solo día hasta producciones de mayor escala en la costa mediterránea española.",
+    "about.p3":
+      "Nuestro catálogo de alquiler incluye iluminación profesional de estudio, sistemas LED portátiles, material de grip y soluciones de distribución eléctrica, todo mantenido bajo estándares de broadcast y publicidad. Tanto si necesitas un paquete completo de iluminación como unidades concretas para complementar tu setup, nos adaptamos a la escala y ritmo de tu producción.",
     "about.button": "Ver equipo",
     "about.workTitle": "Cómo trabajamos",
     "about.intro":

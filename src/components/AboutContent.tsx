@@ -41,13 +41,13 @@ export default function AboutContent() {
       <section className="border-b border-black/10">
         <div className="mx-auto grid max-w-7xl gap-10 px-4 pb-14 pt-24 sm:px-6 sm:pt-28 lg:grid-cols-[0.9fr_1.1fr] lg:px-8 lg:pb-20 lg:pt-32">
           <div className="flex flex-col justify-center">
-            <h1 className="max-w-3xl text-4xl font-black uppercase leading-none tracking-[0.01em] sm:text-5xl lg:text-6xl">
+            <h1 className="max-w-3xl text-3xl font-black uppercase leading-tight tracking-[0.01em] sm:text-4xl lg:text-5xl">
               {t("homeIntro.eyebrow")}
             </h1>
             <div className="mt-6 max-w-2xl space-y-4 text-lg font-medium leading-relaxed text-black/60">
-              <p>{t("homeIntro.p1")}</p>
-              <p>{t("homeIntro.p2")}</p>
-              <p>{t("homeIntro.p3")}</p>
+              <p>{t("about.p1")}</p>
+              <p>{t("about.p2")}</p>
+              <p>{t("about.p3")}</p>
             </div>
           </div>
 

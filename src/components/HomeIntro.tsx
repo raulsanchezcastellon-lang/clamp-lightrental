@@ -18,7 +18,6 @@ export default function HomeIntro() {
           <div className="max-w-4xl space-y-4 text-lg font-medium leading-relaxed text-black/60">
             <p>{t("homeIntro.p1")}</p>
             <p>{t("homeIntro.p2")}</p>
-            <p>{t("homeIntro.p3")}</p>
           </div>
         </div>
       </div>
