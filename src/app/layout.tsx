@@ -38,6 +38,9 @@ export const metadata: Metadata = {
   publisher: SITE_NAME,
   applicationName: SITE_NAME,
   category: "Lighting equipment rental",
+  verification: {
+    google: "ac2607ba750e34ee",
+  },
   alternates: {
     canonical: "/",
   },
