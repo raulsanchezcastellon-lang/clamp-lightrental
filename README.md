@@ -1,36 +1,85 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# CLAMP Light Rental - Sitio Web y Panel de Administración
 
-## Getting Started
+Una solución completa para gestionar un negocio de alquiler de material de iluminación profesional. Incluye sitio web optimizado para SEO, catálogo de productos y panel de administración para gestionar el inventario.
 
-First, run the development server:
+## Características
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+✅ **Sitio Web Profesional**
+- Página principal con llamada a la acción
+- Catálogo de productos dinámico
+- Página de contacto con formulario
+- Diseño responsive y moderno
+- Optimizado para SEO
+
+✅ **Panel de Administración**
+- Autenticación segura con JWT
+- Gestión completa de productos (CRUD)
+- Interfaz intuitiva y fácil de usar
+- Base de datos MongoDB
+
+✅ **Stack Tecnológico**
+- Next.js 16+ con App Router
+- TypeScript para seguridad de tipos
+- Tailwind CSS para estilos
+- Prisma ORM para base de datos
+- MongoDB para persistencia
+- JWT para autenticación
+
+## Instalación Rápida
+
+### Requisitos
+- Node.js 18+
+- MongoDB Atlas account (gratuito)
+
+### Pasos
+
+1. **Variables de entorno** - Edita `.env.local`:
+   ```
+   DATABASE_URL="mongodb+srv://usuario:contraseña@cluster.mongodb.net/clamp"
+   JWT_SECRET="tu-clave-secreta-aqui"
+   ```
+
+2. **Instala y ejecuta**:
+   ```bash
+   npm install
+   npx prisma db push
+   npm run dev
+   ```
+
+3. **Accede a**:
+   - Sitio: http://localhost:3000
+   - Admin: http://localhost:3000/admin
+
+## Estructura del Proyecto
+
+```
+src/
+├── app/                    # Páginas y API routes
+│   ├── page.tsx           # Inicio
+│   ├── catalogo/          # Catálogo de productos
+│   ├── contacto/          # Formulario de contacto
+│   ├── admin/             # Panel administrativo
+│   └── api/               # API REST
+├── components/            # Componentes React
+└── lib/                   # Utilidades
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Credenciales por Defecto
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Para crear el admin inicial, ejecuta:
+```bash
+npx prisma studio  # Para ver/crear datos en la BD
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Scripts
 
-## Learn More
+```bash
+npm run dev       # Desarrollo (localhost:3000)
+npm run build     # Compilar para producción
+npm run start     # Ejecutar en producción
+npm run lint      # Verificar código
+```
 
-To learn more about Next.js, take a look at the following resources:
+## Documentación Completa
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Ver [documentación detallada](./DOCUMENTATION.md) para guía completa de uso, despliegue y características avanzadas.
