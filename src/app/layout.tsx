@@ -3,6 +3,12 @@ import { Montserrat } from "next/font/google";
 import { CartProvider } from "@/components/CartProvider";
 import { LanguageProvider } from "@/components/LanguageProvider";
 import WhatsAppButton from "@/components/WhatsAppButton";
+import {
+  DEFAULT_DESCRIPTION,
+  DEFAULT_OG_IMAGE,
+  SITE_NAME,
+  SITE_URL,
+} from "@/lib/seo";
 import "./globals.css";
 
 const montserrat = Montserrat({
@@ -11,13 +17,12 @@ const montserrat = Montserrat({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://www.clamp-lightrental.com"),
+  metadataBase: new URL(SITE_URL),
   title: {
-    default: "CLAMP Light Rental",
-    template: "%s | CLAMP Light Rental",
+    default: "CLAMP Light Rental | Lighting Equipment Rental in Alicante",
+    template: `%s | ${SITE_NAME}`,
   },
-  description:
-    "Professional lighting equipment rental for photo, video, advertising shoots and production crews in Alicante and across the Spanish Mediterranean coast.",
+  description: DEFAULT_DESCRIPTION,
   keywords: [
     "lighting rental",
     "light rental",
@@ -25,11 +30,16 @@ export const metadata: Metadata = {
     "photo lighting rental",
     "video production equipment",
     "Alicante lighting rental",
-    "CLAMP Light Rental",
+    SITE_NAME,
   ],
-  authors: [{ name: "CLAMP Light Rental" }],
-  creator: "CLAMP Light Rental",
-  publisher: "CLAMP Light Rental",
+  authors: [{ name: SITE_NAME }],
+  creator: SITE_NAME,
+  publisher: SITE_NAME,
+  applicationName: SITE_NAME,
+  category: "Lighting equipment rental",
+  alternates: {
+    canonical: "/",
+  },
   icons: {
     icon: "/icon.svg",
   },
@@ -37,26 +47,75 @@ export const metadata: Metadata = {
     type: "website",
     locale: "en_US",
     url: "/",
-    siteName: "CLAMP Light Rental",
-    title: "CLAMP Light Rental",
-    description:
-      "Professional lighting equipment rental for photo, video, advertising shoots and production crews in Alicante and across the Spanish Mediterranean coast.",
+    siteName: SITE_NAME,
+    title: "CLAMP Light Rental | Lighting Equipment Rental in Alicante",
+    description: DEFAULT_DESCRIPTION,
     images: [
       {
-        url: "/og-image.png",
+        url: DEFAULT_OG_IMAGE,
         width: 1024,
         height: 1024,
-        alt: "CLAMP Light Rental",
+        alt: SITE_NAME,
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "CLAMP Light Rental",
-    description:
-      "Professional lighting equipment rental for photo, video, advertising shoots and production crews in Alicante and across the Spanish Mediterranean coast.",
-    images: ["/og-image.png"],
+    title: "CLAMP Light Rental | Lighting Equipment Rental in Alicante",
+    description: DEFAULT_DESCRIPTION,
+    images: [DEFAULT_OG_IMAGE],
   },
+};
+
+const localBusinessJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "LocalBusiness",
+  "@id": `${SITE_URL}/#business`,
+  name: SITE_NAME,
+  url: SITE_URL,
+  logo: `${SITE_URL}/icon.svg`,
+  image: `${SITE_URL}${DEFAULT_OG_IMAGE}`,
+  description: DEFAULT_DESCRIPTION,
+  email: "raul@clamp-lightrental.com",
+  telephone: "+34681878782",
+  priceRange: "€€",
+  address: {
+    "@type": "PostalAddress",
+    streetAddress: "Calle Tomas Capelo, 42",
+    postalCode: "03550",
+    addressLocality: "San Juan d'Alacant",
+    addressRegion: "Alicante",
+    addressCountry: "ES",
+  },
+  openingHoursSpecification: [
+    {
+      "@type": "OpeningHoursSpecification",
+      dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+      opens: "09:00",
+      closes: "18:00",
+    },
+  ],
+  areaServed: [
+    "Alicante",
+    "Valencian Community",
+    "Spanish Mediterranean coast",
+  ],
+  makesOffer: [
+    {
+      "@type": "Offer",
+      itemOffered: {
+        "@type": "Service",
+        name: "Professional lighting equipment rental",
+      },
+    },
+    {
+      "@type": "Offer",
+      itemOffered: {
+        "@type": "Service",
+        name: "Technical lighting crew and on-set support",
+      },
+    },
+  ],
 };
 
 export default function RootLayout({
@@ -70,6 +129,12 @@ export default function RootLayout({
       className={`${montserrat.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(localBusinessJsonLd),
+          }}
+        />
         <LanguageProvider>
           <CartProvider>
             {children}

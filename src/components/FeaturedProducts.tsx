@@ -3,19 +3,15 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { useLanguage } from "@/components/LanguageProvider";
+import type { PublicProduct } from "@/lib/products";
 
-type FeaturedProduct = {
-  id: string;
-  name: string;
-  brand?: string;
-  category: string;
-  price: number;
-  image?: string;
-};
-
-export default function FeaturedProducts() {
-  const [products, setProducts] = useState<FeaturedProduct[]>([]);
-  const [loading, setLoading] = useState(true);
+export default function FeaturedProducts({
+  initialProducts = [],
+}: {
+  initialProducts?: PublicProduct[];
+}) {
+  const [products, setProducts] = useState<PublicProduct[]>(initialProducts);
+  const [loading, setLoading] = useState(initialProducts.length === 0);
   const { t } = useLanguage();
 
   useEffect(() => {
@@ -40,6 +36,11 @@ export default function FeaturedProducts() {
     return null;
   }
 
+  const getProductAltText = (product: PublicProduct) =>
+    [product.brand, product.name, product.category, "featured lighting rental equipment"]
+      .filter(Boolean)
+      .join(" - ");
+
   return (
     <section className="bg-[#f7f7f4] px-4 py-8 text-black sm:px-6 lg:px-8">
       <div className="mx-auto max-w-[1580px]">
@@ -53,8 +54,9 @@ export default function FeaturedProducts() {
                   {product.image ? (
                     <img
                       src={product.image}
-                      alt={product.name}
+                      alt={getProductAltText(product)}
                       className="h-full w-full object-contain"
+                      loading="lazy"
                     />
                   ) : (
                     <div className="flex h-full w-full items-center justify-center border border-black/10 text-xs font-medium uppercase tracking-[0.08em] text-black/30">

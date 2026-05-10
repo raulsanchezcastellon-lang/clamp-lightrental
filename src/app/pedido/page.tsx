@@ -116,8 +116,9 @@ export default function PedidoPage() {
                         {item.image ? (
                           <img
                             src={item.image}
-                            alt={item.name}
+                            alt={[item.brand, item.name, item.category].filter(Boolean).join(" - ")}
                             className="h-full w-full object-contain p-2"
+                            loading="lazy"
                           />
                         ) : (
                           <span className="text-xs font-medium uppercase text-black/30">

@@ -3,32 +3,26 @@
 import { useEffect, useMemo, useState } from "react";
 import { useCart } from "@/components/CartProvider";
 import { useLanguage } from "@/components/LanguageProvider";
+import type { PublicProduct } from "@/lib/products";
 
 type ListingType = "rental" | "sale";
-
-interface Product {
-  id: string;
-  name: string;
-  brand?: string;
-  category: string;
-  price: number;
-  image?: string;
-  description?: string;
-  listingType?: ListingType;
-}
 
 interface ProductCatalogProps {
   listingType: ListingType;
   title: string;
   emptyText: string;
+  initialProducts?: PublicProduct[];
 }
 
-export default function ProductCatalog({ listingType }: ProductCatalogProps) {
+export default function ProductCatalog({
+  listingType,
+  initialProducts = [],
+}: ProductCatalogProps) {
   const [selectedCategory, setSelectedCategory] = useState("All");
   const [searchQuery, setSearchQuery] = useState("");
   const [quantities, setQuantities] = useState<Record<string, number>>({});
-  const [products, setProducts] = useState<Product[]>([]);
-  const [loading, setLoading] = useState(true);
+  const [products, setProducts] = useState<PublicProduct[]>(initialProducts);
+  const [loading, setLoading] = useState(initialProducts.length === 0);
   const { addItem } = useCart();
   const { t } = useLanguage();
 
@@ -82,7 +76,7 @@ export default function ProductCatalog({ listingType }: ProductCatalogProps) {
     }));
   };
 
-  const handleAddProduct = (product: Product) => {
+  const handleAddProduct = (product: PublicProduct) => {
     addItem({
       id: product.id,
       name: product.name,
@@ -94,6 +88,11 @@ export default function ProductCatalog({ listingType }: ProductCatalogProps) {
       quantity: quantities[product.id] || 1,
     });
   };
+
+  const getProductAltText = (product: PublicProduct) =>
+    [product.brand, product.name, product.category, "lighting rental equipment"]
+      .filter(Boolean)
+      .join(" - ");
 
   return (
     <main className="min-h-screen bg-[#f7f7f4] text-black">
@@ -174,8 +173,9 @@ export default function ProductCatalog({ listingType }: ProductCatalogProps) {
                       <div className="flex aspect-square w-full max-w-[150px] items-center justify-center sm:max-w-[200px] xl:max-w-[240px]">
                         <img
                           src={product.image}
-                          alt={product.name}
+                          alt={getProductAltText(product)}
                           className="h-full w-full object-contain transition duration-300 group-hover:scale-[1.025]"
+                          loading="lazy"
                         />
                       </div>
                     ) : (
