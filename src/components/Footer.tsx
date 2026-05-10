@@ -70,17 +70,17 @@ export default function Footer() {
             <h4 className="text-lg font-semibold mb-4">{t("footer.legal")}</h4>
             <ul className="space-y-3 text-black/80 text-sm">
               <li>
-                <a href="#" className="hover:underline">
+                <a href="/aviso-legal" className="hover:underline">
                   {t("footer.legalNotice")}
                 </a>
               </li>
               <li>
-                <a href="#" className="hover:underline">
+                <a href="/privacidad" className="hover:underline">
                   {t("footer.privacy")}
                 </a>
               </li>
               <li>
-                <a href="#" className="hover:underline">
+                <a href="/cookies" className="hover:underline">
                   {t("footer.cookies")}
                 </a>
               </li>
