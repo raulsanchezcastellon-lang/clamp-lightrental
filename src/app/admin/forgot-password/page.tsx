@@ -1,37 +1,35 @@
 "use client";
 
 import { useState } from "react";
-import { useRouter } from "next/navigation";
 import Link from "next/link";
 
-export default function AdminLogin() {
+export default function ForgotPasswordPage() {
   const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [message, setMessage] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
-  const router = useRouter();
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
+  const handleSubmit = async (event: React.FormEvent) => {
+    event.preventDefault();
     setError("");
+    setMessage("");
     setLoading(true);
 
     try {
-      const response = await fetch("/api/auth/login", {
+      const response = await fetch("/api/auth/forgot-password", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, password }),
+        body: JSON.stringify({ email }),
       });
-
       const data = await response.json();
 
-      if (response.ok) {
-        router.push("/admin/products");
-      } else {
-        setError(data.error || "Error al iniciar sesión");
+      if (!response.ok) {
+        throw new Error(data.error || "No se pudo enviar el email.");
       }
+
+      setMessage("Si el email existe, recibirás un enlace para cambiar la contraseña.");
     } catch (err) {
-      setError("Error de conexión. Por favor, intenta de nuevo.");
+      setError(err instanceof Error ? err.message : "No se pudo enviar el email.");
     } finally {
       setLoading(false);
     }
@@ -44,15 +42,21 @@ export default function AdminLogin() {
           CLAMP
         </p>
         <h1 className="mt-2 text-center text-3xl font-black uppercase tracking-[0.02em]">
-          Admin
+          Recuperar
         </h1>
         <p className="mb-7 mt-2 text-center text-sm text-white/45">
-          Panel de Administración
+          Te enviaremos un enlace temporal.
         </p>
 
         {error && (
           <div className="mb-5 rounded-lg border border-red-400/30 bg-red-500/10 px-4 py-3 text-sm text-red-100">
             {error}
+          </div>
+        )}
+
+        {message && (
+          <div className="mb-5 rounded-lg border border-[#FFED00]/30 bg-[#FFED00]/10 px-4 py-3 text-sm text-[#FFF7A0]">
+            {message}
           </div>
         )}
 
@@ -64,34 +68,11 @@ export default function AdminLogin() {
             <input
               type="email"
               value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              onChange={(event) => setEmail(event.target.value)}
               required
               className="w-full rounded-lg border border-white/10 bg-black px-4 py-3 text-white outline-none transition focus:border-[#FFED00]"
               placeholder="tu@email.com"
             />
-          </div>
-
-          <div>
-            <label className="mb-2 block text-xs font-black uppercase tracking-[0.12em] text-white/45">
-              Contraseña
-            </label>
-            <input
-              type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              required
-              className="w-full rounded-lg border border-white/10 bg-black px-4 py-3 text-white outline-none transition focus:border-[#FFED00]"
-              placeholder="••••••••"
-            />
-          </div>
-
-          <div className="text-right">
-            <Link
-              href="/admin/forgot-password"
-              className="text-sm font-semibold text-white/55 transition hover:text-[#FFED00]"
-            >
-              ¿Has olvidado la contraseña?
-            </Link>
           </div>
 
           <button
@@ -99,13 +80,13 @@ export default function AdminLogin() {
             disabled={loading}
             className="w-full rounded-full bg-[#FFED00] py-3 text-sm font-black uppercase tracking-[0.12em] text-black transition hover:bg-white disabled:opacity-50"
           >
-            {loading ? "Iniciando sesión..." : "Iniciar Sesión"}
+            {loading ? "Enviando..." : "Enviar enlace"}
           </button>
         </form>
 
         <p className="mt-6 text-center text-sm text-white/45">
-          <Link href="/" className="font-semibold text-white hover:text-[#FFED00]">
-            Volver al sitio
+          <Link href="/admin" className="font-semibold text-white hover:text-[#FFED00]">
+            Volver al login
           </Link>
         </p>
       </div>

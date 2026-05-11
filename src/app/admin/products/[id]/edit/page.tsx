@@ -63,6 +63,7 @@ export default function EditProductPage() {
 
   const handleUploadImage = async (file: File) => {
     setUploadingImage(true);
+    setError("");
 
     const formData = new FormData();
     formData.append("image", file);
@@ -74,13 +75,14 @@ export default function EditProductPage() {
       });
 
       if (!response.ok) {
-        throw new Error("Upload failed");
+        const data = await response.json().catch(() => null);
+        throw new Error(data?.error || "Upload failed");
       }
 
       const data = await response.json();
       setImageUrl(data.url);
     } catch (err) {
-      console.error(err);
+      setError(err instanceof Error ? err.message : "Error uploading image. Try again.");
     } finally {
       setUploadingImage(false);
     }

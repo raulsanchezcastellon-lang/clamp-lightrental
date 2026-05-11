@@ -61,13 +61,14 @@ export default function NewProductPage() {
       });
 
       if (!response.ok) {
-        throw new Error("Upload failed");
+        const data = await response.json().catch(() => null);
+        throw new Error(data?.error || "Upload failed");
       }
 
       const data = await response.json();
       setImageUrl(data.url);
     } catch (err) {
-      setError("Error uploading image. Try again.");
+      setError(err instanceof Error ? err.message : "Error uploading image. Try again.");
     } finally {
       setUploadingImage(false);
     }
