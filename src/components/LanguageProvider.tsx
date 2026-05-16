@@ -145,7 +145,7 @@ const translations: Record<Language, Record<TranslationKey, string>> = {
     "homeIntro.p1":
       "CLAMP is a lighting equipment rental company for photography and video, specialised in film productions and advertising shoots.",
     "homeIntro.p2":
-      "Based in Alicante and backed by more than 10 years of experience, we provide the technical equipment and skilled professionals needed to cover your on-set requirements.",
+      "Based in Alicante and backed by more than 10 years of experience, we provide technical equipment and skilled professionals for productions across Alicante, Benidorm, Calpe, Dénia, Jávea and Murcia.",
     "homeIntro.p3":
       "",
     "featured.loading": "Loading featured products...",
@@ -282,7 +282,7 @@ const translations: Record<Language, Record<TranslationKey, string>> = {
     "homeIntro.p1":
       "CLAMP es una empresa dedicada al alquiler de material de iluminación para fotografía y vídeo, especializada en rodajes y shootings de publicidad.",
     "homeIntro.p2":
-      "Localizada en Alicante y con más de 10 años de experiencia, contamos con el material técnico y los profesionales necesarios para cubrir tus necesidades en set.",
+      "Localizada en Alicante y con más de 10 años de experiencia, contamos con el material técnico y los profesionales necesarios para producciones en Alicante, Benidorm, Calpe, Dénia, Jávea y Murcia.",
     "homeIntro.p3":
       "",
     "featured.loading": "Cargando productos destacados...",
