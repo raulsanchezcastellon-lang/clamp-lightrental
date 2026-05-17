@@ -54,6 +54,8 @@ type TranslationKey =
   | "cart.sentText"
   | "cart.emptyTitle"
   | "cart.emptyText"
+  | "cart.item"
+  | "cart.items"
   | "cart.noImage"
   | "cart.remove"
   | "cart.detailsTitle"
@@ -175,6 +177,8 @@ const translations: Record<Language, Record<TranslationKey, string>> = {
       "We have received your request. We will reply by email with availability and confirmation.",
     "cart.emptyTitle": "Your cart is empty",
     "cart.emptyText": "Add products from the catalog to prepare a request.",
+    "cart.item": "item",
+    "cart.items": "items",
     "cart.noImage": "No image",
     "cart.remove": "Remove",
     "cart.detailsTitle": "Request details",
@@ -312,6 +316,8 @@ const translations: Record<Language, Record<TranslationKey, string>> = {
       "Hemos recibido tu solicitud. Te responderemos por email con disponibilidad y confirmación.",
     "cart.emptyTitle": "Tu carrito está vacío",
     "cart.emptyText": "Añade productos desde el catálogo para preparar una solicitud.",
+    "cart.item": "artículo",
+    "cart.items": "artículos",
     "cart.noImage": "Sin imagen",
     "cart.remove": "Eliminar",
     "cart.detailsTitle": "Detalles del pedido",

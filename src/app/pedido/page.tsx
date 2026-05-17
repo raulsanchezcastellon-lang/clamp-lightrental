@@ -8,7 +8,7 @@ import { useCart } from "@/components/CartProvider";
 import { useLanguage } from "@/components/LanguageProvider";
 
 export default function PedidoPage() {
-  const { items, updateQuantity, removeItem, clearCart } = useCart();
+  const { items, totalItems, updateQuantity, removeItem, clearCart } = useCart();
   const { t } = useLanguage();
   const [form, setForm] = useState({
     name: "",
@@ -69,7 +69,21 @@ export default function PedidoPage() {
     <>
       <Header />
 
-      <main className="min-h-screen bg-[#f7f7f4] px-4 pb-10 pt-16 text-black sm:px-6 sm:pt-20 lg:px-8">
+      <div className="sticky top-[65px] z-40 mt-[65px] border-b border-black/10 bg-white px-4 py-3 text-black shadow-sm sm:hidden">
+        <div className="mx-auto flex max-w-7xl items-center justify-between gap-4">
+          <span className="text-xs font-black uppercase tracking-[0.12em] text-black/45">
+            {totalItems} {t(totalItems === 1 ? "cart.item" : "cart.items")}
+          </span>
+          <span className="text-right text-sm font-black">
+            {t("cart.estimatedTotal")}: {estimatedTotal}€
+            <span className="ml-1 align-middle text-[0.56rem] font-black uppercase tracking-[0.08em] text-black/25">
+              {t("price.exTax")}
+            </span>
+          </span>
+        </div>
+      </div>
+
+      <main className="min-h-screen bg-[#f7f7f4] px-4 pb-10 pt-6 text-black sm:px-6 sm:pt-20 lg:px-8">
         <div className="mx-auto max-w-7xl">
           <div className="mb-8 flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
             <div>
@@ -98,7 +112,7 @@ export default function PedidoPage() {
           )}
 
           <form onSubmit={handleSubmit} className="grid gap-8 lg:grid-cols-[1.1fr_0.9fr]">
-              <section className="space-y-4">
+              <section className="order-2 space-y-3 sm:order-1 sm:space-y-4">
                 {items.length === 0 ? (
                   <div className="rounded-lg border border-black/10 bg-white p-8">
                     <h2 className="text-xl font-black">{t("cart.emptyTitle")}</h2>
@@ -110,9 +124,9 @@ export default function PedidoPage() {
                   items.map((item) => (
                     <article
                       key={item.id}
-                      className="grid gap-4 rounded-lg border border-black/10 bg-white p-4 sm:grid-cols-[96px_1fr_auto]"
+                      className="grid grid-cols-[48px_minmax(0,1fr)_auto] items-center gap-3 rounded-lg border border-black/10 bg-white p-3 sm:grid-cols-[96px_1fr_auto] sm:gap-4 sm:p-4"
                     >
-                      <div className="flex aspect-square items-center justify-center rounded-md bg-[#f7f7f4]">
+                      <div className="flex h-12 w-12 items-center justify-center rounded-md bg-[#f7f7f4] sm:aspect-square sm:h-auto sm:w-auto">
                         {item.image ? (
                           <img
                             src={item.image}
@@ -127,38 +141,38 @@ export default function PedidoPage() {
                         )}
                       </div>
 
-                      <div>
+                      <div className="min-w-0">
                         {item.brand && (
-                          <p className="mb-1 text-xs font-black uppercase tracking-[0.12em] text-[#00000075]">
+                          <p className="mb-0.5 truncate text-[0.62rem] font-black uppercase tracking-[0.1em] text-[#00000075] sm:mb-1 sm:text-xs sm:tracking-[0.12em]">
                             {item.brand}
                           </p>
                         )}
-                        <h2 className="text-base font-black">{item.name}</h2>
+                        <h2 className="truncate text-sm font-black sm:text-base">{item.name}</h2>
                         {item.category && (
-                          <p className="mt-1 text-sm font-medium text-black/45">
+                          <p className="mt-1 hidden text-sm font-medium text-black/45 sm:block">
                             {item.category}
                           </p>
                         )}
-                        <p className="mt-1 text-sm font-medium text-black/45">
+                        <p className="mt-0.5 text-xs font-medium text-black/45 sm:mt-1 sm:text-sm">
                           {item.price}€ {item.listingType === "rental" ? t("price.day") : ""}
-                          <span className="ml-1 text-[0.62rem] font-black uppercase tracking-[0.08em] text-black/25">
+                          <span className="ml-1 hidden text-[0.62rem] font-black uppercase tracking-[0.08em] text-black/25 sm:inline">
                             {t("price.exTax")}
                           </span>
                         </p>
                       </div>
 
-                      <div className="flex flex-col items-start gap-3 sm:items-end sm:justify-center">
+                      <div className="flex flex-col items-end gap-2 sm:gap-3 sm:justify-center">
                         <div className="grid grid-cols-3 rounded-full border border-black/10 bg-[#f7f7f4]">
                           <button
                             type="button"
                             onClick={() => updateQuantity(item.id, item.quantity - 1)}
-                            className="h-10 w-12 text-lg font-medium text-black/55 transition hover:text-black"
+                            className="h-8 w-8 text-base font-medium text-black/55 transition hover:text-black sm:h-10 sm:w-12 sm:text-lg"
                             aria-label={`Reduce ${item.name} quantity`}
                           >
                             -
                           </button>
                           <span
-                            className="flex h-10 w-12 items-center justify-center text-sm font-black"
+                            className="flex h-8 w-8 items-center justify-center text-xs font-black sm:h-10 sm:w-12 sm:text-sm"
                             aria-label={`${item.name} quantity`}
                           >
                             {item.quantity}
@@ -166,7 +180,7 @@ export default function PedidoPage() {
                           <button
                             type="button"
                             onClick={() => updateQuantity(item.id, item.quantity + 1)}
-                            className="h-10 w-12 text-lg font-medium text-black/55 transition hover:text-black"
+                            className="h-8 w-8 text-base font-medium text-black/55 transition hover:text-black sm:h-10 sm:w-12 sm:text-lg"
                             aria-label={`Increase ${item.name} quantity`}
                           >
                             +
@@ -175,7 +189,7 @@ export default function PedidoPage() {
                         <button
                           type="button"
                           onClick={() => removeItem(item.id)}
-                          className="text-xs font-black uppercase tracking-[0.1em] text-black/35 transition hover:text-black"
+                          className="text-[0.62rem] font-black uppercase tracking-[0.08em] text-black/35 transition hover:text-black sm:text-xs sm:tracking-[0.1em]"
                         >
                           {t("cart.remove")}
                         </button>
@@ -185,7 +199,7 @@ export default function PedidoPage() {
                 )}
               </section>
 
-              <section className="rounded-lg border border-black/10 bg-white p-5 lg:sticky lg:top-24 lg:self-start">
+              <section className="order-1 rounded-lg border border-black/10 bg-white p-5 sm:order-2 lg:sticky lg:top-24 lg:self-start">
                 <div className="border-b border-black/10 pb-4">
                   <h2 className="text-xl font-black uppercase tracking-[0.02em]">
                     {t("cart.detailsTitle")}
