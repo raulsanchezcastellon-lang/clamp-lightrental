@@ -73,7 +73,7 @@ export async function POST(request: NextRequest) {
 
     try {
       await sendMailWithRetry({
-        from: `"${escapeHtml(customer.name)}" <${process.env.SMTP_USER}>`,
+        from: `"${escapeHtml(customer.name)} (pedido web)" <web@mail.clamp-lightrental.com>`,
         replyTo: customer.email,
         to: "raul@clamp-lightrental.com",
         subject: `Nuevo pedido web de ${customer.name}`,
