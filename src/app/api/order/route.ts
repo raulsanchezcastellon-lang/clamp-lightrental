@@ -129,10 +129,7 @@ export async function POST(request: NextRequest) {
   } catch (error) {
     console.error("Order error:", error);
     return NextResponse.json(
-      {
-        error: "Error sending order",
-        debug: error instanceof Error ? error.message : String(error),
-      },
+      { error: "Error sending order" },
       { status: 500 }
     );
   }
