@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useLanguage } from "@/components/LanguageProvider";
 
 export default function HomeIntro() {
@@ -18,6 +19,12 @@ export default function HomeIntro() {
           <div className="max-w-4xl space-y-4 text-lg font-medium leading-relaxed text-black/60">
             <p>{t("homeIntro.p1")}</p>
             <p>{t("homeIntro.p2")}</p>
+            <Link
+              href="/alquiler-iluminacion-alicante"
+              className="inline-block font-semibold text-black underline underline-offset-4 hover:no-underline"
+            >
+              {t("homeIntro.alicanteLink")} →
+            </Link>
           </div>
         </div>
       </div>

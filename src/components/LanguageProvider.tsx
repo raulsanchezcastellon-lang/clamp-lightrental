@@ -28,6 +28,7 @@ type TranslationKey =
   | "homeIntro.p1"
   | "homeIntro.p2"
   | "homeIntro.p3"
+  | "homeIntro.alicanteLink"
   | "featured.loading"
   | "featured.noImage"
   | "featured.priceOnRequest"
@@ -150,6 +151,7 @@ const translations: Record<Language, Record<TranslationKey, string>> = {
       "Based in Alicante and backed by more than 10 years of experience, we provide technical equipment and skilled professionals for productions across Alicante, Benidorm, Calpe, Dénia, Jávea and Murcia.",
     "homeIntro.p3":
       "",
+    "homeIntro.alicanteLink": "More about lighting rental in Alicante",
     "featured.loading": "Loading featured products...",
     "featured.noImage": "No image",
     "featured.priceOnRequest": "Price on request",
@@ -289,6 +291,7 @@ const translations: Record<Language, Record<TranslationKey, string>> = {
       "Localizada en Alicante y con más de 10 años de experiencia, contamos con el material técnico y los profesionales necesarios para producciones en Alicante, Benidorm, Calpe, Dénia, Jávea y Murcia.",
     "homeIntro.p3":
       "",
+    "homeIntro.alicanteLink": "Más sobre el alquiler de iluminación en Alicante",
     "featured.loading": "Cargando productos destacados...",
     "featured.noImage": "Sin imagen",
     "featured.priceOnRequest": "Precio bajo consulta",
@@ -420,20 +423,31 @@ const LanguageContext = createContext<LanguageContextValue | null>(null);
 const LANGUAGE_STORAGE_KEY = "clamp-language";
 
 export function LanguageProvider({ children }: { children: ReactNode }) {
-  const [language, setLanguageState] = useState<Language>(() => {
-    if (typeof window === "undefined") {
-      return "en";
-    }
+  // Español fijo en el primer render, tanto en servidor como en cliente.
+  // Es el mercado principal del negocio y evita el hydration mismatch que
+  // provocaba ramificar por `typeof window`. La detección de idioma
+  // guardado/navegador se aplica después del montaje, en el efecto de abajo.
+  const [language, setLanguageState] = useState<Language>("es");
 
+  useEffect(() => {
     const storedLanguage = window.localStorage.getItem(LANGUAGE_STORAGE_KEY);
-    if (storedLanguage === "en" || storedLanguage === "es") {
-      return storedLanguage;
-    }
+    const detected: Language =
+      storedLanguage === "en" || storedLanguage === "es"
+        ? storedLanguage
+        : (window.navigator.language || window.navigator.languages?.[0] || "es")
+            .toLowerCase()
+            .startsWith("es")
+        ? "es"
+        : "en";
 
-    const browserLanguage =
-      window.navigator.language || window.navigator.languages?.[0] || "en";
-    return browserLanguage.toLowerCase().startsWith("es") ? "es" : "en";
-  });
+    if (detected !== "es") {
+      // Lectura puntual de localStorage/navigator en el montaje: es el caso
+      // sancionado por la propia regla ("sync state from an external system"),
+      // necesario para no romper la hidratación con contenido determinista.
+      // eslint-disable-next-line react-hooks/set-state-in-effect
+      setLanguageState(detected);
+    }
+  }, []);
 
   useEffect(() => {
     document.documentElement.lang = language;

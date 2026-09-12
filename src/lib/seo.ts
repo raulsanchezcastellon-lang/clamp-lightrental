@@ -4,7 +4,7 @@ export const SITE_URL = "https://www.clamp-lightrental.com";
 export const SITE_NAME = "CLAMP Light Rental";
 export const DEFAULT_OG_IMAGE = "/og-image.png";
 export const DEFAULT_DESCRIPTION =
-  "Professional lighting equipment rental for photo, video, advertising shoots and production crews in Alicante and across the Spanish Mediterranean coast.";
+  "Alquiler de equipos de iluminación profesional para producciones de foto, vídeo, publicidad y eventos en Alicante y la costa mediterránea española.";
 
 type PageMetadataOptions = {
   title: string;
@@ -12,6 +12,7 @@ type PageMetadataOptions = {
   path: string;
   image?: string;
   noIndex?: boolean;
+  locale?: "en_US" | "es_ES";
 };
 
 export function createPageMetadata({
@@ -20,6 +21,7 @@ export function createPageMetadata({
   path,
   image = DEFAULT_OG_IMAGE,
   noIndex = false,
+  locale = "es_ES",
 }: PageMetadataOptions): Metadata {
   return {
     title,
@@ -49,7 +51,7 @@ export function createPageMetadata({
         },
     openGraph: {
       type: "website",
-      locale: "en_US",
+      locale,
       url: path,
       siteName: SITE_NAME,
       title,

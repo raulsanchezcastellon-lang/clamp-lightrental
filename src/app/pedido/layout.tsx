@@ -2,9 +2,9 @@ import type { ReactNode } from "react";
 import { createPageMetadata } from "@/lib/seo";
 
 export const metadata = createPageMetadata({
-  title: "Request Cart",
+  title: "Solicitud de Presupuesto",
   description:
-    "Send your selected CLAMP Light Rental equipment list, dates and production details for availability confirmation.",
+    "Envía tu listado de equipo, fechas y detalles de producción a CLAMP Light Rental para confirmar disponibilidad.",
   path: "/pedido",
   noIndex: true,
 });

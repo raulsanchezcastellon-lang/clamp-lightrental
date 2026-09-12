@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import type { Prisma } from "@prisma/client";
 import prisma from "@/lib/prisma";
 import { getAdminFromToken } from "@/lib/auth";
+import { buildProductSlugBase, generateUniqueProductSlug } from "@/lib/products";
 
 function priorityRank(priority: number | null) {
   if (priority === 1) return 0;
@@ -103,10 +104,16 @@ export async function POST(request: NextRequest) {
 
     const data = await request.json();
 
+    const brand =
+      typeof data.brand === "string" && data.brand.trim() ? data.brand.trim() : null;
+    const slugBase = buildProductSlugBase({ brand, name: data.name });
+    const slug = await generateUniqueProductSlug(slugBase);
+
     const product = await prisma.product.create({
       data: {
         name: data.name,
-        brand: typeof data.brand === "string" && data.brand.trim() ? data.brand.trim() : null,
+        slug,
+        brand,
         description: data.description,
         category: data.category,
         listingType: data.listingType === "sale" ? "sale" : "rental",

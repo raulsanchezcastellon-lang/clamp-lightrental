@@ -11,9 +11,9 @@ import { getPublicProducts } from "@/lib/products";
 export const dynamic = "force-dynamic";
 
 export const metadata = createPageMetadata({
-  title: "CLAMP Light Rental | Lighting Equipment Rental in Alicante",
+  title: "CLAMP Light Rental | Alquiler de Iluminación en Alicante",
   description:
-    "CLAMP Light Rental rents professional lighting, grip and power equipment for photography, video, advertising shoots and production crews in Alicante.",
+    "CLAMP Light Rental alquila equipos de iluminación, grip y alimentación profesionales para fotografía, vídeo, publicidad y equipos de producción en Alicante.",
   path: "/",
 });
 

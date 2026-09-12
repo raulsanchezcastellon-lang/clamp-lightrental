@@ -2,9 +2,9 @@ import type { ReactNode } from "react";
 import { createPageMetadata } from "@/lib/seo";
 
 export const metadata = createPageMetadata({
-  title: "Contact",
+  title: "Contacto",
   description:
-    "Contact CLAMP Light Rental for lighting equipment rental quotes, availability, delivery options and technical support for your production.",
+    "Contacta con CLAMP Light Rental para presupuestos de alquiler de iluminación, disponibilidad, entrega y soporte técnico para tu producción.",
   path: "/contacto",
 });
 

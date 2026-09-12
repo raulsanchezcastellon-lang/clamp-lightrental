@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
 import { useCart } from "@/components/CartProvider";
 import { useLanguage } from "@/components/LanguageProvider";
@@ -168,7 +169,10 @@ export default function ProductCatalog({
                   key={product.id}
                   className="group flex min-h-[300px] flex-col bg-white p-3 transition hover:bg-[#fbfbf8] sm:min-h-[330px] xl:min-h-[360px] xl:p-4"
                 >
-                  <div className="flex flex-1 items-center justify-center">
+                  <Link
+                    href={product.slug ? `/producto/${product.slug}` : "/catalogo"}
+                    className="flex flex-1 items-center justify-center"
+                  >
                     {product.image ? (
                       <div className="flex aspect-square w-full max-w-[150px] items-center justify-center sm:max-w-[200px] xl:max-w-[240px]">
                         <img
@@ -183,7 +187,7 @@ export default function ProductCatalog({
                         {t("catalog.noImage")}
                       </div>
                     )}
-                  </div>
+                  </Link>
 
                   <div className="mt-4 border-t border-black/10 pt-3">
                     <div>
@@ -192,9 +196,11 @@ export default function ProductCatalog({
                           {product.brand}
                         </p>
                       )}
-                      <h3 className="text-xs font-black leading-tight tracking-[0.01em] sm:text-sm">
-                        {product.name}
-                      </h3>
+                      <Link href={product.slug ? `/producto/${product.slug}` : "/catalogo"}>
+                        <h3 className="text-xs font-black leading-tight tracking-[0.01em] hover:underline sm:text-sm">
+                          {product.name}
+                        </h3>
+                      </Link>
                       <p className="mt-1 text-xs font-normal text-[#555]">
                         {product.category}
                       </p>

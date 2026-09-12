@@ -2,9 +2,9 @@ import type { ReactNode } from "react";
 import { createPageMetadata } from "@/lib/seo";
 
 export const metadata = createPageMetadata({
-  title: "Privacy Policy",
+  title: "Política de Privacidad",
   description:
-    "Privacy policy for CLAMP Light Rental, including data processing purposes, rights and contact information.",
+    "Política de privacidad de CLAMP Light Rental: finalidades del tratamiento de datos, derechos y contacto.",
   path: "/privacidad",
 });
 

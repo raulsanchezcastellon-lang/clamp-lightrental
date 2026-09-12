@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import prisma from "@/lib/prisma";
-import nodemailer from "nodemailer";
+import { sendMailWithRetry } from "@/lib/email";
 
 export async function POST(request: NextRequest) {
   try {
@@ -18,17 +18,7 @@ export async function POST(request: NextRequest) {
 
     // Send email
     try {
-      const transporter = nodemailer.createTransport({
-        host: process.env.SMTP_HOST || "smtp.gmail.com",
-        port: parseInt(process.env.SMTP_PORT || "587"),
-        secure: false, // true for 465, false for other ports
-        auth: {
-          user: process.env.SMTP_USER,
-          pass: process.env.SMTP_PASS,
-        },
-      });
-
-      await transporter.sendMail({
+      await sendMailWithRetry({
         from: `"${data.name}" <${process.env.SMTP_USER}>`,
         to: "raul@clamp-lightrental.com",
         subject: `Nuevo mensaje de contacto de ${data.name}`,
@@ -49,8 +39,8 @@ export async function POST(request: NextRequest) {
         `,
       });
     } catch (emailError) {
-      console.error("Error sending email:", emailError);
-      // Don't fail the request if email fails, just log it
+      console.error("Error sending email after retries:", emailError);
+      // No fallamos la petición si el email falla tras los reintentos: el mensaje ya está guardado en la base de datos.
     }
 
     return NextResponse.json(message, { status: 201 });

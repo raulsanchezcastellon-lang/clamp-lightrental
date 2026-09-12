@@ -1,14 +1,17 @@
 import type { Prisma } from "@prisma/client";
 import prisma from "@/lib/prisma";
+import { buildProductSlugBase } from "@/lib/slug";
 
 export type PublicProduct = {
   id: string;
   name: string;
+  slug?: string;
   brand?: string;
   category: string;
   price: number;
   image?: string;
   description?: string;
+  specs?: string[];
   listingType?: "rental" | "sale";
 };
 
@@ -27,23 +30,94 @@ function manualOrderRank(featuredOrder: number | null) {
 function toPublicProduct(product: {
   id: string;
   name: string;
+  slug?: string | null;
   brand: string | null;
   category: string;
   price: number;
   image: string | null;
   description: string | null;
+  specs?: string[] | null;
   listingType: string | null;
 }): PublicProduct {
   return {
     id: product.id,
     name: product.name,
+    slug: product.slug || undefined,
     brand: product.brand || undefined,
     category: product.category,
     price: product.price,
     image: product.image || undefined,
     description: product.description || undefined,
+    specs: product.specs && product.specs.length > 0 ? product.specs : undefined,
     listingType: product.listingType === "sale" ? "sale" : "rental",
   };
+}
+
+/**
+ * Genera un slug único para un producto, añadiendo -2, -3... si ya existe.
+ * excludeId se usa al editar, para no chocar con el propio slug del producto.
+ */
+export async function generateUniqueProductSlug(
+  base: string,
+  excludeId?: string
+): Promise<string> {
+  const safeBase = base || "producto";
+  let candidate = safeBase;
+  let suffix = 2;
+
+  while (true) {
+    const existing = await prisma.product.findFirst({
+      where: {
+        slug: candidate,
+        ...(excludeId ? { id: { not: excludeId } } : {}),
+      },
+      select: { id: true },
+    });
+
+    if (!existing) return candidate;
+
+    candidate = `${safeBase}-${suffix}`;
+    suffix += 1;
+  }
+}
+
+export { buildProductSlugBase };
+
+export async function getPublicProductBySlug(
+  slug: string
+): Promise<PublicProduct | null> {
+  if (!slug) return null;
+
+  const product = await prisma.product.findFirst({
+    where: { slug, available: true },
+    select: {
+      id: true,
+      name: true,
+      slug: true,
+      brand: true,
+      category: true,
+      price: true,
+      image: true,
+      description: true,
+      specs: true,
+      listingType: true,
+    },
+  });
+
+  if (!product) return null;
+
+  return toPublicProduct(product);
+}
+
+export async function getAllProductSlugs(): Promise<string[]> {
+  const products = await prisma.product.findMany({
+    where: { available: true, NOT: { slug: null } },
+    select: { slug: true },
+  });
+
+  return products
+    .map((product) => product.slug)
+    .filter((slug): slug is string => Boolean(slug));
 }
 
 export async function getPublicProducts({
@@ -79,6 +153,7 @@ export async function getPublicProducts({
     select: {
       id: true,
       name: true,
+      slug: true,
       brand: true,
       category: true,
       price: true,

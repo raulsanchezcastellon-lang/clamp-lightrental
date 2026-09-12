@@ -4,9 +4,9 @@ import AboutContent from "@/components/AboutContent";
 import { createPageMetadata } from "@/lib/seo";
 
 export const metadata = createPageMetadata({
-  title: "About CLAMP Light Rental",
+  title: "Sobre Nosotros",
   description:
-    "Meet CLAMP Light Rental: professional lighting equipment rental, technical crew, delivery and production support for photo and video shoots.",
+    "Conoce CLAMP Light Rental: alquiler de equipos de iluminación, equipo técnico, entrega y soporte para producciones de foto y vídeo.",
   path: "/about",
 });
 

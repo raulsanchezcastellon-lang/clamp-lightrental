@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import prisma from "@/lib/prisma";
+import { buildProductSlugBase, generateUniqueProductSlug } from "@/lib/products";
 
 export async function GET(
   request: Request,
@@ -29,9 +30,25 @@ export async function PUT(
   try {
     const { id } = await context.params;
     const body = await request.json();
+    const brand =
+      typeof body.brand === "string" && body.brand.trim() ? body.brand.trim() : null;
+
+    const existingProduct = await prisma.product.findUnique({
+      where: { id },
+      select: { slug: true },
+    });
+
+    const slug =
+      existingProduct?.slug ||
+      (await generateUniqueProductSlug(
+        buildProductSlugBase({ brand, name: body.name }),
+        id
+      ));
+
     const data = {
       name: body.name,
-      brand: typeof body.brand === "string" && body.brand.trim() ? body.brand.trim() : null,
+      slug,
+      brand,
       description: body.description,
       category: body.category,
       listingType: body.listingType === "sale" ? "sale" : "rental",

@@ -37,6 +37,7 @@ model PasswordResetToken {
 model Product {
   id          String @id @default(auto()) @map("_id") @db.ObjectId
   name        String
+  slug        String? @unique
   brand       String?
   description String?
   category    String
@@ -77,4 +78,19 @@ model ContactMessage {
   phone     String?
   message   String
   createdAt DateTime @default(now())
+}
+
+model Order {
+  id             String   @id @default(auto()) @map("_id") @db.ObjectId
+  customerName   String
+  customerEmail  String
+  customerPhone  String?
+  pickupDate     String?
+  returnDate     String?
+  delivery       Boolean  @default(false)
+  comments       String?
+  items          Json
+  estimatedTotal Float
+  emailSent      Boolean  @default(false)
+  createdAt      DateTime @default(now())
 }

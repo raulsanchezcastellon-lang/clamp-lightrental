@@ -8,9 +8,9 @@ import { getPublicProducts } from "@/lib/products";
 export const dynamic = "force-dynamic";
 
 export const metadata = createPageMetadata({
-  title: "Equipment Catalog",
+  title: "Catálogo de Equipos",
   description:
-    "Browse CLAMP Light Rental's professional lighting, grip, LED, power and accessories catalog for photo and video productions.",
+    "Consulta el catálogo de CLAMP Light Rental: iluminación profesional LED, grip, alimentación y accesorios en alquiler para producciones de foto y vídeo.",
   path: "/catalogo",
 });
 

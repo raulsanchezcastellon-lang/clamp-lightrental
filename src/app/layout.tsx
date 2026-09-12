@@ -27,7 +27,7 @@ const barlowCondensed = Barlow_Condensed({
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: "CLAMP Light Rental | Lighting Equipment Rental in Alicante",
+    default: "CLAMP Light Rental | Alquiler de Iluminación en Alicante",
     template: `%s | ${SITE_NAME}`,
   },
   description: DEFAULT_DESCRIPTION,
@@ -63,10 +63,10 @@ export const metadata: Metadata = {
   },
   openGraph: {
     type: "website",
-    locale: "en_US",
+    locale: "es_ES",
     url: "/",
     siteName: SITE_NAME,
-    title: "CLAMP Light Rental | Lighting Equipment Rental in Alicante",
+    title: "CLAMP Light Rental | Alquiler de Iluminación en Alicante",
     description: DEFAULT_DESCRIPTION,
     images: [
       {
@@ -79,7 +79,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "CLAMP Light Rental | Lighting Equipment Rental in Alicante",
+    title: "CLAMP Light Rental | Alquiler de Iluminación en Alicante",
     description: DEFAULT_DESCRIPTION,
     images: [DEFAULT_OG_IMAGE],
   },
@@ -129,14 +129,14 @@ const localBusinessJsonLd = {
       "@type": "Offer",
       itemOffered: {
         "@type": "Service",
-        name: "Professional lighting equipment rental",
+        name: "Alquiler de equipos de iluminación profesional",
       },
     },
     {
       "@type": "Offer",
       itemOffered: {
         "@type": "Service",
-        name: "Technical lighting crew and on-set support",
+        name: "Equipo técnico y soporte en plató",
       },
     },
   ],
@@ -149,7 +149,7 @@ export default function RootLayout({
 }>) {
   return (
     <html
-      lang="en"
+      lang="es"
       className={`${barlow.variable} ${barlowCondensed.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">

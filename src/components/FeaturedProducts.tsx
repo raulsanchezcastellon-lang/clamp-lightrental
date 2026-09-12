@@ -50,7 +50,10 @@ export default function FeaturedProducts({
           <div className="grid grid-cols-2 gap-px bg-black/12 md:grid-cols-4">
             {products.map((product) => (
               <article key={product.id} className="bg-white p-3 sm:p-4">
-                <div className="flex aspect-square items-center justify-center">
+                <Link
+                  href={product.slug ? `/producto/${product.slug}` : "/catalogo"}
+                  className="flex aspect-square items-center justify-center"
+                >
                   {product.image ? (
                     <img
                       src={product.image}
@@ -63,16 +66,18 @@ export default function FeaturedProducts({
                       {t("featured.noImage")}
                     </div>
                   )}
-                </div>
+                </Link>
                 <div className="mt-4 border-t border-black/10 pt-3">
                   {product.brand && (
                     <p className="mb-1 text-[0.7rem] font-black uppercase tracking-[0.12em] text-[#00000075]">
                       {product.brand}
                     </p>
                   )}
-                  <h3 className="text-xs font-black leading-tight sm:text-sm">
-                    {product.name}
-                  </h3>
+                  <Link href={product.slug ? `/producto/${product.slug}` : "/catalogo"}>
+                    <h3 className="text-xs font-black leading-tight hover:underline sm:text-sm">
+                      {product.name}
+                    </h3>
+                  </Link>
                   <p className="mt-1 text-xs font-medium text-black/45">
                     {product.category}
                   </p>

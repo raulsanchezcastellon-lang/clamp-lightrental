@@ -2,9 +2,9 @@ import type { ReactNode } from "react";
 import { createPageMetadata } from "@/lib/seo";
 
 export const metadata = createPageMetadata({
-  title: "Cookie Policy",
+  title: "Política de Cookies",
   description:
-    "Cookie policy for CLAMP Light Rental, including cookie types, purposes and browser management options.",
+    "Política de cookies de CLAMP Light Rental: tipos de cookies, finalidades y opciones de gestión en el navegador.",
   path: "/cookies",
 });
 

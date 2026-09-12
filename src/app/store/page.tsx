@@ -8,9 +8,9 @@ import { getPublicProducts } from "@/lib/products";
 export const dynamic = "force-dynamic";
 
 export const metadata = createPageMetadata({
-  title: "Store",
+  title: "Tienda",
   description:
-    "Buy selected lighting equipment, accessories and production gear from CLAMP Light Rental's store.",
+    "Compra equipo de iluminación y accesorios de producción seleccionados en la tienda de CLAMP Light Rental.",
   path: "/store",
 });
 

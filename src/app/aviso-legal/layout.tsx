@@ -2,9 +2,9 @@ import type { ReactNode } from "react";
 import { createPageMetadata } from "@/lib/seo";
 
 export const metadata = createPageMetadata({
-  title: "Legal Notice",
+  title: "Aviso Legal",
   description:
-    "Legal notice and website ownership information for CLAMP Light Rental.",
+    "Aviso legal e información de titularidad del sitio web de CLAMP Light Rental.",
   path: "/aviso-legal",
 });
 
