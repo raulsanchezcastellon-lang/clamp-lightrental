@@ -8,6 +8,7 @@ import ProductDetailActions from "@/components/ProductDetailActions";
 import { createPageMetadata, SITE_URL } from "@/lib/seo";
 import { getPublicProductBySlug } from "@/lib/products";
 import { localizePath, type Language } from "@/lib/i18n";
+import { parseSpecs } from "@/lib/specs";
 
 const COPY = {
   es: {
@@ -88,6 +89,8 @@ export default async function ProductPageView({ slug, lang }: { slug: string; la
   if (!product) {
     notFound();
   }
+
+  const specRows = parseSpecs(product.specs, lang);
 
   const productJsonLd = {
     "@context": "https://schema.org",
@@ -184,22 +187,30 @@ export default async function ProductPageView({ slug, lang }: { slug: string; la
           </div>
 
           {/* Especificaciones */}
-          {product.specs && product.specs.length > 0 && (
-            <div className="mt-16 max-w-2xl border-t border-black/10 pt-10">
+          {specRows.length > 0 && (
+            <div className="mt-16 max-w-3xl border-t border-black/10 pt-10">
               <h2 className="text-2xl font-black uppercase tracking-wide">
                 {c.specs}
               </h2>
-              <ul className="mt-4 space-y-2">
-                {product.specs.map((spec) => (
-                  <li
-                    key={spec}
-                    className="flex items-start gap-2 text-base text-black/65"
-                  >
-                    <span aria-hidden="true" className="mt-2 h-1 w-1 rounded-full bg-black/40" />
-                    {spec}
-                  </li>
-                ))}
-              </ul>
+              <dl className="mt-6 divide-y divide-black/10 border-y border-black/10">
+                {specRows.map((row, index) =>
+                  row.label ? (
+                    <div
+                      key={`${row.label}-${index}`}
+                      className="grid gap-1 py-3 sm:grid-cols-[200px_1fr] sm:gap-6"
+                    >
+                      <dt className="text-xs font-black uppercase tracking-[0.12em] text-black/45">
+                        {row.label}
+                      </dt>
+                      <dd className="text-base font-medium text-black/80">{row.value}</dd>
+                    </div>
+                  ) : (
+                    <div key={`spec-${index}`} className="py-3 text-base font-medium text-black/80">
+                      {row.value}
+                    </div>
+                  )
+                )}
+              </dl>
             </div>
           )}
 
