@@ -5,7 +5,7 @@ export const SITE_URL = "https://www.clamp-lightrental.com";
 export const SITE_NAME = "CLAMP Light Rental";
 export const DEFAULT_OG_IMAGE = "/og-image.png";
 export const DEFAULT_DESCRIPTION =
-  "Alquiler de equipos de iluminación profesional para producciones de foto, vídeo, publicidad y eventos en Alicante y la costa mediterránea española.";
+  "Alquiler de equipos de iluminación profesional para rodajes de cine, publicidad y fotografía en Alicante y la costa mediterránea española.";
 export const DEFAULT_DESCRIPTION_EN =
   "Professional film lighting rental in Alicante, Spain. Gear delivered to set, collected after wrap and English-speaking lighting crew for international productions shooting on the Costa Blanca.";
 

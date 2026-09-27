@@ -238,7 +238,7 @@ const translations: Record<Language, Record<TranslationKey, string>> = {
     "about.eyebrow": "About us and our services",
     "about.title": "Lighting rental shaped around your production",
     "about.text":
-      "CLAMP Light Rental provides professional lighting equipment and technical support for film, photo, commercial and event productions. We combine carefully maintained gear with a practical, flexible service so each project can move smoothly from prep to wrap.",
+      "CLAMP Light Rental provides professional lighting equipment and technical support for film, TV, commercial and photo shoots. We combine carefully maintained gear with a practical, flexible service so each project can move smoothly from prep to wrap.",
     "about.p1":
       "CLAMP is a lighting equipment rental company for photography and video productions, specialised in advertising shoots, commercials, and high-demand sets.",
     "about.p2":
@@ -384,7 +384,7 @@ const translations: Record<Language, Record<TranslationKey, string>> = {
     "about.eyebrow": "Sobre nosotros y nuestros servicios",
     "about.title": "Alquiler de iluminación adaptado a tu producción",
     "about.text":
-      "CLAMP Light Rental ofrece material profesional de iluminación y soporte técnico para producciones de cine, fotografía, publicidad y eventos. Combinamos equipo cuidado con un servicio práctico y flexible para que cada proyecto avance con fluidez.",
+      "CLAMP Light Rental ofrece material profesional de iluminación y soporte técnico para rodajes de cine, series, publicidad y fotografía. Combinamos equipo cuidado con un servicio práctico y flexible para que cada proyecto avance con fluidez.",
     "about.p1":
       "CLAMP es una empresa de alquiler de material de iluminación para producciones de fotografía y vídeo, especializada en shootings publicitarios, comerciales y sets de alta exigencia.",
     "about.p2":
@@ -399,7 +399,7 @@ const translations: Record<Language, Record<TranslationKey, string>> = {
       "Nuestro trabajo es hacer que el departamento de iluminación funcione con fluidez: disponibilidad clara, precios directos y soporte en set cuando lo necesites.",
     "about.service1Title": "Alquiler de iluminación",
     "about.service1Text":
-      "Ofrecemos un catálogo seleccionado de equipo moderno de iluminación para cine, fotografía, publicidad y directos. Nuestro inventario está escogido por su rendimiento, calidad de luz y uso práctico en set.",
+      "Ofrecemos un catálogo seleccionado de equipo moderno de iluminación para cine, series, publicidad y fotografía. Nuestro inventario está escogido por su rendimiento, calidad de luz y uso práctico en set.",
     "about.service2Title": "Crew técnico",
     "about.service2Text":
       "Además del material, podemos aportar equipo técnico con experiencia para tu rodaje. Gaffers, técnicos de iluminación y asistentes pueden ayudarte a preparar, montar y operar el setup para que el departamento de luz funcione con fluidez en set.",
