@@ -33,7 +33,7 @@ const SOCIAL_PROOF_IMAGES = [
 ];
 
 export default function HomeFeatureSections() {
-  const { t } = useLanguage();
+  const { t, href } = useLanguage();
   const features = [
     {
       icon: "⚡",
@@ -113,7 +113,7 @@ export default function HomeFeatureSections() {
           </h2>
           <p className="mb-8 text-lg text-gray-300">{t("homeCta.text")}</p>
           <Link
-            href="/contacto"
+            href={href("/contacto")}
             className="inline-block rounded-lg border border-white px-8 py-3 font-semibold text-white transition-all duration-300 hover:bg-white hover:text-black"
           >
             {t("homeCta.button")}

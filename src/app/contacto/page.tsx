@@ -10,13 +10,17 @@ import { CONTACT_HOURS } from "@/lib/contactInfo";
 function ContactContent() {
   const searchParams = useSearchParams();
   const product = searchParams.get("product");
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">("idle");
   const [form, setForm] = useState({
     name: "",
     email: "",
     phone: "",
-    message: product ? `Hi, I am interested in ${product}.` : "",
+    message: product
+      ? language === "en"
+        ? `Hi, I'm interested in renting the ${product}.`
+        : `Hola, me interesa alquilar ${product}.`
+      : "",
   });
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {

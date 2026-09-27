@@ -1,11 +1,14 @@
 import type { Metadata } from "next";
+import { headers } from "next/headers";
 import { Barlow, Barlow_Condensed } from "next/font/google";
 import { CartProvider } from "@/components/CartProvider";
 import CookieConsentBanner from "@/components/CookieConsentBanner";
 import { LanguageProvider } from "@/components/LanguageProvider";
 import WhatsAppButton from "@/components/WhatsAppButton";
+import LanguageSuggestion from "@/components/LanguageSuggestion";
 import {
   DEFAULT_DESCRIPTION,
+  DEFAULT_DESCRIPTION_EN,
   DEFAULT_OG_IMAGE,
   SITE_NAME,
   SITE_URL,
@@ -55,9 +58,6 @@ export const metadata: Metadata = {
   verification: {
     google: "26sDH8y85x0GwmQ-NaSEwU338H7a3VPdhmYFToWCips",
   },
-  alternates: {
-    canonical: "/",
-  },
   icons: {
     icon: "/icon.svg",
   },
@@ -93,8 +93,9 @@ const localBusinessJsonLd = {
   url: SITE_URL,
   logo: `${SITE_URL}/icon.svg`,
   image: `${SITE_URL}${DEFAULT_OG_IMAGE}`,
-  description: DEFAULT_DESCRIPTION,
+  description: DEFAULT_DESCRIPTION_EN,
   email: "raul@clamp-lightrental.com",
+  knowsLanguage: ["en", "es"],
   telephone: "+34681878782",
   priceRange: "€€",
   address: {
@@ -129,27 +130,37 @@ const localBusinessJsonLd = {
       "@type": "Offer",
       itemOffered: {
         "@type": "Service",
-        name: "Alquiler de equipos de iluminación profesional",
+        name: "Film and photo lighting equipment rental",
       },
     },
     {
       "@type": "Offer",
       itemOffered: {
         "@type": "Service",
-        name: "Equipo técnico y soporte en plató",
+        name: "English-speaking lighting crew (gaffers and technicians)",
+      },
+    },
+    {
+      "@type": "Offer",
+      itemOffered: {
+        "@type": "Service",
+        name: "Equipment delivery to set and collection",
       },
     },
   ],
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const requestHeaders = await headers();
+  const lang = requestHeaders.get("x-clamp-lang") === "en" ? "en" : "es";
+
   return (
     <html
-      lang="es"
+      lang={lang}
       className={`${barlow.variable} ${barlowCondensed.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">
@@ -162,6 +173,7 @@ export default function RootLayout({
         <LanguageProvider>
           <CartProvider>
             {children}
+            <LanguageSuggestion />
             <CookieConsentBanner />
             <WhatsAppButton />
           </CartProvider>

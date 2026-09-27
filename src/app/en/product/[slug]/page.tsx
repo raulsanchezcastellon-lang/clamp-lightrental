@@ -9,10 +9,10 @@ type PageProps = {
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { slug } = await params;
-  return generateProductMetadata(slug, "es");
+  return generateProductMetadata(slug, "en");
 }
 
-export default async function ProductoPage({ params }: PageProps) {
+export default async function ProductPageEn({ params }: PageProps) {
   const { slug } = await params;
-  return <ProductPageView slug={slug} lang="es" />;
+  return <ProductPageView slug={slug} lang="en" />;
 }

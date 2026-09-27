@@ -9,7 +9,7 @@ import { useLanguage } from "@/components/LanguageProvider";
 
 export default function PedidoPage() {
   const { items, totalItems, updateQuantity, removeItem, clearCart } = useCart();
-  const { t } = useLanguage();
+  const { t, href } = useLanguage();
   const [form, setForm] = useState({
     name: "",
     email: "",
@@ -95,7 +95,7 @@ export default function PedidoPage() {
               </h1>
             </div>
             <Link
-              href="/catalogo"
+              href={href("/catalogo")}
               className="inline-flex rounded-full border border-black/15 bg-white px-4 py-2 text-sm font-black text-black/60 transition hover:border-black hover:text-black"
             >
               {t("cart.addMore")}

@@ -17,7 +17,7 @@ const SLIDES = [
 
 export default function HeroSlider() {
   const [activeIndex, setActiveIndex] = useState(0);
-  const { t } = useLanguage();
+  const { t, href } = useLanguage();
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -55,13 +55,13 @@ export default function HeroSlider() {
 
         <div className="mt-10 flex flex-col sm:flex-row gap-4 justify-center">
           <Link
-            href="/catalogo"
+            href={href("/catalogo")}
             className="border border-white text-white px-8 py-3 rounded-lg font-semibold hover:bg-white hover:text-black transition-all duration-300"
           >
             {t("hero.catalog")}
           </Link>
           <Link
-            href="/contacto"
+            href={href("/contacto")}
             className="bg-gray-800/90 border border-white text-white px-8 py-3 rounded-lg font-semibold hover:bg-white hover:text-black hover:border-white transition-all duration-300"
           >
             {t("hero.quote")}

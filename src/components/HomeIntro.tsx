@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useLanguage } from "@/components/LanguageProvider";
 
 export default function HomeIntro() {
-  const { t } = useLanguage();
+  const { t, href } = useLanguage();
 
   return (
     <section className="bg-[#f7f7f4] px-4 py-14 text-black sm:px-6 lg:px-8">
@@ -20,7 +20,7 @@ export default function HomeIntro() {
             <p>{t("homeIntro.p1")}</p>
             <p>{t("homeIntro.p2")}</p>
             <Link
-              href="/alquiler-iluminacion-alicante"
+              href={href("/alquiler-iluminacion-alicante")}
               className="inline-block font-semibold text-black underline underline-offset-4 hover:no-underline"
             >
               {t("homeIntro.alicanteLink")} →

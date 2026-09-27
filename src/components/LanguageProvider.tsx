@@ -3,13 +3,18 @@
 import {
   createContext,
   ReactNode,
+  useCallback,
   useContext,
   useEffect,
   useMemo,
-  useState,
 } from "react";
-
-type Language = "en" | "es";
+import { usePathname, useRouter } from "next/navigation";
+import {
+  getLanguageFromPath,
+  localizePath,
+  switchLanguagePath,
+  type Language,
+} from "@/lib/i18n";
 
 type TranslationKey =
   | "nav.equipment"
@@ -128,7 +133,17 @@ type TranslationKey =
   | "cookies.bannerText"
   | "cookies.accept"
   | "cookies.reject"
-  | "cookies.policy";
+  | "cookies.policy"
+  | "catalog.all"
+  | "product.add"
+  | "product.quote"
+  | "product.decrease"
+  | "product.increase"
+  | "whatsapp.message"
+  | "whatsapp.label"
+  | "langSuggest.text"
+  | "langSuggest.button"
+  | "langSuggest.dismiss";
 
 const translations: Record<Language, Record<TranslationKey, string>> = {
   en: {
@@ -138,20 +153,21 @@ const translations: Record<Language, Record<TranslationKey, string>> = {
     "nav.contact": "Contact",
     "nav.call": "Call CLAMP",
     "nav.cart": "Open order cart",
-    "hero.kicker": "Lighting rental • Cinematography • Production",
-    "hero.title": "Professional Lighting Rental",
-    "hero.subtitle": "High-end lighting rental for film and production work.",
+    "hero.kicker": "Lighting rental • Delivery to set • Crew",
+    "hero.title": "Film Lighting Rental in Alicante",
+    "hero.subtitle":
+      "Film lighting rental in Alicante for international productions. Delivered to set, collected at wrap, with English-speaking crew on request.",
     "hero.catalog": "View Catalog",
     "hero.quote": "Request Quote",
     "homeIntro.eyebrow": "Who we are",
-    "homeIntro.title": "Lighting rental for photo and video productions.",
+    "homeIntro.title": "Your lighting partner when you shoot in Alicante.",
     "homeIntro.p1":
-      "CLAMP is a lighting equipment rental company for photography and video, specialised in film productions and advertising shoots.",
+      "CLAMP is a lighting rental house based in Alicante, Spain, working with international film, commercial and photo productions that come to shoot on the Costa Blanca.",
     "homeIntro.p2":
-      "Based in Alicante and backed by more than 10 years of experience, we provide technical equipment and skilled professionals for productions across Alicante, Benidorm, Calpe, Dénia, Jávea and Murcia.",
+      "With more than 10 years on set, we supply the lights, grip and power, deliver them to your location and collect them after wrap, and can add English-speaking gaffers and technicians so your crew can travel light. We cover Alicante, Benidorm, Calpe, Dénia, Jávea, Murcia and Valencia.",
     "homeIntro.p3":
       "",
-    "homeIntro.alicanteLink": "More about lighting rental in Alicante",
+    "homeIntro.alicanteLink": "Lighting rental in Alicante for visiting productions",
     "featured.loading": "Loading featured products...",
     "featured.noImage": "No image",
     "featured.priceOnRequest": "Price on request",
@@ -163,7 +179,7 @@ const translations: Record<Language, Record<TranslationKey, string>> = {
     "catalog.priceOnRequest": "Price on request",
     "catalog.add": "Add",
     "price.day": "/day",
-    "price.exTax": "ex. TAX",
+    "price.exTax": "ex. VAT",
     "catalog.equipmentTitle": "Equipment Catalog",
     "catalog.storeTitle": "Store",
     "catalog.emptyRental": "No rental equipment found.",
@@ -192,11 +208,11 @@ const translations: Record<Language, Record<TranslationKey, string>> = {
     "cart.phone": "Phone",
     "cart.pickup": "Pickup date",
     "cart.return": "Return date",
-    "cart.delivery": "Delivery service",
+    "cart.delivery": "Delivery to set & collection",
     "cart.no": "No",
     "cart.yes": "Yes",
     "cart.comments": "Comments",
-    "cart.commentsPlaceholder": "Project notes, delivery address, schedule...",
+    "cart.commentsPlaceholder": "Project, shooting location, call times, crew needed...",
     "cart.estimatedTotal": "Estimated total",
     "cart.sending": "Sending...",
     "cart.send": "Send request",
@@ -215,12 +231,12 @@ const translations: Record<Language, Record<TranslationKey, string>> = {
     "homeFeatures.modernTitle": "Modern Equipment",
     "homeFeatures.modernText":
       "State-of-the-art lighting solutions designed for outstanding cinematic results",
-    "homeFeatures.deliveryTitle": "Fast Delivery",
+    "homeFeatures.deliveryTitle": "Delivered to set",
     "homeFeatures.deliveryText":
-      "Immediate availability and punctual delivery across the region",
-    "homeFeatures.supportTitle": "Technical Support",
+      "We drop the gear at your location and collect it after wrap, anywhere on the Costa Blanca, Murcia and Valencia",
+    "homeFeatures.supportTitle": "English-speaking crew",
     "homeFeatures.supportText":
-      "Expert assistance available for every production and rental need",
+      "Local gaffers and lighting technicians who know the gear and work in English",
     "homeSocial.eyebrow": "On set",
     "homeSocial.title": "Real gear, real shoots, real crews.",
     "homeCta.title": "Need lighting for your project?",
@@ -268,7 +284,17 @@ const translations: Record<Language, Record<TranslationKey, string>> = {
       "We use essential cookies to make the website work. With your permission, we may also use non-essential cookies to improve the experience and understand how the site is used.",
     "cookies.accept": "Accept",
     "cookies.reject": "Reject",
-    "cookies.policy": "Cookie policy",
+        "cookies.policy": "Cookie policy",
+    "catalog.all": "All",
+    "product.add": "Add to request",
+    "product.quote": "Request a quote",
+    "product.decrease": "Decrease quantity",
+    "product.increase": "Increase quantity",
+    "whatsapp.message": "Hi, I'd like some information about renting lighting from CLAMP.",
+    "whatsapp.label": "Chat with us on WhatsApp",
+    "langSuggest.text": "This page is also available in Spanish.",
+    "langSuggest.button": "Ver en español",
+    "langSuggest.dismiss": "Dismiss",
   },
   es: {
     "nav.equipment": "Equipo",
@@ -408,7 +434,17 @@ const translations: Record<Language, Record<TranslationKey, string>> = {
       "Usamos cookies esenciales para que la web funcione. Con tu permiso, también podríamos usar cookies no esenciales para mejorar la experiencia y entender cómo se utiliza la web.",
     "cookies.accept": "Aceptar",
     "cookies.reject": "Rechazar",
-    "cookies.policy": "Política de cookies",
+        "cookies.policy": "Política de cookies",
+    "catalog.all": "Todo",
+    "product.add": "Añadir al pedido",
+    "product.quote": "Pedir presupuesto",
+    "product.decrease": "Reducir cantidad",
+    "product.increase": "Aumentar cantidad",
+    "whatsapp.message": "Hola, me gustaría recibir información de CLAMP Light Rental.",
+    "whatsapp.label": "Escríbenos por WhatsApp",
+    "langSuggest.text": "This website is available in English.",
+    "langSuggest.button": "View in English",
+    "langSuggest.dismiss": "Cerrar",
   },
 };
 
@@ -417,47 +453,31 @@ type LanguageContextValue = {
   setLanguage: (language: Language) => void;
   toggleLanguage: () => void;
   t: (key: TranslationKey) => string;
+  /** Convierte una ruta española a la del idioma actual. */
+  href: (esPath: string) => string;
 };
 
 const LanguageContext = createContext<LanguageContextValue | null>(null);
-const LANGUAGE_STORAGE_KEY = "clamp-language";
 
 export function LanguageProvider({ children }: { children: ReactNode }) {
-  // Español fijo en el primer render, tanto en servidor como en cliente.
-  // Es el mercado principal del negocio y evita el hydration mismatch que
-  // provocaba ramificar por `typeof window`. La detección de idioma
-  // guardado/navegador se aplica después del montaje, en el efecto de abajo.
-  const [language, setLanguageState] = useState<Language>("es");
-
-  useEffect(() => {
-    const storedLanguage = window.localStorage.getItem(LANGUAGE_STORAGE_KEY);
-    const detected: Language =
-      storedLanguage === "en" || storedLanguage === "es"
-        ? storedLanguage
-        : (window.navigator.language || window.navigator.languages?.[0] || "es")
-            .toLowerCase()
-            .startsWith("es")
-        ? "es"
-        : "en";
-
-    if (detected !== "es") {
-      // Lectura puntual de localStorage/navigator en el montaje: es el caso
-      // sancionado por la propia regla ("sync state from an external system"),
-      // necesario para no romper la hidratación con contenido determinista.
-      // eslint-disable-next-line react-hooks/set-state-in-effect
-      setLanguageState(detected);
-    }
-  }, []);
+  // El idioma lo decide la URL: /en/... es inglés y el resto español.
+  // Así servidor y cliente coinciden y Google indexa cada idioma en su URL.
+  const pathname = usePathname();
+  const router = useRouter();
+  const language = getLanguageFromPath(pathname);
 
   useEffect(() => {
     document.documentElement.lang = language;
   }, [language]);
 
-  const setLanguage = (nextLanguage: Language) => {
-    setLanguageState(nextLanguage);
-    window.localStorage.setItem(LANGUAGE_STORAGE_KEY, nextLanguage);
-    document.documentElement.lang = nextLanguage;
-  };
+  const setLanguage = useCallback(
+    (nextLanguage: Language) => {
+      if (nextLanguage === language) return;
+      const search = typeof window !== "undefined" ? window.location.search : "";
+      router.push(`${switchLanguagePath(pathname || "/", nextLanguage)}${search}`);
+    },
+    [language, pathname, router]
+  );
 
   const value = useMemo(
     () => ({
@@ -465,8 +485,9 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
       setLanguage,
       toggleLanguage: () => setLanguage(language === "en" ? "es" : "en"),
       t: (key: TranslationKey) => translations[language][key],
+      href: (esPath: string) => localizePath(esPath, language),
     }),
-    [language]
+    [language, setLanguage]
   );
 
   return (

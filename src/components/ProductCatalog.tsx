@@ -25,7 +25,7 @@ export default function ProductCatalog({
   const [products, setProducts] = useState<PublicProduct[]>(initialProducts);
   const [loading, setLoading] = useState(initialProducts.length === 0);
   const { addItem } = useCart();
-  const { t } = useLanguage();
+  const { t, href } = useLanguage();
 
   useEffect(() => {
     const loadProducts = async () => {
@@ -131,7 +131,7 @@ export default function ProductCatalog({
             </div>
 
             <p className="text-xs font-medium uppercase tracking-[0.08em] text-black/50">
-              {loading ? "Loading" : `${filteredProducts.length} ${t("catalog.productsDisplayed")}`}
+              {loading ? t("catalog.loading") : `${filteredProducts.length} ${t("catalog.productsDisplayed")}`}
             </p>
           </div>
 
@@ -147,7 +147,7 @@ export default function ProductCatalog({
                     : "border-black/15 bg-white text-black/60 hover:border-black/35 hover:text-black"
                 }`}
               >
-                {category}
+                {category === "All" ? t("catalog.all") : category}
               </button>
             ))}
           </div>
@@ -170,7 +170,7 @@ export default function ProductCatalog({
                   className="group flex min-h-[300px] flex-col bg-white p-3 transition hover:bg-[#fbfbf8] sm:min-h-[330px] xl:min-h-[360px] xl:p-4"
                 >
                   <Link
-                    href={product.slug ? `/producto/${product.slug}` : "/catalogo"}
+                    href={href(product.slug ? `/producto/${product.slug}` : "/catalogo")}
                     className="flex flex-1 items-center justify-center"
                   >
                     {product.image ? (
@@ -196,7 +196,7 @@ export default function ProductCatalog({
                           {product.brand}
                         </p>
                       )}
-                      <Link href={product.slug ? `/producto/${product.slug}` : "/catalogo"}>
+                      <Link href={href(product.slug ? `/producto/${product.slug}` : "/catalogo")}>
                         <h3 className="text-xs font-black leading-tight tracking-[0.01em] hover:underline sm:text-sm">
                           {product.name}
                         </h3>

@@ -3,19 +3,23 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
+import { usePathname } from "next/navigation";
+import { switchLanguagePath } from "@/lib/i18n";
 import { useCart } from "@/components/CartProvider";
 import { useLanguage } from "@/components/LanguageProvider";
 
 export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
   const { totalItems } = useCart();
-  const { language, toggleLanguage, t } = useLanguage();
+  const { language, t, href } = useLanguage();
+  const pathname = usePathname();
+  const otherLanguageHref = switchLanguagePath(pathname || "/", language === "en" ? "es" : "en");
 
   return (
     <header className="fixed inset-x-0 top-0 z-50 border-b border-white/10 bg-black/90 backdrop-blur-sm shadow-lg">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-2">
         <div className="flex items-center justify-between gap-4">
-          <Link href="/" className="flex items-center gap-4">
+          <Link href={href("/")} className="flex items-center gap-4">
             <div className="relative w-72 h-12 sm:w-80 sm:h-12 lg:w-96 lg:h-12">
               <Image
                 src="/CLAMP_Logos-20.svg"
@@ -27,29 +31,29 @@ export default function Header() {
           </Link>
 
           <nav className="hidden lg:flex items-center gap-10 text-[0.78rem] uppercase tracking-[0.18em] text-gray-300 font-semibold" style={{ fontStretch: "condensed" }}>
-            <Link href="/catalogo" className="hover:text-white transition">
+            <Link href={href("/catalogo")} className="hover:text-white transition">
               {t("nav.equipment")}
             </Link>
-            <Link href="/store" className="hover:text-white transition">
+            <Link href={href("/store")} className="hover:text-white transition">
               {t("nav.store")}
             </Link>
-            <Link href="/about" className="hover:text-white transition">
+            <Link href={href("/about")} className="hover:text-white transition">
               {t("nav.about")}
             </Link>
-            <Link href="/contacto" className="hover:text-white transition">
+            <Link href={href("/contacto")} className="hover:text-white transition">
               {t("nav.contact")}
             </Link>
           </nav>
 
           <div className="flex items-center gap-3">
-            <button
-              type="button"
-              onClick={toggleLanguage}
-              aria-label={language === "en" ? "Cambiar a español" : "Switch to English"}
+            <Link
+              href={otherLanguageHref}
+              hrefLang={language === "en" ? "es" : "en"}
+              aria-label={language === "en" ? "Ver en español" : "View in English"}
               className="hidden h-10 min-w-10 items-center justify-center rounded-full border border-white px-3 text-xs font-black uppercase tracking-[0.08em] text-white transition hover:bg-white hover:text-black sm:inline-flex"
             >
               {language === "en" ? "ES" : "EN"}
-            </button>
+            </Link>
 
             <a
               href="tel:+34681878782"
@@ -73,7 +77,7 @@ export default function Header() {
             </a>
 
             <Link
-              href="/pedido"
+              href={href("/pedido")}
               aria-label={t("nav.cart")}
               className="relative hidden h-10 w-10 items-center justify-center rounded-full border border-white text-white transition hover:bg-white hover:text-black sm:inline-flex"
             >
@@ -122,25 +126,25 @@ export default function Header() {
 
         {menuOpen && (
           <nav className="lg:hidden mt-4 flex flex-col gap-4 border-t border-white/10 pt-4 text-sm uppercase tracking-[0.14em] text-gray-300">
-            <Link href="/catalogo" className="hover:text-white transition">
+            <Link href={href("/catalogo")} className="hover:text-white transition">
               {t("nav.equipment")}
             </Link>
-            <Link href="/store" className="hover:text-white transition">
+            <Link href={href("/store")} className="hover:text-white transition">
               {t("nav.store")}
             </Link>
-            <Link href="/about" className="hover:text-white transition">
+            <Link href={href("/about")} className="hover:text-white transition">
               {t("nav.about")}
             </Link>
-            <Link href="/contacto" className="hover:text-white transition">
+            <Link href={href("/contacto")} className="hover:text-white transition">
               {t("nav.contact")}
             </Link>
-            <button
-              type="button"
-              onClick={toggleLanguage}
+            <Link
+              href={otherLanguageHref}
+              hrefLang={language === "en" ? "es" : "en"}
               className="rounded-full border border-white px-4 py-2 text-center text-white hover:bg-white hover:text-black transition"
             >
               {language === "en" ? "Español" : "English"}
-            </button>
+            </Link>
             <a
               href="tel:+34681878782"
               className="rounded-full border border-white px-4 py-2 text-center text-white hover:bg-white hover:text-black transition"
@@ -148,7 +152,7 @@ export default function Header() {
               {t("nav.call")} +34 681 878 782
             </a>
             <Link
-              href="/pedido"
+              href={href("/pedido")}
               className="rounded-full border border-white px-4 py-2 text-center text-white hover:bg-white hover:text-black transition"
             >
               {t("nav.cart")} {totalItems > 0 ? `(${totalItems})` : ""}

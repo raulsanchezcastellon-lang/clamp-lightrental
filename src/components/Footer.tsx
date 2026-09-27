@@ -6,7 +6,8 @@ import { useLanguage } from "@/components/LanguageProvider";
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
+  const legalSuffix = language === "en" ? " (ES)" : "";
 
   return (
     <footer className="bg-[#FFED00] text-black">
@@ -70,18 +71,18 @@ export default function Footer() {
             <h4 className="text-lg font-semibold mb-4">{t("footer.legal")}</h4>
             <ul className="space-y-3 text-black/80 text-sm">
               <li>
-                <a href="/aviso-legal" className="hover:underline">
-                  {t("footer.legalNotice")}
+                <a href="/aviso-legal" hrefLang="es" className="hover:underline">
+                  {t("footer.legalNotice")}{legalSuffix}
                 </a>
               </li>
               <li>
-                <a href="/privacidad" className="hover:underline">
-                  {t("footer.privacy")}
+                <a href="/privacidad" hrefLang="es" className="hover:underline">
+                  {t("footer.privacy")}{legalSuffix}
                 </a>
               </li>
               <li>
-                <a href="/cookies" className="hover:underline">
-                  {t("footer.cookies")}
+                <a href="/cookies" hrefLang="es" className="hover:underline">
+                  {t("footer.cookies")}{legalSuffix}
                 </a>
               </li>
             </ul>

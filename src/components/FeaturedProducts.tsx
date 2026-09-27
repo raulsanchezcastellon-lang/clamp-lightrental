@@ -12,7 +12,7 @@ export default function FeaturedProducts({
 }) {
   const [products, setProducts] = useState<PublicProduct[]>(initialProducts);
   const [loading, setLoading] = useState(initialProducts.length === 0);
-  const { t } = useLanguage();
+  const { t, href } = useLanguage();
 
   useEffect(() => {
     const loadProducts = async () => {
@@ -51,7 +51,7 @@ export default function FeaturedProducts({
             {products.map((product) => (
               <article key={product.id} className="bg-white p-3 sm:p-4">
                 <Link
-                  href={product.slug ? `/producto/${product.slug}` : "/catalogo"}
+                  href={href(product.slug ? `/producto/${product.slug}` : "/catalogo")}
                   className="flex aspect-square items-center justify-center"
                 >
                   {product.image ? (
@@ -73,7 +73,7 @@ export default function FeaturedProducts({
                       {product.brand}
                     </p>
                   )}
-                  <Link href={product.slug ? `/producto/${product.slug}` : "/catalogo"}>
+                  <Link href={href(product.slug ? `/producto/${product.slug}` : "/catalogo")}>
                     <h3 className="text-xs font-black leading-tight hover:underline sm:text-sm">
                       {product.name}
                     </h3>
@@ -92,7 +92,7 @@ export default function FeaturedProducts({
 
         <div className="mt-8 flex justify-center">
           <Link
-            href="/catalogo"
+            href={href("/catalogo")}
             className="rounded-full bg-black px-7 py-3 text-sm font-black uppercase tracking-[0.12em] text-white transition hover:bg-[#FFED00] hover:text-black"
           >
             {t("featured.catalog")}

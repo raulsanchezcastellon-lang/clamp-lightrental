@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useLanguage } from "@/components/LanguageProvider";
 
 export default function ContactCta() {
-  const { t } = useLanguage();
+  const { t, href } = useLanguage();
 
   return (
     <section className="border-b-[10px] border-[#FFED00] bg-black px-4 py-16 text-white sm:px-6 lg:px-8">
@@ -18,7 +18,7 @@ export default function ContactCta() {
           </h2>
         </div>
         <Link
-          href="/contacto"
+          href={href("/contacto")}
           className="inline-flex w-fit rounded-full border border-white px-8 py-4 text-sm font-black uppercase tracking-[0.12em] transition hover:bg-white hover:text-black"
         >
           {t("cta.button")}

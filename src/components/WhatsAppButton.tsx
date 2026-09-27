@@ -1,9 +1,13 @@
+"use client";
+
+import { useLanguage } from "@/components/LanguageProvider";
+
 const WHATSAPP_NUMBER = "34681878782";
-const WHATSAPP_MESSAGE = "Hola, me gustaria recibir informacion de CLAMP Light Rental.";
 
 export default function WhatsAppButton() {
+  const { t } = useLanguage();
   const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(
-    WHATSAPP_MESSAGE
+    t("whatsapp.message")
   )}`;
 
   return (
@@ -11,7 +15,7 @@ export default function WhatsAppButton() {
       href={whatsappUrl}
       target="_blank"
       rel="noreferrer"
-      aria-label="Open WhatsApp conversation"
+      aria-label={t("whatsapp.label")}
       className="fixed bottom-5 right-5 z-[60] flex h-14 w-14 items-center justify-center rounded-full bg-[#25D366] text-white shadow-[0_10px_30px_rgba(0,0,0,0.25)] transition hover:scale-105 hover:bg-[#1fb85a] focus:outline-none focus:ring-4 focus:ring-[#25D366]/30"
     >
       <svg

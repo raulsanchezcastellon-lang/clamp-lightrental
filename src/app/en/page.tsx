@@ -11,13 +11,14 @@ import { getPublicProducts } from "@/lib/products";
 export const dynamic = "force-dynamic";
 
 export const metadata = createPageMetadata({
-  title: "CLAMP Light Rental | Alquiler de Iluminación para Rodajes en Alicante",
+  title: "Film Lighting Rental in Alicante, Spain",
   description:
-    "CLAMP Light Rental alquila equipos de iluminación, grip y alimentación profesionales para fotografía, vídeo, publicidad y equipos de producción en Alicante.",
+    "Film and photo lighting rental in Alicante for international productions shooting on the Costa Blanca. Gear delivered to set and collected after wrap, English-speaking crew on request.",
   path: "/",
+  lang: "en",
 });
 
-export default async function Home() {
+export default async function HomeEn() {
   const featuredProducts = await getPublicProducts({
     listingType: "rental",
     featured: true,
