@@ -19,9 +19,10 @@ export default function ContactCta() {
         </div>
         <Link
           href={href("/contacto")}
-          className="inline-flex w-fit rounded-full border border-white px-8 py-4 text-sm font-black uppercase tracking-[0.12em] transition hover:bg-white hover:text-black"
+          className="inline-flex w-fit items-center gap-8 bg-[#FFED00] px-7 py-4 text-sm font-semibold uppercase tracking-[0.14em] text-black transition hover:bg-white"
         >
           {t("cta.button")}
+          <span aria-hidden="true">→</span>
         </Link>
       </div>
     </section>

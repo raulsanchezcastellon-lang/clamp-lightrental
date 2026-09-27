@@ -18,13 +18,13 @@ import "./globals.css";
 const barlow = Barlow({
   variable: "--font-body",
   subsets: ["latin"],
-  weight: "300",
+  weight: ["300", "400", "500", "600"],
 });
 
 const barlowCondensed = Barlow_Condensed({
   variable: "--font-heading",
   subsets: ["latin"],
-  weight: "800",
+  weight: ["700", "800"],
 });
 
 export const metadata: Metadata = {

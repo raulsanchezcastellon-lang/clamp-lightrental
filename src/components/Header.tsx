@@ -17,7 +17,7 @@ export default function Header() {
 
   return (
     <header className="fixed inset-x-0 top-0 z-50 border-b border-white/10 bg-black/90 backdrop-blur-sm shadow-lg">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-2">
+      <div className="max-w-[1580px] mx-auto px-4 sm:px-6 lg:px-8 py-2">
         <div className="flex items-center justify-between gap-4">
           <Link href={href("/")} className="flex items-center gap-4">
             <div className="relative w-72 h-12 sm:w-80 sm:h-12 lg:w-96 lg:h-12">
@@ -50,7 +50,7 @@ export default function Header() {
               href={otherLanguageHref}
               hrefLang={language === "en" ? "es" : "en"}
               aria-label={language === "en" ? "Ver en español" : "View in English"}
-              className="hidden h-10 min-w-10 items-center justify-center rounded-full border border-white px-3 text-xs font-black uppercase tracking-[0.08em] text-white transition hover:bg-white hover:text-black sm:inline-flex"
+              className="hidden h-10 min-w-10 items-center justify-center border border-white/40 px-3 text-xs font-black uppercase tracking-[0.08em] text-white transition hover:bg-white hover:text-black sm:inline-flex"
             >
               {language === "en" ? "ES" : "EN"}
             </Link>
@@ -58,7 +58,7 @@ export default function Header() {
             <a
               href="tel:+34681878782"
               aria-label={t("nav.call")}
-              className="hidden h-10 w-10 items-center justify-center rounded-full border border-white text-white transition hover:bg-white hover:text-black sm:inline-flex"
+              className="hidden h-10 w-10 items-center justify-center border border-white/40 text-white transition hover:bg-white hover:text-black sm:inline-flex"
             >
               <svg
                 aria-hidden="true"
@@ -79,7 +79,7 @@ export default function Header() {
             <Link
               href={href("/pedido")}
               aria-label={t("nav.cart")}
-              className="relative hidden h-10 w-10 items-center justify-center rounded-full border border-white text-white transition hover:bg-white hover:text-black sm:inline-flex"
+              className="relative hidden h-10 w-10 items-center justify-center border border-white/40 text-white transition hover:bg-white hover:text-black sm:inline-flex"
             >
               <svg
                 aria-hidden="true"
@@ -103,7 +103,7 @@ export default function Header() {
             </Link>
 
             <button
-              className="inline-flex items-center justify-center rounded-full border border-white p-2 text-white hover:bg-white hover:text-black transition lg:hidden"
+              className="inline-flex items-center justify-center border border-white/40 p-2 text-white hover:bg-white hover:text-black transition lg:hidden"
               onClick={() => setMenuOpen(!menuOpen)}
               aria-label="Open navigation"
             >
@@ -141,19 +141,19 @@ export default function Header() {
             <Link
               href={otherLanguageHref}
               hrefLang={language === "en" ? "es" : "en"}
-              className="rounded-full border border-white px-4 py-2 text-center text-white hover:bg-white hover:text-black transition"
+              className="border border-white/40 px-4 py-2 text-center text-white hover:bg-white hover:text-black transition"
             >
               {language === "en" ? "Español" : "English"}
             </Link>
             <a
               href="tel:+34681878782"
-              className="rounded-full border border-white px-4 py-2 text-center text-white hover:bg-white hover:text-black transition"
+              className="border border-white/40 px-4 py-2 text-center text-white hover:bg-white hover:text-black transition"
             >
               {t("nav.call")} +34 681 878 782
             </a>
             <Link
               href={href("/pedido")}
-              className="rounded-full border border-white px-4 py-2 text-center text-white hover:bg-white hover:text-black transition"
+              className="border border-white/40 px-4 py-2 text-center text-white hover:bg-white hover:text-black transition"
             >
               {t("nav.cart")} {totalItems > 0 ? `(${totalItems})` : ""}
             </Link>

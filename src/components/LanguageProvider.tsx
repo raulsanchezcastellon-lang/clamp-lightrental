@@ -98,10 +98,6 @@ type TranslationKey =
   | "homeFeatures.supportTitle"
   | "homeFeatures.supportText"
   | "homeSocial.eyebrow"
-  | "homeSocial.title"
-  | "homeCta.title"
-  | "homeCta.text"
-  | "homeCta.button"
   | "brands.title"
   | "about.eyebrow"
   | "about.title"
@@ -156,7 +152,7 @@ const translations: Record<Language, Record<TranslationKey, string>> = {
     "hero.kicker": "Lighting rental • Delivery to set • Crew",
     "hero.title": "Film Lighting Rental in Alicante",
     "hero.subtitle":
-      "Film lighting rental in Alicante for international productions. Delivered to set, collected at wrap, with English-speaking crew on request.",
+      "Lights, grip and power for international film, commercial and photo productions. Delivered to set, collected at wrap, with English-speaking crew on request.",
     "hero.catalog": "View Catalog",
     "hero.quote": "Request Quote",
     "homeIntro.eyebrow": "Who we are",
@@ -227,10 +223,10 @@ const translations: Record<Language, Record<TranslationKey, string>> = {
     "contact.error": "The message could not be sent. Please try again.",
     "contact.send": "Send Inquiry",
     "contact.sending": "Sending...",
-    "homeFeatures.title": "Why choose CLAMP?",
-    "homeFeatures.modernTitle": "Modern Equipment",
+    "homeFeatures.title": "How we work",
+    "homeFeatures.modernTitle": "Up-to-date gear",
     "homeFeatures.modernText":
-      "State-of-the-art lighting solutions designed for outstanding cinematic results",
+      "Current-generation LED fixtures from Aputure, Astera and Nanlite, plus the grip and power to run them",
     "homeFeatures.deliveryTitle": "Delivered to set",
     "homeFeatures.deliveryText":
       "We drop the gear at your location and collect it after wrap, anywhere on the Costa Blanca, Murcia and Valencia",
@@ -238,10 +234,6 @@ const translations: Record<Language, Record<TranslationKey, string>> = {
     "homeFeatures.supportText":
       "Local gaffers and lighting technicians who know the gear and work in English",
     "homeSocial.eyebrow": "On set",
-    "homeSocial.title": "Real gear, real shoots, real crews.",
-    "homeCta.title": "Need lighting for your project?",
-    "homeCta.text": "Contact us today for a tailored lighting solution.",
-    "homeCta.button": "Send Inquiry",
     "brands.title": "Brands we trust",
     "about.eyebrow": "About us and our services",
     "about.title": "Lighting rental shaped around your production",
@@ -304,9 +296,9 @@ const translations: Record<Language, Record<TranslationKey, string>> = {
     "nav.call": "Llamar a CLAMP",
     "nav.cart": "Abrir carrito de pedido",
     "hero.kicker": "Alquiler de iluminación • Cinematografía • Producción",
-    "hero.title": "Alquiler profesional de iluminación",
+    "hero.title": "Iluminación para rodajes",
     "hero.subtitle":
-      "Alquiler de iluminación de alta gama para rodajes y producciones.",
+      "Focos, grip y energía para cine, publicidad y fotografía en Alicante. Llevamos el material al set y lo recogemos al terminar.",
     "hero.catalog": "Ver catálogo",
     "hero.quote": "Pedir presupuesto",
     "homeIntro.eyebrow": "Quiénes somos",
@@ -377,21 +369,17 @@ const translations: Record<Language, Record<TranslationKey, string>> = {
     "contact.error": "No se ha podido enviar el mensaje. Inténtalo de nuevo.",
     "contact.send": "Enviar consulta",
     "contact.sending": "Enviando...",
-    "homeFeatures.title": "¿Por qué elegir CLAMP?",
-    "homeFeatures.modernTitle": "Equipo moderno",
+    "homeFeatures.title": "Cómo trabajamos",
+    "homeFeatures.modernTitle": "Material al día",
     "homeFeatures.modernText":
-      "Soluciones de iluminación actuales pensadas para resultados cinematográficos de alto nivel",
-    "homeFeatures.deliveryTitle": "Entrega rápida",
+      "Focos LED de última generación de Aputure, Astera y Nanlite, con el grip y la alimentación necesarios para montarlos",
+    "homeFeatures.deliveryTitle": "Entrega en set",
     "homeFeatures.deliveryText":
-      "Disponibilidad inmediata y entregas puntuales en la zona",
-    "homeFeatures.supportTitle": "Soporte técnico",
+      "Llevamos el material a tu localización y lo recogemos al terminar, en toda la Costa Blanca, Murcia y Valencia",
+    "homeFeatures.supportTitle": "Equipo técnico",
     "homeFeatures.supportText":
-      "Asistencia experta para cada producción y necesidad de alquiler",
+      "Eléctricos y gaffers locales que conocen el material y trabajan también en inglés",
     "homeSocial.eyebrow": "En set",
-    "homeSocial.title": "Material real, rodajes reales, equipos reales.",
-    "homeCta.title": "¿Necesitas iluminación para tu proyecto?",
-    "homeCta.text": "Contáctanos y prepararemos una solución a medida.",
-    "homeCta.button": "Enviar consulta",
     "brands.title": "Marcas con las que trabajamos",
     "about.eyebrow": "Sobre nosotros y nuestros servicios",
     "about.title": "Alquiler de iluminación adaptado a tu producción",
