@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import type { Prisma } from "@prisma/client";
 import prisma from "@/lib/prisma";
-import { getAdminFromToken } from "@/lib/auth";
+import { getAdminFromToken, normalizeSpecs } from "@/lib/auth";
 import { buildProductSlugBase, generateUniqueProductSlug } from "@/lib/products";
 
 function priorityRank(priority: number | null) {
@@ -127,6 +127,7 @@ export async function POST(request: NextRequest) {
         stock: data.stock,
         image: data.image || null,
         available: data.available ?? true,
+        specs: normalizeSpecs(data.specs) ?? [],
         adminId: admin.adminId,
       },
     });

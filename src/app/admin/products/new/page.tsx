@@ -21,6 +21,7 @@ export default function NewProductPage() {
   const [price, setPrice] = useState("");
   const [stock, setStock] = useState("");
   const [imageUrl, setImageUrl] = useState("");
+  const [specsText, setSpecsText] = useState("");
   const [uploadingImage, setUploadingImage] = useState(false);
   const [loadingCategories, setLoadingCategories] = useState(true);
   const [error, setError] = useState("");
@@ -91,6 +92,7 @@ export default function NewProductPage() {
           priority,
           featuredOrder: Number(featuredOrder),
           image: imageUrl,
+          specs: specsText.split("\n"),
           price: Number(price),
           stock: Number(stock),
         }),
@@ -306,6 +308,20 @@ export default function NewProductPage() {
               className="w-full border border-white/10 bg-[#111111] rounded-lg px-4 py-3 text-white"
               required
             />
+          </div>
+
+          <div>
+            <label className="block mb-2 text-sm font-medium text-gray-300">Technical specs</label>
+            <textarea
+              value={specsText}
+              onChange={(e) => setSpecsText(e.target.value)}
+              rows={10}
+              placeholder={"One per line, e.g.\nWeight: 9.5 kg (head with yoke)\nPower: 1,200 W\nIn the box: Head · Control box · Reflector"}
+              className="w-full border border-white/10 bg-[#111111] rounded-lg px-4 py-3 font-mono text-sm text-white"
+            />
+            <p className="mt-2 text-sm text-gray-500">
+              One spec per line as &quot;Label: value&quot; (English labels: Weight, Dimensions, White light, Colored light, Color rendition, Beam angle, Power, IP rating, Mount, Built-in battery, In the box). The Spanish page translates the labels.
+            </p>
           </div>
 
           <button

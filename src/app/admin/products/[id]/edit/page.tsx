@@ -22,6 +22,7 @@ export default function EditProductPage() {
   const [price, setPrice] = useState(0);
   const [stock, setStock] = useState(0);
   const [imageUrl, setImageUrl] = useState("");
+  const [specsText, setSpecsText] = useState("");
   const [uploadingImage, setUploadingImage] = useState(false);
   const [loadingCategories, setLoadingCategories] = useState(true);
   const [saving, setSaving] = useState(false);
@@ -51,6 +52,7 @@ export default function EditProductPage() {
         setPrice(productData.price || 0);
         setStock(productData.stock || 0);
         setImageUrl(productData.image || "");
+        setSpecsText(Array.isArray(productData.specs) ? productData.specs.join("\n") : "");
       } catch (err) {
         console.error("Unable to load product data:", err);
       } finally {
@@ -109,6 +111,7 @@ export default function EditProductPage() {
           price,
           stock,
           image: imageUrl,
+          specs: specsText.split("\n"),
         }),
       });
 
@@ -284,6 +287,20 @@ export default function EditProductPage() {
               placeholder="Stock"
               className="w-full border border-white/10 bg-[#111111] rounded-lg px-4 py-3 text-white"
             />
+          </div>
+
+          <div>
+            <label className="block mb-2 text-sm font-medium text-gray-300">Technical specs</label>
+            <textarea
+              value={specsText}
+              onChange={(e) => setSpecsText(e.target.value)}
+              rows={10}
+              placeholder={"One per line, e.g.\nWeight: 9.5 kg (head with yoke)\nPower: 1,200 W\nIn the box: Head · Control box · Reflector"}
+              className="w-full border border-white/10 bg-[#111111] rounded-lg px-4 py-3 font-mono text-sm text-white"
+            />
+            <p className="mt-2 text-sm text-gray-500">
+              One spec per line as &quot;Label: value&quot; (English labels: Weight, Dimensions, White light, Colored light, Color rendition, Beam angle, Power, IP rating, Mount, Built-in battery, In the box). The Spanish page translates the labels.
+            </p>
           </div>
 
           <button

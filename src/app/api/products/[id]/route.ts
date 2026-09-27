@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import prisma from "@/lib/prisma";
+import { normalizeSpecs, requireAdmin } from "@/lib/auth";
 import { buildProductSlugBase, generateUniqueProductSlug } from "@/lib/products";
 
 export async function GET(
@@ -28,6 +29,9 @@ export async function PUT(
   context: { params: Promise<{ id: string }> }
 ) {
   try {
+    const unauthorized = await requireAdmin();
+    if (unauthorized) return unauthorized;
+
     const { id } = await context.params;
     const body = await request.json();
     const brand =
@@ -61,6 +65,7 @@ export async function PUT(
       stock: body.stock,
       image: body.image || null,
       available: body.available ?? true,
+      ...(normalizeSpecs(body.specs) ? { specs: normalizeSpecs(body.specs) } : {}),
     };
 
     const updatedProduct = await prisma.product.update({
@@ -84,12 +89,21 @@ export async function PATCH(
   context: { params: Promise<{ id: string }> }
 ) {
   try {
+    const unauthorized = await requireAdmin();
+    if (unauthorized) return unauthorized;
+
     const { id } = await context.params;
     const body = await request.json();
     const data: {
       featuredOrder?: number;
       priority?: number;
+      specs?: string[];
     } = {};
+
+    const specs = normalizeSpecs(body.specs);
+    if (specs) {
+      data.specs = specs;
+    }
 
     if (typeof body.featuredOrder === "number" && Number.isFinite(body.featuredOrder)) {
       data.featuredOrder = body.featuredOrder;
@@ -120,6 +134,9 @@ export async function DELETE(
   context: { params: Promise<{ id: string }> }
 ) {
   try {
+    const unauthorized = await requireAdmin();
+    if (unauthorized) return unauthorized;
+
     const { id } = await context.params;
     await prisma.product.delete({
       where: {
