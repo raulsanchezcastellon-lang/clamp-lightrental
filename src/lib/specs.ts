@@ -75,7 +75,7 @@ const VALUE_PHRASES_ES: Array<[RegExp, string]> = [
   [/swivel with brakes/gi, "giratorias con freno"],
   [/Adjustable upper shelf \((\d+) positions\)/gi, "Balda superior regulable ($1 posiciones)"],
   [/Non-slip rubber/gi, "Goma antideslizante"],
-  [/maleta de carga with/gi, "maleta de carga con"],
+  [/with PowerBox/gi, "con PowerBox"],
   [/\bBag\b/g, "Bolsa"],
   [/12 V car/gi, "12 V mechero"],
   [/A \/ B size/gi, "tamaño A / B"],
