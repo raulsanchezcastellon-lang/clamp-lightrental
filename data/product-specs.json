@@ -1,5 +1,5 @@
 {
-  "_schema": "Mismo esquema y orden que Rec Distrikt: Weight, Dimensions, White light, Colored light, Color rendition, Beam angle, Power, IP rating, Mount, Built-in battery, In the box. Valores verificados con la documentación oficial del fabricante (27/09/2026). Los campos sin dato oficial se omiten.",
+  "_schema": "Mismo esquema y orden que Rec Distrikt: Weight, Dimensions, White light, Colored light, Color rendition, Beam angle, Power, IP rating, Mount, Built-in battery, In the box. Valores verificados con la documentación oficial del fabricante (27/09/2026). Los campos sin dato oficial se omiten. Contenido de los kits ('In the box') confirmado por Raúl el 27/09/2026.",
   "aputure-storm-1200x": [
     "Weight: 9.5 kg (head with yoke)",
     "Dimensions: 33.4 × 33.6 × 55.7 cm (head with yoke)",
@@ -94,7 +94,7 @@
     "IP rating: IP65 (with charging-port covers)",
     "Mount: 2× M5 · TubeHolder (1/4\"-20) · TubeStand",
     "Built-in battery: Up to 20 h · 1 h 45 min at full output",
-    "In the box: 8× Titan Tube · PowerBox charger + 8 cables · Charging case · 8× Stand · 16× Holder · 16× Baby pin · 16× Eyebolt · 8× Port cover"
+    "In the box: 8× Titan Tube · Astera charging case with PowerBox + 8 cables · 8× TubeStand · 16× Holder · 16× Baby pin · 16× Eyebolt · 8× Port cover · AsteraBox (wireless control, included)"
   ],
   "nanlite-pavotube-30xr-2x": [
     "Weight: 1.58 kg each",
@@ -176,6 +176,117 @@
     "Color rendition: CRI 95+ / TLCI 96+",
     "Power: 7 W",
     "Mount: E26 / E27",
-    "Built-in battery: 70+ min at full output · 20+ h at minimum"
+    "Built-in battery: 70+ min at full output · 20+ h at minimum",
+    "In the box: 1× Accent B7c bulb (price per bulb)"
+  ],
+  "aputure-cf12-fresnel-barndoors": [
+    "Weight: 4.72 kg (fresnel)",
+    "Dimensions: 38.3 × 37.0 × 12.8 cm",
+    "Beam angle: 15° – 45° (spot / flood)",
+    "Mount: Bowens",
+    "Compatible with: STORM 1200x / 700x / 400x / 1000c · LS 1200d Pro · LS 600c Pro II",
+    "In the box: CF12 Fresnel · CF12 Barn doors"
+  ],
+  "aputure-f10-fresnel-barn-doors": [
+    "Weight: 3.85 kg (fresnel)",
+    "Dimensions: 34.6 × 34.0 × 17.2 cm (collapsed) · 25.0 cm deep extended",
+    "Beam angle: 15° – 45° (spot / flood)",
+    "Mount: Bowens",
+    "Compatible with: LS 600c Pro II · LS 600d Pro · LS 1200d Pro",
+    "In the box: F10 Fresnel · F10 Barn doors · Padded bag"
+  ],
+  "aputure-spotlight-max-19": [
+    "Beam angle: 19° lens",
+    "Gobo size: A / B size",
+    "Mount: Bowens",
+    "Compatible with: LS 600 series · LS 1200d Pro · STORM 1200x",
+    "In the box: Spotlight Max with 19° lens · Yoke · Gobo holder · Rolling hard case"
+  ],
+  "aputure-spotlight-26": [
+    "Beam angle: 26° lens",
+    "Gobo size: B size · 18-leaf iris slot",
+    "Mount: Bowens",
+    "Compatible with: Bowens-mount point-source LEDs up to 600 W (LS 600c Pro II, STORM 400x, STORM 80c with adapter)",
+    "In the box: Spotlight Mount with 26° lens · Gobo holder · Case"
+  ],
+  "aputure-spotlight-19": [
+    "Beam angle: 19° lens",
+    "Gobo size: B size · 18-leaf iris slot",
+    "Mount: Bowens",
+    "Compatible with: Bowens-mount point-source LEDs up to 600 W (LS 600c Pro II, STORM 400x)",
+    "In the box: Spotlight Mount with 19° lens · Gobo holder · Case"
+  ],
+  "aputure-light-dome-150": [
+    "Weight: 3.32 kg",
+    "Dimensions: Ø 150 cm × 80 cm deep",
+    "Beam angle: 45° with included grid",
+    "Mount: Bowens",
+    "Compatible with: Bowens-mount fixtures (LS 600, LS 1200d Pro, STORM 400x / 700x)",
+    "In the box: Light Dome 150 · 1.5-stop & 2.5-stop diffusion · 45° grid · Bag"
+  ],
+  "ecoflow-delta-max-2016wh": [
+    "Capacity: 2,016 Wh",
+    "Power: 2,400 W continuous · 4,600 W surge (230 V pure sine wave)",
+    "Outputs: 4× AC · 4× USB-A · 2× USB-C 100 W · 1× 12 V car",
+    "Weight: 22 kg",
+    "Dimensions: 49.7 × 24.2 × 30.5 cm",
+    "Recharge: 1.6 h from AC"
+  ],
+  "aputure-sidus-one": [
+    "Protocols: CRMX · DMX / RDM · Art-Net · sACN · Sidus Bluetooth mesh · Wi-Fi",
+    "Range: CRMX ≤300 m · Bluetooth ≤180 m · Wi-Fi ≤120 m",
+    "Outputs: 4 DMX universes",
+    "Built-in battery: 19 h (3.5 h charge)",
+    "IP rating: IP54",
+    "Weight: 302 g",
+    "Dimensions: 113 × 75 × 23.3 mm"
+  ],
+  "beamz-f1600-hazhe-machine": [
+    "Power: 1,600 W",
+    "Output: 350 m³/min",
+    "Fluid tank: 3.1 L",
+    "Warm-up: 2 min",
+    "Control: DMX (2 ch, 3-pin XLR) · Standalone · Auto programs",
+    "Weight: 15.8 kg",
+    "Dimensions: 60 × 37 × 25 cm",
+    "In the box: F1600 in flight case"
+  ],
+  "swit-monitor-k15": [
+    "Screen: 15.4\" · 1920 × 1200",
+    "Brightness: 1,500 nits",
+    "Inputs: 2× 3G-SDI (with loop out) · 1× HDMI 1.4",
+    "Power: AC · 4-pin XLR · V-Mount (11–17 V)",
+    "Weight: 5.3 kg",
+    "Dimensions: 38.7 × 28.0 × 9.1 cm",
+    "In the box: Monitor · Sun hood · VESA to C-stand adapter · 2× Cheese plate · Carrying case"
+  ],
+  "lince-crane-cart-120-pro": [
+    "Dimensions: 120 × 65 × 107 cm (assembled) · 49 cm high folded",
+    "Weight: 44.9 kg",
+    "Wheels: 10\" pneumatic · 2 swivel with brakes",
+    "Shelves: Adjustable upper shelf (6 positions) · Non-slip rubber"
+  ],
+  "avenger-d650-boom": [
+    "Length: 300 cm max. extension",
+    "Max. load: 10 kg at full extension · 40 kg at 163 cm",
+    "Weight: 14.8 kg",
+    "Mount: 28 mm male stand attachment · Grip head with 16 mm / 28 mm",
+    "In the box: D650 Junior boom · 6.7 kg counterweight"
+  ],
+  "avenger-d600-mini-boom": [
+    "Length: 117 – 212 cm",
+    "Max. load: 7 kg at full extension · 30 kg at minimum",
+    "Weight: 3.7 kg",
+    "Mount: Built-in D200 grip head · 16 mm baby spigot",
+    "In the box: D600 Mini boom (counterweight with sandbag)"
+  ],
+  "manfrotto-skylite-frame-2x2m-kit-x2-fabrics": [
+    "Size: 2 × 2 m",
+    "Weight: 5 kg (kit)",
+    "In the box: Skylite Rapid frame 2 × 2 m · Silver / White reflector · 1.25-stop diffusion · Rigid case"
+  ],
+  "dedolight-lightstream-50cm-reflector-kit-1-4": [
+    "Size: 50 × 50 cm reflectors",
+    "In the box: 4× Lightstream reflector (#1 – #4, from spot to wide spread) · Mounting hardware · Case"
   ]
 }
