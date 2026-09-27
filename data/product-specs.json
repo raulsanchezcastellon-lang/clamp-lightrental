@@ -283,10 +283,61 @@
   "manfrotto-skylite-frame-2x2m-kit-x2-fabrics": [
     "Size: 2 × 2 m",
     "Weight: 5 kg (kit)",
-    "In the box: Skylite Rapid frame 2 × 2 m · Silver / White reflector · 1.25-stop diffusion · Rigid case"
+    "In the box: Skylite Rapid frame 2 × 2 m · 2 fabrics of your choice (ask us for the available fabrics) · Rigid case"
   ],
   "dedolight-lightstream-50cm-reflector-kit-1-4": [
     "Size: 50 × 50 cm reflectors",
     "In the box: 4× Lightstream reflector (#1 – #4, from spot to wide spread) · Mounting hardware · Case"
+  ],
+  "manfrotto-skylite-frame-3x3m-kit-x2-fabrics": [
+    "Size: 3 × 3 m",
+    "In the box: Skylite Rapid frame 3 × 3 m · 2 fabrics of your choice (ask us for the available fabrics) · Rigid case"
+  ],
+  "avenger-modular-frame-6x6-fabric-x1": [
+    "Size: 6 × 6' (1.8 × 1.8 m)",
+    "In the box: Modular frame · 1 fabric of your choice (ask us for the available fabrics)"
+  ],
+  "avenger-modular-frame-8x8-fabric-x1": [
+    "Size: 8 × 8' (2.4 × 2.4 m)",
+    "In the box: Modular frame · 1 fabric of your choice (ask us for the available fabrics)"
+  ],
+  "avenger-modular-frame-12x12-fabric-x1": [
+    "Size: 12 × 12' (3.6 × 3.6 m)",
+    "In the box: Modular frame · 1 fabric of your choice (ask us for the available fabrics)"
+  ],
+  "aputure-light-dome-90": [
+    "Weight: 2.24 kg",
+    "Dimensions: Ø 89 cm × 60 cm deep",
+    "Beam angle: 40° with included grid",
+    "Mount: Bowens",
+    "Compatible with: Bowens-mount fixtures (STORM 700x / 400x, LS 600, amaran 150c / 300c)",
+    "In the box: Light Dome III · 1.5-stop & 2.5-stop diffusion · 40° grid · Bag"
+  ],
+  "proaim-flyking-camera-slider-100mm-bowl-tripod-head": [
+    "Length: 1.22 m (4') · 1.01 m travel",
+    "Max. load: 70 kg",
+    "Weight: 32 kg",
+    "Mount: 100 mm bowl (75 mm reducer ring) · 1/4\"-20 · 3/8\"-16 · 5/8\" receivers",
+    "In the box: Flyking 4' slider · 2× Crossbar · 4× Adjustable foot · Tripod head · Carrying case"
+  ],
+  "kupo-flags-kit": [
+    "Size: 60 × 90 cm (24 × 36\")",
+    "In the box: 1× Solid flag · 1× Hollywood · 1× Single net (green) · 1× Double net (red)"
+  ],
+  "avenger-floppy-flag-4x4": [
+    "Size: 4 × 4' (120 × 120 cm) · opens to 4 × 8'",
+    "In the box: 1× Floppy flag 4 × 4'"
+  ],
+  "kupo-apple-box": [
+    "Size: Full apple · 50.8 × 30.5 × 20.3 cm (20 × 12 × 8\")"
+  ],
+  "foldit-production-cart-150kg": [
+    "Max. load: 150 kg",
+    "Weight: 15 kg",
+    "Dimensions: 143 × 73.5 × 58.5 cm (open) · 102.5 × 25 × 60 cm (folded)",
+    "Wheels: Pneumatic Ø 49.5 cm"
+  ],
+  "manfrotto-sandbag-10kg": [
+    "Weight: 10 kg (filled)"
   ]
 }
