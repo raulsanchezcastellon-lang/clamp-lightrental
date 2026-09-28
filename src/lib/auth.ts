@@ -2,15 +2,25 @@ import jwt from "jsonwebtoken";
 import { cookies } from "next/headers";
 import { NextResponse } from "next/server";
 
-const JWT_SECRET = process.env.JWT_SECRET || "your-secret-key";
+/**
+ * Sin JWT_SECRET no hay sesiones: nunca se usa un valor por defecto, porque
+ * cualquiera que lo conociera podría fabricarse una sesión de administrador.
+ */
+function getJwtSecret() {
+  const secret = process.env.JWT_SECRET;
+  if (!secret || secret.length < 16) {
+    throw new Error("JWT_SECRET is missing or too short (min. 16 characters).");
+  }
+  return secret;
+}
 
 export function createToken(adminId: string): string {
-  return jwt.sign({ adminId }, JWT_SECRET, { expiresIn: "7d" });
+  return jwt.sign({ adminId }, getJwtSecret(), { expiresIn: "7d" });
 }
 
 export async function verifyToken(token: string) {
   try {
-    return jwt.verify(token, JWT_SECRET) as { adminId: string; iat: number; exp: number };
+    return jwt.verify(token, getJwtSecret()) as { adminId: string; iat: number; exp: number };
   } catch (error) {
     return null;
   }

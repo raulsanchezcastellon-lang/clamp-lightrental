@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
 import { useCart } from "@/components/CartProvider";
 import { useLanguage } from "@/components/LanguageProvider";
+import { categoryLabel } from "@/lib/i18n";
 import type { PublicProduct } from "@/lib/products";
 
 type ListingType = "rental" | "sale";
@@ -25,7 +26,7 @@ export default function ProductCatalog({
   const [products, setProducts] = useState<PublicProduct[]>(initialProducts);
   const [loading, setLoading] = useState(initialProducts.length === 0);
   const { addItem } = useCart();
-  const { t, href } = useLanguage();
+  const { t, href, language } = useLanguage();
 
   useEffect(() => {
     const loadProducts = async () => {
@@ -147,7 +148,7 @@ export default function ProductCatalog({
                     : "border-black/15 bg-white text-black/60 hover:border-black/35 hover:text-black"
                 }`}
               >
-                {category === "All" ? t("catalog.all") : category}
+                {category === "All" ? t("catalog.all") : categoryLabel(category, language)}
               </button>
             ))}
           </div>
@@ -202,7 +203,7 @@ export default function ProductCatalog({
                         </h3>
                       </Link>
                       <p className="mt-1 text-xs font-normal text-[#555]">
-                        {product.category}
+                        {categoryLabel(product.category, language)}
                       </p>
                       <p className="mt-2 text-xs font-normal text-[#444]">
                         {product.price ? (
@@ -225,7 +226,7 @@ export default function ProductCatalog({
                             setProductQuantity(product.id, (quantities[product.id] || 1) - 1)
                           }
                           className="h-9 text-lg font-medium text-black/55 transition hover:text-black"
-                          aria-label={`Reduce ${product.name} quantity`}
+                          aria-label={`${t("cart.decrease")}: ${product.name}`}
                         >
                           -
                         </button>
@@ -238,7 +239,7 @@ export default function ProductCatalog({
                             setProductQuantity(product.id, (quantities[product.id] || 1) + 1)
                           }
                           className="h-9 text-lg font-medium text-black/55 transition hover:text-black"
-                          aria-label={`Increase ${product.name} quantity`}
+                          aria-label={`${t("cart.increase")}: ${product.name}`}
                         >
                           +
                         </button>

@@ -1,6 +1,10 @@
 import { NextRequest, NextResponse } from "next/server";
+import { z } from "zod";
 import prisma from "@/lib/prisma";
 import { sendMailWithRetry } from "@/lib/email";
+import { escapeHtml, headerSafe, isFilledHoneypot } from "@/lib/formSecurity";
+import { getClientIp, isRateLimited } from "@/lib/rateLimit";
+import { rentalDays } from "@/lib/rental";
 
 type OrderItem = {
   id: string;
@@ -12,34 +16,93 @@ type OrderItem = {
   quantity: number;
 };
 
-function escapeHtml(value: unknown) {
-  return String(value ?? "")
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;")
-    .replace(/"/g, "&quot;")
-    .replace(/'/g, "&#039;");
-}
+const dateString = z
+  .string()
+  .regex(/^\d{4}-\d{2}-\d{2}$/)
+  .optional()
+  .or(z.literal(""));
+
+const orderSchema = z.object({
+  customer: z.object({
+    name: z.string().trim().min(1).max(120),
+    email: z.string().trim().max(200).pipe(z.email()),
+    phone: z.string().trim().max(40).optional().or(z.literal("")),
+    pickupDate: dateString,
+    returnDate: dateString,
+    delivery: z.enum(["yes", "no"]).optional(),
+    comments: z.string().trim().max(5000).optional().or(z.literal("")),
+  }),
+  items: z
+    .array(
+      z.object({
+        id: z.string().regex(/^[a-f0-9]{24}$/),
+        quantity: z.number().int().min(1).max(99),
+      })
+    )
+    .min(1)
+    .max(100),
+});
 
 export async function POST(request: NextRequest) {
   try {
-    const data = await request.json();
-    const customer = data.customer || {};
-    const items: OrderItem[] = Array.isArray(data.items) ? data.items : [];
-
-    if (!customer.name || !customer.email) {
-      return NextResponse.json(
-        { error: "Name and email are required" },
-        { status: 400 }
-      );
+    if (isRateLimited(`order:${getClientIp(request)}`, 5, 10 * 60 * 1000)) {
+      return NextResponse.json({ error: "Too many requests" }, { status: 429 });
     }
+
+    const body = await request.json().catch(() => null);
+
+    if (isFilledHoneypot(body?.customer)) {
+      return NextResponse.json({ success: true }, { status: 201 });
+    }
+
+    const parsed = orderSchema.safeParse(body);
+    if (!parsed.success) {
+      return NextResponse.json({ error: "Invalid data" }, { status: 400 });
+    }
+
+    const customer = parsed.data.customer;
+
+    if (
+      customer.pickupDate &&
+      customer.returnDate &&
+      customer.returnDate < customer.pickupDate
+    ) {
+      return NextResponse.json({ error: "Invalid dates" }, { status: 400 });
+    }
+
+    // Precios y datos de producto salen de la base de datos, no del navegador.
+    const products = await prisma.product.findMany({
+      where: { id: { in: parsed.data.items.map((item) => item.id) }, available: true },
+      select: { id: true, name: true, brand: true, category: true, price: true, listingType: true },
+    });
+    const productsById = new Map(products.map((product) => [product.id, product]));
+
+    const items: OrderItem[] = parsed.data.items.flatMap((item) => {
+      const product = productsById.get(item.id);
+      if (!product) return [];
+      return [
+        {
+          id: product.id,
+          name: product.name,
+          brand: product.brand ?? undefined,
+          category: product.category,
+          price: product.price,
+          listingType: product.listingType ?? "rental",
+          quantity: item.quantity,
+        },
+      ];
+    });
 
     if (items.length === 0) {
-      return NextResponse.json(
-        { error: "The request cart is empty" },
-        { status: 400 }
-      );
+      return NextResponse.json({ error: "The request cart is empty" }, { status: 400 });
     }
+
+    const days = rentalDays(customer.pickupDate, customer.returnDate);
+    const estimatedTotal = items.reduce(
+      (total, item) =>
+        total + item.price * item.quantity * (item.listingType === "sale" ? 1 : days ?? 1),
+      0
+    );
 
     const itemsRows = items
       .map(
@@ -67,16 +130,16 @@ export async function POST(request: NextRequest) {
         delivery: customer.delivery === "yes",
         comments: customer.comments || null,
         items,
-        estimatedTotal: Number(data.estimatedTotal) || 0,
+        estimatedTotal,
       },
     });
 
     try {
       await sendMailWithRetry({
-        from: `"${escapeHtml(customer.name)} (pedido web)" <web@mail.clamp-lightrental.com>`,
+        from: `"${headerSafe(customer.name)} (pedido web)" <web@mail.clamp-lightrental.com>`,
         replyTo: customer.email,
         to: "raul@clamp-lightrental.com",
-        subject: `Nuevo pedido web de ${customer.name}`,
+        subject: `Nuevo pedido web de ${headerSafe(customer.name)}`,
         html: `
           <div style="font-family: Arial, sans-serif; max-width: 760px; margin: 0 auto; color: #111;">
             <h1>Nuevo pedido web</h1>
@@ -106,7 +169,8 @@ export async function POST(request: NextRequest) {
               <tbody>${itemsRows}</tbody>
             </table>
 
-            <p><strong>Total estimado:</strong> ${escapeHtml(data.estimatedTotal)}€ ex. IVA</p>
+            <p><strong>Días de alquiler:</strong> ${days ?? "Sin fechas (total calculado por 1 día)"}</p>
+            <p><strong>Total estimado:</strong> ${escapeHtml(estimatedTotal)}€ ex. IVA</p>
 
             <div style="background: #f5f5f5; padding: 20px; border-radius: 8px;">
               <h2 style="margin-top: 0;">Comentarios</h2>

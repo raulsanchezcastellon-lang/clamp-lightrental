@@ -2,10 +2,22 @@ import { NextRequest, NextResponse } from "next/server";
 import prisma from "@/lib/prisma";
 import { hashPassword, verifyPassword } from "@/lib/password";
 import { createToken } from "@/lib/auth";
+import { getClientIp, isRateLimited } from "@/lib/rateLimit";
 
 export async function POST(request: NextRequest) {
   try {
+    if (isRateLimited(`login:${getClientIp(request)}`, 10, 15 * 60 * 1000)) {
+      return NextResponse.json(
+        { error: "Demasiados intentos. Espera unos minutos." },
+        { status: 429 }
+      );
+    }
+
     const { email, password } = await request.json();
+
+    if (typeof email !== "string" || typeof password !== "string") {
+      return NextResponse.json({ error: "Email o contraseña incorrectos" }, { status: 401 });
+    }
 
     const admin = await prisma.admin.findUnique({
       where: { email },
@@ -13,7 +25,7 @@ export async function POST(request: NextRequest) {
 
     if (!admin) {
       return NextResponse.json(
-        { error: "Admin no encontrado" },
+        { error: "Email o contraseña incorrectos" },
         { status: 401 }
       );
     }
@@ -22,7 +34,7 @@ export async function POST(request: NextRequest) {
 
     if (!validPassword) {
       return NextResponse.json(
-        { error: "Contraseña incorrecta" },
+        { error: "Email o contraseña incorrectos" },
         { status: 401 }
       );
     }

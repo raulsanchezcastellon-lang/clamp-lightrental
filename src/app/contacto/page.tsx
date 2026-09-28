@@ -5,13 +5,15 @@ import { FormEvent, Suspense, useState } from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { useLanguage } from "@/components/LanguageProvider";
-import { CONTACT_HOURS } from "@/lib/contactInfo";
+import { CONTACT_ADDRESS, CONTACT_HOURS } from "@/lib/contactInfo";
+import { HONEYPOT_FIELD } from "@/lib/formSecurity";
 
 function ContactContent() {
   const searchParams = useSearchParams();
   const product = searchParams.get("product");
   const { t, language } = useLanguage();
   const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">("idle");
+  const [honeypot, setHoneypot] = useState("");
   const [form, setForm] = useState({
     name: "",
     email: "",
@@ -31,7 +33,7 @@ function ContactContent() {
       const response = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(form),
+        body: JSON.stringify({ ...form, [HONEYPOT_FIELD]: honeypot }),
       });
 
       if (!response.ok) {
@@ -77,12 +79,12 @@ function ContactContent() {
               </div>
               <div>
                 <p className="text-sm font-semibold uppercase tracking-[0.18em] text-white">{t("contact.location")}</p>
-                <p className="mt-2">Calle Tomas Capelo, 42, 03550 San Juan d&apos;Alacant, Spain</p>
+                <p className="mt-2">{CONTACT_ADDRESS[language]}</p>
               </div>
               <div>
                 <p className="text-sm font-semibold uppercase tracking-[0.18em] text-white">{t("contact.hours")}</p>
                 <div className="mt-2 space-y-1">
-                  {CONTACT_HOURS.map((line) => (
+                  {CONTACT_HOURS[language].map((line) => (
                     <p key={line}>{line}</p>
                   ))}
                 </div>
@@ -93,8 +95,12 @@ function ContactContent() {
           <section className="rounded-lg border border-white/10 bg-[#0f0f0f] p-6 shadow-2xl sm:p-8">
             <form onSubmit={handleSubmit} className="space-y-6">
               <div>
-                <label className="mb-2 block text-sm font-medium text-gray-300">{t("cart.name")}</label>
+                <label htmlFor="contact-name" className="mb-2 block text-sm font-medium text-gray-300">{t("cart.name")}</label>
                 <input
+                  id="contact-name"
+                  name="name"
+                  autoComplete="name"
+                  maxLength={120}
                   type="text"
                   value={form.name}
                   onChange={(event) => setForm({ ...form, name: event.target.value })}
@@ -105,8 +111,12 @@ function ContactContent() {
 
               <div className="grid gap-6 sm:grid-cols-2">
                 <div>
-                  <label className="mb-2 block text-sm font-medium text-gray-300">Email</label>
+                  <label htmlFor="contact-email" className="mb-2 block text-sm font-medium text-gray-300">Email</label>
                   <input
+                    id="contact-email"
+                    name="email"
+                    autoComplete="email"
+                    maxLength={200}
                     type="email"
                     value={form.email}
                     onChange={(event) => setForm({ ...form, email: event.target.value })}
@@ -116,8 +126,12 @@ function ContactContent() {
                 </div>
 
                 <div>
-                    <label className="mb-2 block text-sm font-medium text-gray-300">{t("cart.phone")}</label>
+                    <label htmlFor="contact-phone" className="mb-2 block text-sm font-medium text-gray-300">{t("cart.phone")}</label>
                   <input
+                    id="contact-phone"
+                    name="phone"
+                    autoComplete="tel"
+                    maxLength={40}
                     type="tel"
                     value={form.phone}
                     onChange={(event) => setForm({ ...form, phone: event.target.value })}
@@ -127,12 +141,28 @@ function ContactContent() {
               </div>
 
               <div>
-                <label className="mb-2 block text-sm font-medium text-gray-300">{t("contact.message")}</label>
+                <label htmlFor="contact-message" className="mb-2 block text-sm font-medium text-gray-300">{t("contact.message")}</label>
                 <textarea
+                  id="contact-message"
+                  name="message"
+                  maxLength={5000}
                   value={form.message}
                   onChange={(event) => setForm({ ...form, message: event.target.value })}
                   className="min-h-40 w-full rounded-lg border border-white/10 bg-[#111111] px-4 py-3 text-white outline-none focus:border-white/50"
                   required
+                />
+              </div>
+
+              {/* Campo trampa para bots: oculto a personas y lectores de pantalla. */}
+              <div aria-hidden="true" className="absolute left-[-9999px] h-px w-px overflow-hidden">
+                <label htmlFor="contact-website">Website</label>
+                <input
+                  id="contact-website"
+                  type="text"
+                  tabIndex={-1}
+                  autoComplete="off"
+                  value={honeypot}
+                  onChange={(event) => setHoneypot(event.target.value)}
                 />
               </div>
 

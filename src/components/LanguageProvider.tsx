@@ -78,6 +78,15 @@ type TranslationKey =
   | "cart.comments"
   | "cart.commentsPlaceholder"
   | "cart.estimatedTotal"
+  | "cart.day"
+  | "cart.days"
+  | "cart.perDayHint"
+  | "cart.returnBeforePickup"
+  | "cart.error"
+  | "cart.decrease"
+  | "cart.increase"
+  | "cart.quantity"
+  | "form.tooMany"
   | "cart.sending"
   | "cart.send"
   | "contact.eyebrow"
@@ -210,6 +219,15 @@ const translations: Record<Language, Record<TranslationKey, string>> = {
     "cart.comments": "Comments",
     "cart.commentsPlaceholder": "Project, shooting location, call times, crew needed...",
     "cart.estimatedTotal": "Estimated total",
+    "cart.day": "day",
+    "cart.days": "days",
+    "cart.perDayHint": "per day — add dates to calculate",
+    "cart.returnBeforePickup": "The return date can't be before the pickup date.",
+    "cart.error": "The request could not be sent. Please try again or contact us by email.",
+    "cart.decrease": "Decrease quantity",
+    "cart.increase": "Increase quantity",
+    "cart.quantity": "Quantity",
+    "form.tooMany": "Too many attempts. Please wait a few minutes and try again.",
     "cart.sending": "Sending...",
     "cart.send": "Send request",
     "contact.eyebrow": "Contact",
@@ -356,6 +374,15 @@ const translations: Record<Language, Record<TranslationKey, string>> = {
     "cart.comments": "Comentarios",
     "cart.commentsPlaceholder": "Notas del proyecto, dirección, horario...",
     "cart.estimatedTotal": "Total estimado",
+    "cart.day": "día",
+    "cart.days": "días",
+    "cart.perDayHint": "por día — indica las fechas para calcularlo",
+    "cart.returnBeforePickup": "La fecha de devolución no puede ser anterior a la de recogida.",
+    "cart.error": "No se ha podido enviar el pedido. Inténtalo de nuevo o escríbenos por email.",
+    "cart.decrease": "Reducir cantidad",
+    "cart.increase": "Aumentar cantidad",
+    "cart.quantity": "Cantidad",
+    "form.tooMany": "Demasiados intentos. Espera unos minutos y vuelve a probar.",
     "cart.sending": "Enviando...",
     "cart.send": "Enviar pedido",
     "contact.eyebrow": "Contacto",

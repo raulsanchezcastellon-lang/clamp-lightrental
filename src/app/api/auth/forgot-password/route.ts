@@ -2,6 +2,7 @@ import { randomBytes, createHash } from "crypto";
 import { NextRequest, NextResponse } from "next/server";
 import nodemailer from "nodemailer";
 import prisma from "@/lib/prisma";
+import { getClientIp, isRateLimited } from "@/lib/rateLimit";
 
 export const dynamic = "force-dynamic";
 
@@ -36,6 +37,10 @@ function getSmtpTransporter() {
 
 export async function POST(request: NextRequest) {
   try {
+    if (isRateLimited(`forgot:${getClientIp(request)}`, 3, 60 * 60 * 1000)) {
+      return NextResponse.json({ success: true });
+    }
+
     const { email } = await request.json();
     const normalizedEmail = typeof email === "string" ? email.trim().toLowerCase() : "";
 

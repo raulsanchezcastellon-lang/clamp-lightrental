@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { useLanguage } from "@/components/LanguageProvider";
+import { categoryLabel } from "@/lib/i18n";
 import type { PublicProduct } from "@/lib/products";
 
 export default function FeaturedProducts({
@@ -12,7 +13,7 @@ export default function FeaturedProducts({
 }) {
   const [products, setProducts] = useState<PublicProduct[]>(initialProducts);
   const [loading, setLoading] = useState(initialProducts.length === 0);
-  const { t, href } = useLanguage();
+  const { t, href, language } = useLanguage();
 
   useEffect(() => {
     const loadProducts = async () => {
@@ -79,7 +80,7 @@ export default function FeaturedProducts({
                     </h3>
                   </Link>
                   <p className="mt-1 text-xs font-medium text-black/45">
-                    {product.category}
+                    {categoryLabel(product.category, language)}
                   </p>
                   <p className="mt-2 text-xs font-medium text-black/45">
                     {product.price ? `${product.price}€ ${t("price.day")}` : t("featured.priceOnRequest")}

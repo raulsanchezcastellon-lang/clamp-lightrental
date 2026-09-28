@@ -7,7 +7,7 @@ import ContactCta from "@/components/ContactCta";
 import ProductDetailActions from "@/components/ProductDetailActions";
 import { createPageMetadata, SITE_URL } from "@/lib/seo";
 import { getPublicProductBySlug } from "@/lib/products";
-import { localizePath, type Language } from "@/lib/i18n";
+import { categoryLabel, localizePath, type Language } from "@/lib/i18n";
 import { parseSpecs } from "@/lib/specs";
 
 const COPY = {
@@ -129,7 +129,7 @@ export default async function ProductPageView({ slug, lang }: { slug: string; la
               {c.catalog}
             </Link>
             <span aria-hidden="true">/</span>
-            <span>{product.category}</span>
+            <span>{categoryLabel(product.category, lang)}</span>
             <span aria-hidden="true">/</span>
             <span className="text-black/70">{product.name}</span>
           </nav>
@@ -162,7 +162,7 @@ export default async function ProductPageView({ slug, lang }: { slug: string; la
                 {product.name}
               </h1>
               <p className="mt-2 text-sm font-medium uppercase tracking-[0.08em] text-black/50">
-                {product.category}
+                {categoryLabel(product.category, lang)}
               </p>
 
               <p className="mt-4 text-lg font-black text-black">

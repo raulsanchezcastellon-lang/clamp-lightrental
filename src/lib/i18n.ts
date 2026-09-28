@@ -93,3 +93,23 @@ export function languageAlternates(esPath: string) {
     "x-default": en,
   };
 }
+
+/**
+ * Las categorías se guardan en inglés en la base de datos. Para mostrarlas en
+ * español se traducen aquí; si aparece una nueva sin traducción, se muestra tal cual.
+ */
+const CATEGORY_LABELS_ES: Record<string, string> = {
+  Lights: "Focos",
+  Modifiers: "Modificadores",
+  Accessories: "Accesorios",
+  Power: "Energía",
+  Grip: "Grip",
+  Camera: "Cámara",
+  Consumables: "Consumibles",
+  Others: "Otros",
+};
+
+export function categoryLabel(category: string | null | undefined, language: Language) {
+  if (!category) return "";
+  return language === "es" ? CATEGORY_LABELS_ES[category] ?? category : category;
+}

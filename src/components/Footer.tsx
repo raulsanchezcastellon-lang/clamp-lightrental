@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { CONTACT_HOURS } from "@/lib/contactInfo";
+import { CONTACT_ADDRESS, CONTACT_HOURS } from "@/lib/contactInfo";
 import { useLanguage } from "@/components/LanguageProvider";
 
 export default function Footer() {
@@ -53,13 +53,13 @@ export default function Footer() {
                   rel="noreferrer"
                   className="hover:underline"
                 >
-                  Calle Tomás Capelo, 42, 03550 San Juan d&apos;Alacant, Spain
+                  {CONTACT_ADDRESS[language]}
                 </a>
               </div>
               <div>
                 <span className="block font-semibold">{t("footer.openingHours")}</span>
                 <div className="space-y-1 text-sm text-black/80">
-                  {CONTACT_HOURS.map((line, index) => (
+                  {CONTACT_HOURS[language].map((line, index) => (
                     <p key={index}>{line}</p>
                   ))}
                 </div>

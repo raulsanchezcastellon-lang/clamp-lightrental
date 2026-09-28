@@ -6,10 +6,15 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { useCart } from "@/components/CartProvider";
 import { useLanguage } from "@/components/LanguageProvider";
+import { categoryLabel } from "@/lib/i18n";
+import { HONEYPOT_FIELD } from "@/lib/formSecurity";
+import { rentalDays, todayIsoDate } from "@/lib/rental";
 
 export default function PedidoPage() {
   const { items, totalItems, updateQuantity, removeItem, clearCart } = useCart();
-  const { t, href } = useLanguage();
+  const { t, href, language } = useLanguage();
+  const [honeypot, setHoneypot] = useState("");
+  const today = todayIsoDate();
   const [form, setForm] = useState({
     name: "",
     email: "",
@@ -22,30 +27,50 @@ export default function PedidoPage() {
   const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">("idle");
   const [errorMessage, setErrorMessage] = useState("");
 
+  const days = rentalDays(form.pickupDate, form.returnDate);
+  const hasRentalItems = items.some((item) => item.listingType !== "sale");
+
+  // Alquiler: precio/día × cantidad × días. Venta: precio × cantidad.
   const estimatedTotal = useMemo(
-    () => items.reduce((total, item) => total + item.price * item.quantity, 0),
-    [items]
+    () =>
+      items.reduce(
+        (total, item) =>
+          total + item.price * item.quantity * (item.listingType === "sale" ? 1 : days ?? 1),
+        0
+      ),
+    [items, days]
   );
+
+  const totalHint = !hasRentalItems
+    ? ""
+    : days
+      ? `${days} ${t(days === 1 ? "cart.day" : "cart.days")}`
+      : t("cart.perDayHint");
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    setStatus("sending");
     setErrorMessage("");
+
+    if (form.pickupDate && form.returnDate && form.returnDate < form.pickupDate) {
+      setStatus("error");
+      setErrorMessage(t("cart.returnBeforePickup"));
+      return;
+    }
+
+    setStatus("sending");
 
     try {
       const response = await fetch("/api/order", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          customer: form,
-          items,
-          estimatedTotal,
+          customer: { ...form, [HONEYPOT_FIELD]: honeypot },
+          items: items.map((item) => ({ id: item.id, quantity: item.quantity })),
         }),
       });
 
       if (!response.ok) {
-        const data = await response.json();
-        throw new Error(data?.error || "Unable to send order");
+        throw new Error(t(response.status === 429 ? "form.tooMany" : "cart.error"));
       }
 
       setStatus("sent");
@@ -61,7 +86,7 @@ export default function PedidoPage() {
       });
     } catch (error) {
       setStatus("error");
-      setErrorMessage(error instanceof Error ? error.message : "Unable to send order");
+      setErrorMessage(error instanceof Error ? error.message : t("cart.error"));
     }
   };
 
@@ -76,6 +101,11 @@ export default function PedidoPage() {
           </span>
           <span className="text-right text-sm font-black">
             {t("cart.estimatedTotal")}: {estimatedTotal}€
+            {hasRentalItems && (
+              <span className="ml-1 font-medium text-black/45">
+                {days ? `(${days} ${t(days === 1 ? "cart.day" : "cart.days")})` : t("price.day")}
+              </span>
+            )}
             <span className="ml-1 align-middle text-[0.56rem] font-black uppercase tracking-[0.08em] text-black/25">
               {t("price.exTax")}
             </span>
@@ -150,7 +180,7 @@ export default function PedidoPage() {
                         <h2 className="truncate text-sm font-black sm:text-base">{item.name}</h2>
                         {item.category && (
                           <p className="mt-1 hidden text-sm font-medium text-black/45 sm:block">
-                            {item.category}
+                            {categoryLabel(item.category, language)}
                           </p>
                         )}
                         <p className="mt-0.5 text-xs font-medium text-black/45 sm:mt-1 sm:text-sm">
@@ -167,13 +197,13 @@ export default function PedidoPage() {
                             type="button"
                             onClick={() => updateQuantity(item.id, item.quantity - 1)}
                             className="h-8 w-8 text-base font-medium text-black/55 transition hover:text-black sm:h-10 sm:w-12 sm:text-lg"
-                            aria-label={`Reduce ${item.name} quantity`}
+                            aria-label={`${t("cart.decrease")}: ${item.name}`}
                           >
                             -
                           </button>
                           <span
                             className="flex h-8 w-8 items-center justify-center text-xs font-black sm:h-10 sm:w-12 sm:text-sm"
-                            aria-label={`${item.name} quantity`}
+                            aria-label={`${t("cart.quantity")}: ${item.name}`}
                           >
                             {item.quantity}
                           </span>
@@ -181,7 +211,7 @@ export default function PedidoPage() {
                             type="button"
                             onClick={() => updateQuantity(item.id, item.quantity + 1)}
                             className="h-8 w-8 text-base font-medium text-black/55 transition hover:text-black sm:h-10 sm:w-12 sm:text-lg"
-                            aria-label={`Increase ${item.name} quantity`}
+                            aria-label={`${t("cart.increase")}: ${item.name}`}
                           >
                             +
                           </button>
@@ -255,6 +285,7 @@ export default function PedidoPage() {
                       <label className="mb-2 block text-sm font-black">{t("cart.pickup")}</label>
                       <input
                         type="date"
+                        min={today}
                         value={form.pickupDate}
                         onChange={(event) =>
                           setForm({ ...form, pickupDate: event.target.value })
@@ -268,6 +299,7 @@ export default function PedidoPage() {
                       <label className="mb-2 block text-sm font-black">{t("cart.return")}</label>
                       <input
                         type="date"
+                        min={form.pickupDate || today}
                         value={form.returnDate}
                         onChange={(event) =>
                           setForm({ ...form, returnDate: event.target.value })
@@ -315,6 +347,11 @@ export default function PedidoPage() {
                     <div className="flex items-center justify-between">
                       <span className="text-sm font-black uppercase tracking-[0.08em] text-black/45">
                         {t("cart.estimatedTotal")}
+                        {totalHint && (
+                          <span className="mt-1 block text-xs font-medium normal-case tracking-normal text-black/45">
+                            {totalHint}
+                          </span>
+                        )}
                       </span>
                       <span className="text-right text-xl font-black">
                         {estimatedTotal}€
@@ -323,6 +360,19 @@ export default function PedidoPage() {
                         </span>
                       </span>
                     </div>
+                  </div>
+
+                  {/* Campo trampa para bots: oculto a personas y lectores de pantalla. */}
+                  <div aria-hidden="true" className="absolute left-[-9999px] h-px w-px overflow-hidden">
+                    <label htmlFor="order-website">Website</label>
+                    <input
+                      id="order-website"
+                      type="text"
+                      tabIndex={-1}
+                      autoComplete="off"
+                      value={honeypot}
+                      onChange={(event) => setHoneypot(event.target.value)}
+                    />
                   </div>
 
                   {status === "error" && (

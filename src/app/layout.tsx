@@ -100,7 +100,7 @@ const localBusinessJsonLd = {
   priceRange: "€€",
   address: {
     "@type": "PostalAddress",
-    streetAddress: "Calle Tomas Capelo, 42",
+    streetAddress: "Calle Tomás Capelo, 42",
     postalCode: "03550",
     addressLocality: "San Juan d'Alacant",
     addressRegion: "Alicante",
