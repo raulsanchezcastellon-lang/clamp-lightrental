@@ -88,6 +88,8 @@ const VALUE_PHRASES_ES: Array<[RegExp, string]> = [
   [/\bYoke\b/g, "Horquilla"],
   [/Gobo holder/gi, "Portagobos"],
   [/Auto programs/gi, "Programas automáticos"],
+  [/Wired remote with timer/gi, "Mando con cable y temporizador"],
+  [/Wireless remote/gi, "Mando inalámbrico"],
   [/Standalone/gi, "Autónomo"],
   [/Silver \/ White reflector/gi, "Reflector plata / blanco"],
   [/\breflectors\b/gi, "reflectores"],
