@@ -147,11 +147,11 @@ export default async function ProductPageView({ slug, lang }: { slug: string; la
       />
       <Header />
       <main className="min-h-screen bg-[#f7f7f4] text-black">
-        <div className="mx-auto max-w-6xl px-4 pb-20 pt-28 sm:px-6 sm:pt-32 lg:px-8 lg:pt-36">
+        <div className="mx-auto max-w-6xl px-4 pb-20 pt-24 sm:px-6 sm:pt-24 lg:px-8 lg:pt-28">
           {/* Breadcrumb */}
           <nav
             aria-label="Breadcrumb"
-            className="mb-8 flex flex-wrap items-center gap-2 text-xs font-medium uppercase tracking-[0.08em] text-black/45"
+            className="mb-6 flex flex-wrap items-center gap-2 text-xs font-medium uppercase tracking-[0.08em] text-black/45"
           >
             <Link href={localizePath("/catalogo", lang)} className="hover:text-black hover:underline">
               {c.catalog}
