@@ -56,8 +56,10 @@ export default function Header() {
             </Link>
 
             <a
-              href="tel:+34681878782"
-              aria-label={t("nav.call")}
+              href="https://wa.me/34681878782"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="WhatsApp +34 681 878 782"
               className="hidden h-10 w-10 items-center justify-center border border-white/40 text-white transition hover:bg-white hover:text-black sm:inline-flex"
             >
               <svg
@@ -146,10 +148,12 @@ export default function Header() {
               {language === "en" ? "Español" : "English"}
             </Link>
             <a
-              href="tel:+34681878782"
+              href="https://wa.me/34681878782"
+              target="_blank"
+              rel="noopener noreferrer"
               className="border border-white/40 px-4 py-2 text-center text-white hover:bg-white hover:text-black transition"
             >
-              {t("nav.call")} +34 681 878 782
+              WhatsApp +34 681 878 782
             </a>
             <Link
               href={href("/pedido")}
