@@ -36,8 +36,8 @@ const FAQS = [
     a: "Damos servicio en toda la provincia de Alicante y trabajamos habitualmente en Murcia y la Comunidad Valenciana. Cuéntanos tu ubicación al pedir presupuesto y coordinamos la entrega.",
   },
   {
-    q: "¿Podéis enviar un técnico o gaffer con el material?",
-    a: "Sí. Podemos conectarte con gaffers y asistentes digitales que conocen nuestro equipo, para que el montaje en plató no dependa de que tu equipo aprenda un sistema nuevo el mismo día del rodaje.",
+    q: "¿Podéis enviar un gaffer, eléctricos o asistentes de foto con el material?",
+    a: "Sí. Podemos conectarte con gaffers, eléctricos y asistentes de foto que conocen nuestro equipo, para que el montaje en plató no dependa de que tu equipo aprenda un sistema nuevo el mismo día del rodaje.",
   },
   {
     q: "No sé exactamente qué equipo necesito, ¿me podéis ayudar a elegir?",
@@ -61,7 +61,7 @@ const CONTENT: LandingContent = {
     title: "Quiénes somos",
     paragraphs: [
       "Con más de 10 años de experiencia, en CLAMP alquilamos equipos de iluminación LED y material de grip para rodajes de cine, series, publicidad y fotografía. Trabajamos con marcas como Aputure, Nanlite, Arri, Manfrotto y Astera, elegidas por su fiabilidad en plató y su control preciso de temperatura de color e intensidad.",
-      "No nos limitamos a poner el material en tus manos: si lo necesitas, te conectamos con gaffers y asistentes digitales que conocen el equipo y saben resolver cualquier imprevisto en plató. El objetivo es que la iluminación nunca sea el problema de tu producción.",
+      "No nos limitamos a poner el material en tus manos: si lo necesitas, te conectamos con gaffers, eléctricos y asistentes de foto que conocen el equipo y saben resolver cualquier imprevisto en plató. El objetivo es que la iluminación nunca sea el problema de tu producción.",
     ],
   },
   useCases: { title: "¿Para qué proyecto necesitas luz?", moreLabel: "Saber más", items: USE_CASES },

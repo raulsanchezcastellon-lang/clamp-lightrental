@@ -49,8 +49,8 @@ const FAQS = [
     a: "Claro. Cuéntanos si es un corto, una serie, un anuncio u otro formato, y te proponemos un listado de equipo adaptado antes de confirmar el pedido.",
   },
   {
-    q: "¿Podéis enviar un gaffer o asistente digital con el material?",
-    a: "Sí. Podemos conectarte con gaffers y asistentes digitales que conocen nuestro equipo, para no perder tiempo de rodaje enseñando un sistema nuevo en plató.",
+    q: "¿Podéis enviar un gaffer, eléctricos o asistentes de foto con el material?",
+    a: "Sí. Podemos conectarte con gaffers, eléctricos y asistentes de foto que conocen nuestro equipo, para no perder tiempo de rodaje enseñando un sistema nuevo en plató.",
   },
 ];
 
@@ -66,7 +66,7 @@ const CONTENT: LandingContent = {
     title: "Luz que aguanta el rodaje",
     paragraphs: [
       "Rodar exige luz que no dé sorpresas durante toda la jornada: control preciso de temperatura de color, potencia suficiente para exteriores y montajes rápidos entre planos. Por eso trabajamos con paneles LED continuos de marcas como Aputure, Nanlite, Godox y Astera, pensados para plató.",
-      "Además del material, si lo necesitas te conectamos con gaffers y asistentes digitales que ya conocen el equipo, para que el montaje en plató no reste tiempo de rodaje.",
+      "Además del material, si lo necesitas te conectamos con gaffers, eléctricos y asistentes de foto que ya conocen el equipo, para que el montaje en plató no reste tiempo de rodaje.",
     ],
   },
   useCases: { title: "Adaptado a cada tipo de rodaje", items: USE_CASES },

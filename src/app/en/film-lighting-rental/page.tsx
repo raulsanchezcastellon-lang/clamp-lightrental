@@ -21,7 +21,7 @@ const CONTENT: LandingContent = {
     title: "Light that lasts the shooting day",
     paragraphs: [
       "A shooting day needs lighting without surprises: accurate colour temperature, enough output for Mediterranean daylight exteriors and quick changes between set-ups. That is why we work with continuous LED fixtures from Aputure, Nanlite, Godox and Astera, built for set.",
-      "If your crew is travelling light, we can add local gaffers and lighting technicians who already know the kit and work in English, so rigging never eats into shooting time.",
+      "If your crew is travelling light, we can add local gaffers, electricians and photo assistants who already know the kit and work in English, so rigging never eats into shooting time.",
     ],
   },
   useCases: {
@@ -73,8 +73,8 @@ const CONTENT: LandingContent = {
         a: "Yes, we regularly work in Murcia and the Valencia region. Send us the dates, shooting days and locations and we will coordinate delivery and collection with you.",
       },
       {
-        q: "Can you send a gaffer or technician with the gear?",
-        a: "Yes. We can provide English-speaking gaffers and lighting technicians who know our equipment, so no time is lost learning new kit on set.",
+        q: "Can you send gaffers, electricians or photo assistants with the gear?",
+        a: "Yes. We can provide English-speaking gaffers, electricians and photo assistants who know our equipment, so no time is lost learning new kit on set.",
       },
       {
         q: "Can you help us build the lighting package?",

@@ -26,7 +26,7 @@ const COPY = {
     specs: "Especificaciones",
     serviceTitle: "Alquiler con soporte técnico incluido",
     serviceText:
-      "Entregamos y recogemos el material en Alicante, Murcia y la Comunidad Valenciana, y si lo necesitas te conectamos con un gaffer que conoce el equipo. Consulta más detalles sobre",
+      "Entregamos y recogemos el material en Alicante, Murcia y la Comunidad Valenciana, y si lo necesitas te conectamos con gaffers, eléctricos o asistentes de foto que conocen el equipo. Consulta más detalles sobre",
     serviceLink: "nuestro servicio de alquiler de iluminación en Alicante",
     serviceOr: "o revisa",
     catalogLink: "el resto del catálogo",
@@ -47,7 +47,7 @@ const COPY = {
     specs: "Specifications",
     serviceTitle: "Delivered to set, with crew if you need it",
     serviceText:
-      "We deliver the gear to your location and collect it after wrap anywhere on the Costa Blanca, Murcia and Valencia. If your crew is travelling light, we can add an English-speaking gaffer or lighting technician who knows the kit. Read more about",
+      "We deliver the gear to your location and collect it after wrap anywhere on the Costa Blanca, Murcia and Valencia. If your crew is travelling light, we can add English-speaking gaffers, electricians or photo assistants who know the kit. Read more about",
     serviceLink: "lighting rental in Alicante for visiting productions",
     serviceOr: "or browse",
     catalogLink: "the full catalog",

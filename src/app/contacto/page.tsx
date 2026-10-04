@@ -72,8 +72,13 @@ function ContactContent() {
                 </a>
               </div>
               <div>
-                <p className="text-sm font-semibold uppercase tracking-[0.18em] text-white">{t("cart.phone")}</p>
-                <a href="tel:+34681878782" className="mt-2 inline-block hover:text-white">
+                <p className="text-sm font-semibold uppercase tracking-[0.18em] text-white">WhatsApp</p>
+                <a
+                  href="https://wa.me/34681878782"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="mt-2 inline-block hover:text-white"
+                >
                   +34 681 878 782
                 </a>
               </div>

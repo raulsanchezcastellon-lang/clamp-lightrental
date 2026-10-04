@@ -4,7 +4,7 @@ import { createPageMetadata } from "@/lib/seo";
 export const metadata = createPageMetadata({
   title: "Lighting Rental in Alicante for International Productions",
   description:
-    "Shooting in Alicante or on the Costa Blanca? Rent film lighting, grip and power locally: delivered to your set, collected after wrap, with English-speaking gaffers and technicians on request.",
+    "Shooting in Alicante or on the Costa Blanca? Rent film lighting, grip and power locally: delivered to your set, collected after wrap, with English-speaking gaffers, electricians and photo assistants on request.",
   path: "/alquiler-iluminacion-alicante",
   lang: "en",
 });
@@ -21,7 +21,7 @@ const CONTENT: LandingContent = {
     title: "Your local lighting department",
     paragraphs: [
       "CLAMP is a lighting rental house based in Alicante with more than 10 years on set. Most of the productions we work with come from abroad: commercial, film, TV and photo crews who travel light and need reliable gear waiting for them on location.",
-      "Send us your shooting dates, locations and gear list in English. We confirm availability, plan delivery and collection around your call times and, if you need extra hands, add local gaffers and lighting technicians who know our kit.",
+      "Send us your shooting dates, locations and gear list in English. We confirm availability, plan delivery and collection around your call times and, if you need extra hands, add local gaffers, electricians and photo assistants who know our kit.",
     ],
   },
   useCases: {
@@ -71,8 +71,8 @@ const CONTENT: LandingContent = {
         a: "Yes. We deliver to your set, hotel or studio anywhere on the Costa Blanca, Murcia and the Valencia region, and collect everything after wrap. Send us the address and call times when you request a quote.",
       },
       {
-        q: "Can you provide a gaffer or lighting technicians?",
-        a: "Yes. We can add English-speaking gaffers, lighting technicians and assistants who know our equipment, so a travelling DoP can work with a small local lighting team.",
+        q: "Can you provide gaffers, electricians or photo assistants?",
+        a: "Yes. We can add English-speaking gaffers, electricians and photo assistants who know our equipment, so a travelling DoP can work with a small local lighting team.",
       },
       {
         q: "We are not sure what gear we need. Can you help?",

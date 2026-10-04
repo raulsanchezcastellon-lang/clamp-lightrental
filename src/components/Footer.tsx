@@ -34,8 +34,13 @@ export default function Footer() {
                 </a>
               </li>
               <li>
-                <span className="block font-semibold">{t("cart.phone")}</span>
-                <a href="tel:+34681878782" className="hover:underline">
+                <span className="block font-semibold">WhatsApp</span>
+                <a
+                  href="https://wa.me/34681878782"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:underline"
+                >
                   +34 681 878 782
                 </a>
               </li>
