@@ -92,24 +92,52 @@ export default async function ProductPageView({ slug, lang }: { slug: string; la
 
   const specRows = parseSpecs(product.specs, lang);
 
-  const productJsonLd = {
-    "@context": "https://schema.org",
+  const productUrl = `${SITE_URL}${localizePath(`/producto/${product.slug}`, lang)}`;
+  const productItem = {
     "@type": "Product",
     name: product.name,
     brand: product.brand ? { "@type": "Brand", name: product.brand } : undefined,
     category: product.category,
-    description:
-      product.description ||
-      c.jsonLdFallback(product.name),
+    description: product.description || c.jsonLdFallback(product.name),
     image: product.image ? `${SITE_URL}${product.image}` : undefined,
-    offers: {
-      "@type": "Offer",
-      url: `${SITE_URL}${localizePath(`/producto/${product.slug}`, lang)}`,
-      priceCurrency: "EUR",
-      price: product.price || undefined,
-      availability: "https://schema.org/InStock",
-    },
   };
+
+  // Rental gear is described as a lease offer (price per day) made by the business,
+  // not as a product for sale, so Google doesn't treat it as a merchant listing.
+  // Only items listed for sale (consumables) keep the Product + Offer markup.
+  const productJsonLd =
+    product.listingType === "sale"
+      ? {
+          "@context": "https://schema.org",
+          ...productItem,
+          offers: {
+            "@type": "Offer",
+            url: productUrl,
+            priceCurrency: "EUR",
+            price: product.price || undefined,
+            availability: "https://schema.org/InStock",
+            seller: { "@id": `${SITE_URL}/#business` },
+          },
+        }
+      : {
+          "@context": "https://schema.org",
+          "@type": "Offer",
+          url: productUrl,
+          businessFunction: "http://purl.org/goodrelations/v1#LeaseOut",
+          availability: "https://schema.org/InStock",
+          offeredBy: { "@id": `${SITE_URL}/#business` },
+          areaServed: ["Alicante", "Murcia", "Comunidad Valenciana"],
+          priceSpecification: product.price
+            ? {
+                "@type": "UnitPriceSpecification",
+                price: product.price,
+                priceCurrency: "EUR",
+                unitCode: "DAY",
+                unitText: lang === "es" ? "día" : "day",
+              }
+            : undefined,
+          itemOffered: productItem,
+        };
 
   return (
     <>
