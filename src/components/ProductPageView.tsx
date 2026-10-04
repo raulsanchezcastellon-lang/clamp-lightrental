@@ -163,8 +163,8 @@ export default async function ProductPageView({ slug, lang }: { slug: string; la
           </nav>
 
           {/* Hero */}
-          <div className="grid gap-10 lg:grid-cols-[1fr_1fr] lg:items-start">
-            <div className="flex aspect-square items-center justify-center rounded-lg border border-black/10 bg-white p-8">
+          <div className="grid gap-10 lg:grid-cols-[5fr_6fr] lg:items-start lg:gap-14">
+            <div className="flex aspect-square items-center justify-center rounded-lg border border-black/10 bg-white p-8 lg:sticky lg:top-28">
               {product.image ? (
                 <img
                   src={product.image}
@@ -211,36 +211,36 @@ export default async function ProductPageView({ slug, lang }: { slug: string; la
               )}
 
               <ProductDetailActions product={product} listingType="rental" />
+
+              {/* Especificaciones */}
+              {specRows.length > 0 && (
+                <div className="mt-10 border-t border-black/10 pt-6">
+                  <h2 className="text-xs font-black uppercase tracking-[0.18em] text-black/50">
+                    {c.specs}
+                  </h2>
+                  <dl className="mt-3 divide-y divide-black/10 border-b border-black/10">
+                    {specRows.map((row, index) =>
+                      row.label ? (
+                        <div
+                          key={`${row.label}-${index}`}
+                          className="grid gap-1 py-2.5 sm:grid-cols-[175px_1fr] sm:gap-5"
+                        >
+                          <dt className="pt-0.5 text-[11px] font-black uppercase tracking-[0.12em] text-black/45">
+                            {row.label}
+                          </dt>
+                          <dd className="text-sm font-medium text-black/80">{row.value}</dd>
+                        </div>
+                      ) : (
+                        <div key={`spec-${index}`} className="py-2.5 text-sm font-medium text-black/80">
+                          {row.value}
+                        </div>
+                      )
+                    )}
+                  </dl>
+                </div>
+              )}
             </div>
           </div>
-
-          {/* Especificaciones */}
-          {specRows.length > 0 && (
-            <div className="mt-16 max-w-3xl border-t border-black/10 pt-10">
-              <h2 className="text-2xl font-black uppercase tracking-wide">
-                {c.specs}
-              </h2>
-              <dl className="mt-6 divide-y divide-black/10 border-y border-black/10">
-                {specRows.map((row, index) =>
-                  row.label ? (
-                    <div
-                      key={`${row.label}-${index}`}
-                      className="grid gap-1 py-3 sm:grid-cols-[200px_1fr] sm:gap-6"
-                    >
-                      <dt className="text-xs font-black uppercase tracking-[0.12em] text-black/45">
-                        {row.label}
-                      </dt>
-                      <dd className="text-base font-medium text-black/80">{row.value}</dd>
-                    </div>
-                  ) : (
-                    <div key={`spec-${index}`} className="py-3 text-base font-medium text-black/80">
-                      {row.value}
-                    </div>
-                  )
-                )}
-              </dl>
-            </div>
-          )}
 
           {/* Confianza / servicio */}
           <div className="mt-16 max-w-2xl border-t border-black/10 pt-10">
