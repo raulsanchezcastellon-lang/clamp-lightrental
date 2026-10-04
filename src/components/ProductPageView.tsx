@@ -26,7 +26,7 @@ const COPY = {
     specs: "Especificaciones",
     serviceTitle: "Alquiler con soporte técnico incluido",
     serviceText:
-      "Entregamos y recogemos el material en Alicante, Murcia y la Comunidad Valenciana, y si lo necesitas te conectamos con un gaffer o asistente digital que conoce el equipo. Consulta más detalles sobre",
+      "Entregamos y recogemos el material en Alicante, Murcia y la Comunidad Valenciana, y si lo necesitas te conectamos con un gaffer que conoce el equipo. Consulta más detalles sobre",
     serviceLink: "nuestro servicio de alquiler de iluminación en Alicante",
     serviceOr: "o revisa",
     catalogLink: "el resto del catálogo",
