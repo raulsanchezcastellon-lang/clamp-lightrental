@@ -157,7 +157,15 @@ export default async function ProductPageView({ slug, lang }: { slug: string; la
               {c.catalog}
             </Link>
             <span aria-hidden="true">/</span>
-            <span>{categoryLabel(product.category, lang)}</span>
+            <Link
+              href={localizePath(
+                `${product.listingType === "sale" ? "/store" : "/catalogo"}?category=${encodeURIComponent(product.category)}`,
+                lang
+              )}
+              className="hover:text-black hover:underline"
+            >
+              {categoryLabel(product.category, lang)}
+            </Link>
             <span aria-hidden="true">/</span>
             <span className="text-black/70">{product.name}</span>
           </nav>

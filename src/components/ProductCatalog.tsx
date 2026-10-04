@@ -45,6 +45,20 @@ export default function ProductCatalog({
     loadProducts();
   }, [listingType]);
 
+  // Filtro por categoría desde la URL (?category=Lights), p. ej. desde la ruta de navegación de la ficha.
+  useEffect(() => {
+    const fromUrl = new URLSearchParams(window.location.search).get("category");
+    if (fromUrl) setSelectedCategory(fromUrl);
+  }, []);
+
+  const selectCategory = (category: string) => {
+    setSelectedCategory(category);
+    const url = new URL(window.location.href);
+    if (category === "All") url.searchParams.delete("category");
+    else url.searchParams.set("category", category);
+    window.history.replaceState(null, "", `${url.pathname}${url.search}${url.hash}`);
+  };
+
   const categories = useMemo(
     () => ["All", ...new Set(products.map((product) => product.category).filter(Boolean))],
     [products]
@@ -141,7 +155,7 @@ export default function ProductCatalog({
               <button
                 key={category}
                 type="button"
-                onClick={() => setSelectedCategory(category)}
+                onClick={() => selectCategory(category)}
                 className={`whitespace-nowrap rounded-full border px-4 py-2 text-sm font-black transition ${
                   selectedCategory === category
                     ? "border-black bg-black text-white"
