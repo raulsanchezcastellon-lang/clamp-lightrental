@@ -26,6 +26,7 @@ const COPY = {
       `Compra ${name} en CLAMP Lighting Rental, Alicante. Material para rodajes con entrega en set junto a tu pedido de alquiler.`,
     noImage: "Sin imagen",
     perDay: "/ día",
+    exTax: "ex. IVA",
     priceOnRequest: "Precio bajo consulta",
     specs: "Especificaciones",
     serviceTitle: "Alquiler con soporte técnico incluido",
@@ -38,7 +39,9 @@ const COPY = {
   en: {
     notFoundTitle: "Product not found",
     notFoundDescription: "This item is no longer available in our catalog.",
-    title: (name: string) => `${name} Rental in Alicante, Spain`,
+    // Con nombres largos se quita ", Spain" para que Google no corte el título (~70 caracteres con la marca).
+    title: (name: string) =>
+      name.length > 24 ? `${name} Rental in Alicante` : `${name} Rental in Alicante, Spain`,
     description: (name: string) =>
       `Rent the ${name} in Alicante, Spain. Delivered to your set, collected after wrap, with English-speaking lighting crew available for international productions on the Costa Blanca.`,
     descriptionSuffix:
@@ -51,6 +54,7 @@ const COPY = {
       `Buy the ${name} from CLAMP Lighting Rental in Alicante, Spain, delivered to set together with your rental order.`,
     noImage: "No image",
     perDay: "/ day",
+    exTax: "ex. VAT",
     priceOnRequest: "Price on request",
     specs: "Specifications",
     serviceTitle: "Delivered to set, with crew if you need it",
@@ -223,6 +227,9 @@ export default async function ProductPageView({ slug, lang }: { slug: string; la
                   <>
                     {product.price}€{" "}
                     {!isSale && <span className="text-sm font-medium text-black/45">{c.perDay}</span>}
+                    <span className="ml-1.5 align-middle text-[0.62rem] font-black uppercase tracking-[0.08em] text-black/30">
+                      {c.exTax}
+                    </span>
                   </>
                 ) : (
                   c.priceOnRequest

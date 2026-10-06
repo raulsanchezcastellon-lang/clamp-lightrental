@@ -257,7 +257,7 @@ export default function NewProductPage() {
 
             <input
               type="file"
-              accept="image/*"
+              accept="image/jpeg,image/png,image/webp,image/avif,image/gif"
               onChange={(e) => {
                 const file = e.target.files?.[0];
                 if (file) handleUploadImage(file);

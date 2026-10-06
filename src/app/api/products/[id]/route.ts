@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import prisma from "@/lib/prisma";
-import { normalizeSpecs, requireAdmin } from "@/lib/auth";
+import { getAdminFromToken, normalizeSpecs, requireAdmin } from "@/lib/auth";
 import { buildProductSlugBase, generateUniqueProductSlug } from "@/lib/products";
 
 export async function GET(
@@ -9,13 +9,33 @@ export async function GET(
 ) {
   try {
     const { id } = await context.params;
+
+    if (!/^[a-f0-9]{24}$/.test(id)) {
+      return NextResponse.json({ error: "Producto no encontrado" }, { status: 404 });
+    }
+
     const product = await prisma.product.findUnique({
       where: {
         id,
       },
     });
 
-    return NextResponse.json(product);
+    if (!product) {
+      return NextResponse.json({ error: "Producto no encontrado" }, { status: 404 });
+    }
+
+    if (await getAdminFromToken()) {
+      return NextResponse.json(product);
+    }
+
+    // Visitantes: solo productos visibles y sin datos internos.
+    if (!product.available) {
+      return NextResponse.json({ error: "Producto no encontrado" }, { status: 404 });
+    }
+
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const { stock, adminId, ...publicProduct } = product;
+    return NextResponse.json(publicProduct);
   } catch (error) {
     return NextResponse.json(
       { error: "Error obteniendo producto" },

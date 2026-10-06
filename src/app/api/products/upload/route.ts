@@ -6,6 +6,8 @@ import { sanitizeImageName, saveUploadToGridFs } from "@/lib/uploads";
 export const runtime = "nodejs";
 
 const MAX_IMAGE_SIZE = 8 * 1024 * 1024;
+// Solo formatos de foto. SVG queda fuera: puede llevar código dentro.
+const ALLOWED_TYPES = new Set(["image/jpeg", "image/png", "image/webp", "image/avif", "image/gif"]);
 
 export async function POST(request: NextRequest) {
   try {
@@ -22,8 +24,11 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: "No image file provided" }, { status: 400 });
     }
 
-    if (!image.type.startsWith("image/")) {
-      return NextResponse.json({ error: "Only image files are allowed" }, { status: 400 });
+    if (!ALLOWED_TYPES.has(image.type)) {
+      return NextResponse.json(
+        { error: "Only JPG, PNG, WEBP, AVIF or GIF images are allowed" },
+        { status: 400 }
+      );
     }
 
     if (image.size > MAX_IMAGE_SIZE) {

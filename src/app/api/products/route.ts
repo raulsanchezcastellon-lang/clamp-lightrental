@@ -14,6 +14,13 @@ function manualOrderRank(featuredOrder: number | null) {
   return featuredOrder ?? Number.MAX_SAFE_INTEGER;
 }
 
+/** Para visitantes: sin datos internos (stock, administrador). */
+function toPublicJson<T extends { stock?: unknown; adminId?: unknown }>(product: T) {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const { stock, adminId, ...rest } = product;
+  return rest;
+}
+
 export async function GET(request: NextRequest) {
   try {
     const admin = await getAdminFromToken();
@@ -62,7 +69,9 @@ export async function GET(request: NextRequest) {
         })
         .slice(0, Number.isFinite(limit) && limit > 0 ? limit : undefined);
 
-      return NextResponse.json(orderedFeaturedProducts);
+      return NextResponse.json(
+        admin ? orderedFeaturedProducts : orderedFeaturedProducts.map(toPublicJson)
+      );
     }
 
     const orderedProducts = products
@@ -84,7 +93,7 @@ export async function GET(request: NextRequest) {
       })
       .slice(0, Number.isFinite(limit) && limit > 0 ? limit : undefined);
 
-    return NextResponse.json(orderedProducts);
+    return NextResponse.json(admin ? orderedProducts : orderedProducts.map(toPublicJson));
   } catch (error) {
     console.error("Get products error:", error);
     return NextResponse.json(

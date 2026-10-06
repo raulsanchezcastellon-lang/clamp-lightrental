@@ -5,6 +5,7 @@ import { FormEvent, Suspense, useState } from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { useLanguage } from "@/components/LanguageProvider";
+import FormPrivacyNotice from "@/components/FormPrivacyNotice";
 import { CONTACT_ADDRESS, CONTACT_HOURS } from "@/lib/contactInfo";
 import { HONEYPOT_FIELD } from "@/lib/formSecurity";
 
@@ -171,6 +172,8 @@ function ContactContent() {
                   onChange={(event) => setHoneypot(event.target.value)}
                 />
               </div>
+
+              <FormPrivacyNotice purpose="contact" tone="dark" />
 
               {status === "sent" && (
                 <p className="rounded-lg border border-emerald-400/30 bg-emerald-400/10 px-4 py-3 text-emerald-200">

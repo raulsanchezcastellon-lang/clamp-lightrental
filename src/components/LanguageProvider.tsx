@@ -140,6 +140,11 @@ type TranslationKey =
   | "cookies.reject"
   | "cookies.policy"
   | "catalog.all"
+  | "privacy.controller"
+  | "privacy.purposeContact"
+  | "privacy.purposeOrder"
+  | "privacy.rights"
+  | "privacy.link"
   | "product.add"
   | "product.quote"
   | "product.decrease"
@@ -299,6 +304,11 @@ const translations: Record<Language, Record<TranslationKey, string>> = {
     "cookies.reject": "Reject",
         "cookies.policy": "Cookie policy",
     "catalog.all": "All",
+    "privacy.controller": "Data controller: CLAMP RENTAL SLU.",
+    "privacy.purposeContact": "Purpose: to answer your enquiry.",
+    "privacy.purposeOrder": "Purpose: to process your rental request.",
+    "privacy.rights": "You can access, correct or delete your data by writing to raul@clamp-lightrental.com. More information in our",
+    "privacy.link": "privacy policy (Spanish)",
     "product.add": "Add to request",
     "product.quote": "Request a quote",
     "product.decrease": "Decrease quantity",
@@ -457,6 +467,11 @@ const translations: Record<Language, Record<TranslationKey, string>> = {
     "cookies.reject": "Rechazar",
         "cookies.policy": "Política de cookies",
     "catalog.all": "Todo",
+    "privacy.controller": "Responsable: CLAMP RENTAL SLU.",
+    "privacy.purposeContact": "Finalidad: responder a tu consulta.",
+    "privacy.purposeOrder": "Finalidad: tramitar tu solicitud de alquiler.",
+    "privacy.rights": "Puedes acceder, rectificar o suprimir tus datos escribiendo a raul@clamp-lightrental.com. Más información en la",
+    "privacy.link": "política de privacidad",
     "product.add": "Añadir al pedido",
     "product.quote": "Pedir presupuesto",
     "product.decrease": "Reducir cantidad",

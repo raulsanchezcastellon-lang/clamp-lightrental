@@ -25,6 +25,7 @@ export async function GET(
       headers: {
         "Cache-Control": "public, max-age=31536000, immutable",
         "Content-Type": contentType,
+        "X-Content-Type-Options": "nosniff",
       },
     });
   } catch (error) {

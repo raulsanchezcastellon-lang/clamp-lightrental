@@ -6,6 +6,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { useCart } from "@/components/CartProvider";
 import { useLanguage } from "@/components/LanguageProvider";
+import FormPrivacyNotice from "@/components/FormPrivacyNotice";
 import { categoryLabel } from "@/lib/i18n";
 import { HONEYPOT_FIELD } from "@/lib/formSecurity";
 import { rentalDays, todayIsoDate } from "@/lib/rental";
@@ -243,10 +244,13 @@ export default function PedidoPage() {
 
                 <div className="mt-5 space-y-5">
                   <div>
-                    <label className="mb-2 block text-sm font-black">
+                    <label htmlFor="order-name" className="mb-2 block text-sm font-black">
                       {t("cart.name")} <span className="text-rose-600">*</span>
                     </label>
                     <input
+                      id="order-name"
+                      name="name"
+                      autoComplete="name"
                       type="text"
                       value={form.name}
                       onChange={(event) => setForm({ ...form, name: event.target.value })}
@@ -256,10 +260,13 @@ export default function PedidoPage() {
                   </div>
 
                   <div>
-                    <label className="mb-2 block text-sm font-black">
+                    <label htmlFor="order-email" className="mb-2 block text-sm font-black">
                       {t("cart.email")} <span className="text-rose-600">*</span>
                     </label>
                     <input
+                      id="order-email"
+                      name="email"
+                      autoComplete="email"
                       type="email"
                       value={form.email}
                       onChange={(event) => setForm({ ...form, email: event.target.value })}
@@ -273,8 +280,11 @@ export default function PedidoPage() {
                   </p>
 
                   <div>
-                    <label className="mb-2 block text-sm font-black">{t("cart.phone")}</label>
+                    <label htmlFor="order-phone" className="mb-2 block text-sm font-black">{t("cart.phone")}</label>
                     <input
+                      id="order-phone"
+                      name="phone"
+                      autoComplete="tel"
                       type="tel"
                       value={form.phone}
                       onChange={(event) => setForm({ ...form, phone: event.target.value })}
@@ -284,8 +294,10 @@ export default function PedidoPage() {
 
                   <div className="grid gap-4 sm:grid-cols-2">
                     <div>
-                      <label className="mb-2 block text-sm font-black">{t("cart.pickup")}</label>
+                      <label htmlFor="order-pickup" className="mb-2 block text-sm font-black">{t("cart.pickup")}</label>
                       <input
+                        id="order-pickup"
+                        name="pickupDate"
                         type="date"
                         min={today}
                         value={form.pickupDate}
@@ -298,8 +310,10 @@ export default function PedidoPage() {
                     </div>
 
                     <div>
-                      <label className="mb-2 block text-sm font-black">{t("cart.return")}</label>
+                      <label htmlFor="order-return" className="mb-2 block text-sm font-black">{t("cart.return")}</label>
                       <input
+                        id="order-return"
+                        name="returnDate"
                         type="date"
                         min={form.pickupDate || today}
                         value={form.returnDate}
@@ -336,8 +350,10 @@ export default function PedidoPage() {
                   </fieldset>
 
                   <div>
-                    <label className="mb-2 block text-sm font-black">{t("cart.comments")}</label>
+                    <label htmlFor="order-comments" className="mb-2 block text-sm font-black">{t("cart.comments")}</label>
                     <textarea
+                      id="order-comments"
+                      name="comments"
                       value={form.comments}
                       onChange={(event) => setForm({ ...form, comments: event.target.value })}
                       className="min-h-32 w-full rounded-md border border-black/10 bg-[#f7f7f4] px-4 py-3 outline-none focus:border-black/40"
@@ -376,6 +392,8 @@ export default function PedidoPage() {
                       onChange={(event) => setHoneypot(event.target.value)}
                     />
                   </div>
+
+                  <FormPrivacyNotice purpose="order" />
 
                   {status === "error" && (
                     <p className="rounded-md border border-rose-400/30 bg-rose-50 px-4 py-3 text-sm font-medium text-rose-700">
