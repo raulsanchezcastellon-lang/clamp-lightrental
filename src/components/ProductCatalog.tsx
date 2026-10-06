@@ -25,17 +25,22 @@ export default function ProductCatalog({
   const [quantities, setQuantities] = useState<Record<string, number>>({});
   const [products, setProducts] = useState<PublicProduct[]>(initialProducts);
   const [loading, setLoading] = useState(initialProducts.length === 0);
+  const [justAddedId, setJustAddedId] = useState<string | null>(null);
   const { addItem } = useCart();
   const { t, href, language } = useLanguage();
 
+  // The page already renders the products on the server. Only fetch them here as a
+  // fallback when that list came back empty, and never wipe a list we already have.
+  const hasInitialProducts = initialProducts.length > 0;
   useEffect(() => {
+    if (hasInitialProducts) return;
     const loadProducts = async () => {
       try {
         const response = await fetch(`/api/products?listingType=${listingType}`);
         const data = await response.json();
 
-        setProducts(Array.isArray(data) ? data : []);
-      } catch (error) {
+        if (response.ok && Array.isArray(data)) setProducts(data);
+      } catch {
         console.error("Error loading products");
       } finally {
         setLoading(false);
@@ -43,7 +48,7 @@ export default function ProductCatalog({
     };
 
     loadProducts();
-  }, [listingType]);
+  }, [listingType, hasInitialProducts]);
 
   // Filtro por categoría desde la URL (?category=Lights), p. ej. desde la ruta de navegación de la ficha.
   useEffect(() => {
@@ -103,6 +108,11 @@ export default function ProductCatalog({
       listingType,
       quantity: quantities[product.id] || 1,
     });
+    setJustAddedId(product.id);
+    window.setTimeout(
+      () => setJustAddedId((current) => (current === product.id ? null : current)),
+      1800
+    );
   };
 
   const getProductAltText = (product: PublicProduct) =>
@@ -261,9 +271,12 @@ export default function ProductCatalog({
                       <button
                         type="button"
                         onClick={() => handleAddProduct(product)}
-                        className="h-9 rounded-full bg-[#FFED00] px-3 text-sm font-black text-black transition hover:bg-black hover:text-white"
+                        aria-live="polite"
+                        className={`h-9 whitespace-nowrap rounded-full px-3 text-sm font-black transition hover:bg-black hover:text-white ${
+                          justAddedId === product.id ? "bg-black text-[#FFED00]" : "bg-[#FFED00] text-black"
+                        }`}
                       >
-                        {actionLabel}
+                        {justAddedId === product.id ? `✓ ${t("catalog.added")}` : actionLabel}
                       </button>
                     </div>
                   </div>

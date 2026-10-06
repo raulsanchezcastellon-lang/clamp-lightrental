@@ -222,8 +222,14 @@ export default function LandingView({ content, lang }: { content: LandingContent
                   key={item.q}
                   className="group rounded-lg border border-gray-800 bg-gray-900 p-6 open:bg-gray-900/80"
                 >
-                  <summary className="cursor-pointer list-none text-lg font-semibold text-white marker:content-none">
-                    {item.q}
+                  <summary className="flex cursor-pointer list-none items-start justify-between gap-4 text-lg font-semibold text-white marker:content-none [&::-webkit-details-marker]:hidden">
+                    <span>{item.q}</span>
+                    <span
+                      aria-hidden="true"
+                      className="mt-0.5 flex h-7 w-7 shrink-0 items-center justify-center rounded-full border border-white/25 text-base leading-none text-[#FFED00] transition-transform group-open:rotate-45"
+                    >
+                      +
+                    </span>
                   </summary>
                   <p className="mt-3 text-gray-400">{item.a}</p>
                 </details>

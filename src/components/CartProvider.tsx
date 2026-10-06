@@ -26,6 +26,8 @@ type AddCartItem = Omit<CartItem, "quantity"> & {
 
 type CartContextValue = {
   items: CartItem[];
+  /** false until the cart has been read from localStorage (avoids flashing "empty cart"). */
+  ready: boolean;
   totalItems: number;
   addItem: (item: AddCartItem) => void;
   updateQuantity: (id: string, quantity: number) => void;
@@ -37,27 +39,31 @@ const CartContext = createContext<CartContextValue | null>(null);
 const CART_STORAGE_KEY = "clamp-cart";
 
 export function CartProvider({ children }: { children: ReactNode }) {
-  const [items, setItems] = useState<CartItem[]>(() => {
-    if (typeof window === "undefined") {
-      return [];
-    }
-
-    try {
-      const storedCart = window.localStorage.getItem(CART_STORAGE_KEY);
-      if (storedCart) {
-        const parsedCart = JSON.parse(storedCart);
-        return Array.isArray(parsedCart) ? parsedCart : [];
-      }
-    } catch (error) {
-      console.error("Unable to load cart");
-    }
-
-    return [];
-  });
+  // El carrito vive en localStorage. Se carga después de montar (no en el render inicial)
+  // para que el HTML del servidor y el primer render del cliente coincidan.
+  const [items, setItems] = useState<CartItem[]>([]);
+  const [loaded, setLoaded] = useState(false);
 
   useEffect(() => {
-    window.localStorage.setItem(CART_STORAGE_KEY, JSON.stringify(items));
-  }, [items]);
+    try {
+      const storedCart = window.localStorage.getItem(CART_STORAGE_KEY);
+      const parsedCart = storedCart ? JSON.parse(storedCart) : [];
+      // eslint-disable-next-line react-hooks/set-state-in-effect -- one-time sync from localStorage after hydration
+      if (Array.isArray(parsedCart) && parsedCart.length > 0) setItems(parsedCart);
+    } catch {
+      console.error("Unable to load cart");
+    }
+    setLoaded(true);
+  }, []);
+
+  useEffect(() => {
+    if (!loaded) return;
+    try {
+      window.localStorage.setItem(CART_STORAGE_KEY, JSON.stringify(items));
+    } catch {
+      // Private mode / storage full: the cart still works for this visit.
+    }
+  }, [items, loaded]);
 
   const totalItems = useMemo(
     () => items.reduce((total, item) => total + item.quantity, 0),
@@ -104,7 +110,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
 
   return (
     <CartContext.Provider
-      value={{ items, totalItems, addItem, updateQuantity, removeItem, clearCart }}
+      value={{ items, ready: loaded, totalItems, addItem, updateQuantity, removeItem, clearCart }}
     >
       {children}
     </CartContext.Provider>

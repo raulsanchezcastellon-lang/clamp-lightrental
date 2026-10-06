@@ -82,7 +82,7 @@ export default function Header() {
             <Link
               href={href("/pedido")}
               aria-label={t("nav.cart")}
-              className="relative hidden h-10 w-10 items-center justify-center border border-white/40 text-white transition hover:bg-white hover:text-black sm:inline-flex"
+              className="relative inline-flex h-10 w-10 items-center justify-center border border-white/40 text-white transition hover:bg-white hover:text-black"
             >
               <svg
                 aria-hidden="true"
@@ -106,7 +106,7 @@ export default function Header() {
             </Link>
 
             <button
-              className="inline-flex items-center justify-center border border-white/40 p-2 text-white hover:bg-white hover:text-black transition lg:hidden"
+              className="inline-flex h-10 w-10 items-center justify-center border border-white/40 text-white hover:bg-white hover:text-black transition lg:hidden"
               onClick={() => setMenuOpen(!menuOpen)}
               aria-label="Open navigation"
             >

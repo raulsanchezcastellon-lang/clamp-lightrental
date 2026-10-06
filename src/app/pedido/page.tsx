@@ -11,7 +11,7 @@ import { HONEYPOT_FIELD } from "@/lib/formSecurity";
 import { rentalDays, todayIsoDate } from "@/lib/rental";
 
 export default function PedidoPage() {
-  const { items, totalItems, updateQuantity, removeItem, clearCart } = useCart();
+  const { items, ready, totalItems, updateQuantity, removeItem, clearCart } = useCart();
   const { t, href, language } = useLanguage();
   const [honeypot, setHoneypot] = useState("");
   const today = todayIsoDate();
@@ -143,7 +143,9 @@ export default function PedidoPage() {
 
           <form onSubmit={handleSubmit} className="grid gap-8 lg:grid-cols-[1.1fr_0.9fr]">
               <section className="order-2 space-y-3 sm:order-1 sm:space-y-4">
-                {items.length === 0 ? (
+                {!ready ? (
+                  <div className="h-28 animate-pulse rounded-lg border border-black/10 bg-white" />
+                ) : items.length === 0 ? (
                   <div className="rounded-lg border border-black/10 bg-white p-8">
                     <h2 className="text-xl font-black">{t("cart.emptyTitle")}</h2>
                     <p className="mt-2 text-black/55">

@@ -144,6 +144,9 @@ type TranslationKey =
   | "product.quote"
   | "product.decrease"
   | "product.increase"
+  | "product.added"
+  | "catalog.added"
+  | "product.viewCart"
   | "whatsapp.message"
   | "whatsapp.label"
   | "langSuggest.text"
@@ -300,6 +303,9 @@ const translations: Record<Language, Record<TranslationKey, string>> = {
     "product.quote": "Request a quote",
     "product.decrease": "Decrease quantity",
     "product.increase": "Increase quantity",
+    "product.added": "Added to your order",
+    "catalog.added": "Added",
+    "product.viewCart": "View order",
     "whatsapp.message": "Hi, I'd like some information about renting lighting from CLAMP.",
     "whatsapp.label": "Chat with us on WhatsApp",
     "langSuggest.text": "This page is also available in Spanish.",
@@ -455,6 +461,9 @@ const translations: Record<Language, Record<TranslationKey, string>> = {
     "product.quote": "Pedir presupuesto",
     "product.decrease": "Reducir cantidad",
     "product.increase": "Aumentar cantidad",
+    "product.added": "Añadido al pedido",
+    "catalog.added": "Añadido",
+    "product.viewCart": "Ver pedido",
     "whatsapp.message": "Hola, me gustaría recibir información de CLAMP Light Rental.",
     "whatsapp.label": "Escríbenos por WhatsApp",
     "langSuggest.text": "This website is available in English.",

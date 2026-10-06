@@ -11,6 +11,7 @@ import { HONEYPOT_FIELD } from "@/lib/formSecurity";
 function ContactContent() {
   const searchParams = useSearchParams();
   const product = searchParams.get("product");
+  const isSale = searchParams.get("type") === "sale";
   const { t, language } = useLanguage();
   const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">("idle");
   const [honeypot, setHoneypot] = useState("");
@@ -20,8 +21,8 @@ function ContactContent() {
     phone: "",
     message: product
       ? language === "en"
-        ? `Hi, I'm interested in renting the ${product}.`
-        : `Hola, me interesa alquilar ${product}.`
+        ? `Hi, I'm interested in ${isSale ? "buying" : "renting"} the ${product}.`
+        : `Hola, me interesa ${isSale ? "comprar" : "alquilar"} ${product}.`
       : "",
   });
 

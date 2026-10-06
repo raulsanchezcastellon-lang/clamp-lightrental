@@ -14,6 +14,7 @@ export default function ProductDetailActions({
   listingType: "rental" | "sale";
 }) {
   const [quantity, setQuantity] = useState(1);
+  const [added, setAdded] = useState(false);
   const { addItem } = useCart();
   const { t, href } = useLanguage();
 
@@ -28,6 +29,7 @@ export default function ProductDetailActions({
       listingType,
       quantity,
     });
+    setAdded(true);
   };
 
   return (
@@ -61,11 +63,26 @@ export default function ProductDetailActions({
         {t("product.add")}
       </button>
       <Link
-        href={href(`/contacto?product=${encodeURIComponent(product.name)}`)}
+        href={href(`/contacto?product=${encodeURIComponent(product.name)}${listingType === "sale" ? "&type=sale" : ""}`)}
         className="inline-flex h-11 items-center justify-center rounded-full border border-black px-6 text-sm font-black text-black transition hover:bg-black hover:text-white"
       >
         {t("product.quote")}
       </Link>
+      {added && (
+        <p
+          role="status"
+          className="flex w-full items-center gap-3 rounded-lg bg-black px-4 py-3 text-sm font-bold text-white"
+        >
+          <span aria-hidden="true" className="text-[#FFED00]">✓</span>
+          <span>{t("product.added")}</span>
+          <Link
+            href={href("/pedido")}
+            className="ml-auto whitespace-nowrap text-[#FFED00] underline underline-offset-4 hover:no-underline"
+          >
+            {t("product.viewCart")} →
+          </Link>
+        </p>
+      )}
     </div>
   );
 }

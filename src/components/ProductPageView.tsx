@@ -20,6 +20,10 @@ const COPY = {
     descriptionSuffix: " Alquiler en Alicante, Murcia y Valencia, con entrega y soporte técnico.",
     jsonLdFallback: (name: string) => `Alquiler de ${name} en Alicante, Murcia y Valencia.`,
     catalog: "Catálogo",
+    store: "Tienda",
+    saleTitle: (name: string) => `Comprar ${name} en Alicante`,
+    saleDescription: (name: string) =>
+      `Compra ${name} en CLAMP Lighting Rental, Alicante. Material para rodajes con entrega en set junto a tu pedido de alquiler.`,
     noImage: "Sin imagen",
     perDay: "/ día",
     priceOnRequest: "Precio bajo consulta",
@@ -41,6 +45,10 @@ const COPY = {
       " Rental in Alicante, Spain — delivered to set and collected after wrap, with English-speaking crew available.",
     jsonLdFallback: (name: string) => `${name} rental in Alicante, Spain, delivered to set.`,
     catalog: "Catalog",
+    store: "Store",
+    saleTitle: (name: string) => `Buy ${name} in Alicante, Spain`,
+    saleDescription: (name: string) =>
+      `Buy the ${name} from CLAMP Lighting Rental in Alicante, Spain, delivered to set together with your rental order.`,
     noImage: "No image",
     perDay: "/ day",
     priceOnRequest: "Price on request",
@@ -69,12 +77,17 @@ export async function generateProductMetadata(slug: string, lang: Language): Pro
   }
 
   const fullName = `${product.brand ? `${product.brand} ` : ""}${product.name}`;
-  const description = product.description
-    ? `${product.description}${c.descriptionSuffix}`.slice(0, 300)
-    : c.description(fullName);
+  const isSale = product.listingType === "sale";
+  const description = isSale
+    ? product.description
+      ? `${product.description}`.slice(0, 300)
+      : c.saleDescription(fullName)
+    : product.description
+      ? `${product.description}${c.descriptionSuffix}`.slice(0, 300)
+      : c.description(fullName);
 
   return createPageMetadata({
-    title: c.title(fullName),
+    title: isSale ? c.saleTitle(fullName) : c.title(fullName),
     description,
     path: `/producto/${product.slug}`,
     image: product.image,
@@ -90,6 +103,7 @@ export default async function ProductPageView({ slug, lang }: { slug: string; la
     notFound();
   }
 
+  const isSale = product.listingType === "sale";
   const specRows = parseSpecs(product.specs, lang);
 
   const productUrl = `${SITE_URL}${localizePath(`/producto/${product.slug}`, lang)}`;
@@ -153,13 +167,16 @@ export default async function ProductPageView({ slug, lang }: { slug: string; la
             aria-label="Breadcrumb"
             className="mb-6 flex flex-wrap items-center gap-2 text-xs font-medium uppercase tracking-[0.08em] text-black/45"
           >
-            <Link href={localizePath("/catalogo", lang)} className="hover:text-black hover:underline">
-              {c.catalog}
+            <Link
+              href={localizePath(isSale ? "/store" : "/catalogo", lang)}
+              className="hover:text-black hover:underline"
+            >
+              {isSale ? c.store : c.catalog}
             </Link>
             <span aria-hidden="true">/</span>
             <Link
               href={localizePath(
-                `${product.listingType === "sale" ? "/store" : "/catalogo"}?category=${encodeURIComponent(product.category)}`,
+                `${isSale ? "/store" : "/catalogo"}?category=${encodeURIComponent(product.category)}`,
                 lang
               )}
               className="hover:text-black hover:underline"
@@ -205,7 +222,7 @@ export default async function ProductPageView({ slug, lang }: { slug: string; la
                 {product.price ? (
                   <>
                     {product.price}€{" "}
-                    <span className="text-sm font-medium text-black/45">{c.perDay}</span>
+                    {!isSale && <span className="text-sm font-medium text-black/45">{c.perDay}</span>}
                   </>
                 ) : (
                   c.priceOnRequest
@@ -218,7 +235,7 @@ export default async function ProductPageView({ slug, lang }: { slug: string; la
                 </p>
               )}
 
-              <ProductDetailActions product={product} listingType="rental" />
+              <ProductDetailActions product={product} listingType={isSale ? "sale" : "rental"} />
 
               {/* Especificaciones */}
               {specRows.length > 0 && (
