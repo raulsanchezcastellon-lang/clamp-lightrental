@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useSyncExternalStore } from "react";
+import { usePathname } from "next/navigation";
 import { useLanguage } from "@/components/LanguageProvider";
 import {
   COOKIE_CONSENT_STORAGE_KEY,
@@ -11,6 +12,7 @@ import {
 
 export default function CookieConsentBanner() {
   const { t } = useLanguage();
+  const pathname = usePathname();
   const consent = useSyncExternalStore(
     (onStoreChange) => {
       window.addEventListener("storage", onStoreChange);
@@ -30,7 +32,8 @@ export default function CookieConsentBanner() {
     window.dispatchEvent(new CustomEvent("cookie-consent-change", { detail: choice }));
   };
 
-  if (consent !== null) {
+  // El panel de administración no es parte de la web pública: sin banner.
+  if (consent !== null || pathname?.startsWith("/admin")) {
     return null;
   }
 

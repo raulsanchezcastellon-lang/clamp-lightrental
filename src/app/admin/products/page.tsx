@@ -274,6 +274,12 @@ export default function AdminProducts() {
           >
             Manage Categories
           </Link>
+          <Link
+            href="/admin/inbox"
+            className="inline-flex rounded-full border border-white/15 px-5 py-2 text-xs font-black uppercase tracking-[0.1em] text-white transition hover:border-white hover:bg-white hover:text-black"
+          >
+            Pedidos y mensajes
+          </Link>
         </div>
 
         <div className="mb-5 flex flex-col gap-2 rounded-xl border border-white/10 bg-[#080808] p-3 sm:flex-row sm:items-center sm:justify-between">

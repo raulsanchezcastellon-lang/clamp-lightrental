@@ -1,14 +1,18 @@
 "use client";
 
+import { usePathname } from "next/navigation";
 import { useLanguage } from "@/components/LanguageProvider";
 
 const WHATSAPP_NUMBER = "34681878782";
 
 export default function WhatsAppButton() {
   const { t } = useLanguage();
+  const pathname = usePathname();
   const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(
     t("whatsapp.message")
   )}`;
+
+  if (pathname?.startsWith("/admin")) return null;
 
   return (
     <a

@@ -143,7 +143,7 @@ export default function PedidoPage() {
           )}
 
           <form onSubmit={handleSubmit} className="grid gap-8 lg:grid-cols-[1.1fr_0.9fr]">
-              <section className="order-2 space-y-3 sm:order-1 sm:space-y-4">
+              <section className="space-y-3 sm:space-y-4">
                 {!ready ? (
                   <div className="h-28 animate-pulse rounded-lg border border-black/10 bg-white" />
                 ) : items.length === 0 ? (
@@ -232,7 +232,7 @@ export default function PedidoPage() {
                 )}
               </section>
 
-              <section className="order-1 rounded-lg border border-black/10 bg-white p-5 sm:order-2 lg:sticky lg:top-24 lg:self-start">
+              <section className="rounded-lg border border-black/10 bg-white p-5 lg:sticky lg:top-24 lg:self-start">
                 <div className="border-b border-black/10 pb-4">
                   <h2 className="text-xl font-black uppercase tracking-[0.02em]">
                     {t("cart.detailsTitle")}

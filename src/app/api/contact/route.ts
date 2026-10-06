@@ -33,7 +33,7 @@ export async function POST(request: NextRequest) {
     const data = parsed.data;
 
     // Guardamos primero, para que el mensaje no se pierda si falla el email.
-    await prisma.contactMessage.create({
+    const saved = await prisma.contactMessage.create({
       data: {
         name: data.name,
         email: data.email,
@@ -63,6 +63,11 @@ export async function POST(request: NextRequest) {
             </p>
           </div>
         `,
+      });
+
+      await prisma.contactMessage.update({
+        where: { id: saved.id },
+        data: { emailSent: true },
       });
     } catch (emailError) {
       console.error("Error sending email after retries:", emailError);
