@@ -172,7 +172,7 @@ export default async function ProductPageView({ slug, lang }: { slug: string; la
 
           {/* Hero */}
           <div className="grid gap-10 lg:grid-cols-[5fr_6fr] lg:items-start lg:gap-14">
-            <div className="flex aspect-square items-center justify-center rounded-lg border border-black/10 bg-white p-8 lg:sticky lg:top-28">
+            <div className="mx-auto flex aspect-[4/3] w-full max-w-md items-center justify-center rounded-lg border border-black/10 bg-white p-4 sm:aspect-square sm:p-8 lg:sticky lg:top-28 lg:max-w-none">
               {product.image ? (
                 <img
                   src={product.image}

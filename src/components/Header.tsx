@@ -19,13 +19,14 @@ export default function Header() {
     <header className="fixed inset-x-0 top-0 z-50 border-b border-white/10 bg-black/90 backdrop-blur-sm shadow-lg">
       <div className="max-w-[1580px] mx-auto px-4 sm:px-6 lg:px-8 py-2">
         <div className="flex items-center justify-between gap-4">
-          <Link href={href("/")} className="flex items-center gap-4">
-            <div className="relative w-72 h-12 sm:w-80 sm:h-12 lg:w-96 lg:h-12">
+          <Link href={href("/")} className="flex min-w-0 flex-1 items-center gap-4">
+            <div className="relative h-12 w-full max-w-72 sm:max-w-80 lg:max-w-96">
               <Image
                 src="/CLAMP_Logos-20.svg"
                 alt="CLAMP Light Rental"
                 fill
-                className="object-contain"
+                priority
+                className="object-contain object-left"
               />
             </div>
           </Link>
@@ -45,7 +46,7 @@ export default function Header() {
             </Link>
           </nav>
 
-          <div className="flex items-center gap-3">
+          <div className="flex shrink-0 items-center gap-3">
             <Link
               href={otherLanguageHref}
               hrefLang={language === "en" ? "es" : "en"}

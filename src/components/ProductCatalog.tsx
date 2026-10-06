@@ -140,7 +140,7 @@ export default function ProductCatalog({
                   value={searchQuery}
                   onChange={(event) => setSearchQuery(event.target.value)}
                   placeholder={t("catalog.search")}
-                  className="h-10 w-full rounded-full border border-black/15 bg-white py-2 pl-10 pr-4 text-sm font-medium outline-none transition placeholder:text-black/35 focus:border-black/45"
+                  className="h-10 w-full rounded-full border border-black/15 bg-white py-2 pl-10 pr-4 text-base font-medium lg:text-sm outline-none transition placeholder:text-black/35 focus:border-black/45"
                 />
               </div>
             </div>
