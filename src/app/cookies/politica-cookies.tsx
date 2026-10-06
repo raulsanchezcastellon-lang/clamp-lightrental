@@ -1,6 +1,6 @@
 export default function PoliticaCookies() {
   return (
-    <main className="w-full max-w-3xl mx-auto px-6 py-16 text-sm leading-relaxed">
+    <main className="w-full max-w-3xl mx-auto flex-1 px-6 pb-16 pt-28 text-sm leading-relaxed sm:pt-32">
       <h1 className="text-3xl font-bold mb-8">Política de Cookies</h1>
 
       <section className="mb-8">
@@ -26,7 +26,7 @@ export default function PoliticaCookies() {
         <div className="overflow-x-auto mt-2">
           <table className="w-full border-collapse text-xs">
             <thead>
-              <tr className="bg-gray-100">
+              <tr className="bg-white/10">
                 <th className="border border-gray-300 px-3 py-2 text-left">Nombre</th>
                 <th className="border border-gray-300 px-3 py-2 text-left">Tipo</th>
                 <th className="border border-gray-300 px-3 py-2 text-left">Finalidad</th>

@@ -1,6 +1,6 @@
 export default function PoliticaPrivacidad() {
   return (
-    <main className="w-full max-w-3xl mx-auto px-6 py-16 text-sm leading-relaxed">
+    <main className="w-full max-w-3xl mx-auto flex-1 px-6 pb-16 pt-28 text-sm leading-relaxed sm:pt-32">
       <h1 className="text-3xl font-bold mb-8">Política de Privacidad</h1>
 
       <section className="mb-8">

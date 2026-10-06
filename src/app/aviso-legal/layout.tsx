@@ -1,5 +1,7 @@
 import type { ReactNode } from "react";
 import { createPageMetadata } from "@/lib/seo";
+import Header from "@/components/Header";
+import Footer from "@/components/Footer";
 
 export const metadata = createPageMetadata({
   title: "Aviso Legal",
@@ -9,5 +11,11 @@ export const metadata = createPageMetadata({
 });
 
 export default function AvisoLegalLayout({ children }: { children: ReactNode }) {
-  return children;
+  return (
+    <>
+      <Header />
+      {children}
+      <Footer />
+    </>
+  );
 }
