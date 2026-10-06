@@ -27,6 +27,13 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: "Category name is required" }, { status: 400 });
     }
 
+    const duplicate = await prisma.category.findFirst({
+      where: { name: { equals: name, mode: "insensitive" } },
+    });
+    if (duplicate) {
+      return NextResponse.json({ error: "Ya existe una categoría con ese nombre." }, { status: 409 });
+    }
+
     const category = await prisma.category.create({
       data: {
         name,

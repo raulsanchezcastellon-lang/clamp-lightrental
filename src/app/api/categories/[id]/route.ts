@@ -19,12 +19,34 @@ export async function PUT(
       return NextResponse.json({ error: "Category name is required" }, { status: 400 });
     }
 
+    const existing = await prisma.category.findUnique({ where: { id } });
+    if (!existing) {
+      return NextResponse.json({ error: "Category not found" }, { status: 404 });
+    }
+
+    const duplicate = await prisma.category.findFirst({
+      where: { name: { equals: name, mode: "insensitive" }, NOT: { id } },
+    });
+    if (duplicate) {
+      return NextResponse.json({ error: "Ya existe una categoría con ese nombre." }, { status: 409 });
+    }
+
     const updated = await prisma.category.update({
       where: { id },
       data: { name },
     });
 
-    return NextResponse.json(updated);
+    // Los productos guardan el nombre de la categoría: al renombrarla, se mueven con ella.
+    let productsUpdated = 0;
+    if (existing.name !== name) {
+      const result = await prisma.product.updateMany({
+        where: { category: existing.name },
+        data: { category: name },
+      });
+      productsUpdated = result.count;
+    }
+
+    return NextResponse.json({ ...updated, productsUpdated });
   } catch (error) {
     console.error("Update category error:", error);
     return NextResponse.json({ error: "Error updating category" }, { status: 500 });

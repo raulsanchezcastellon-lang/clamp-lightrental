@@ -272,7 +272,7 @@ export default function AdminProducts() {
             href="/admin/categories"
             className="inline-flex rounded-full border border-white/15 px-5 py-2 text-xs font-black uppercase tracking-[0.1em] text-white transition hover:border-white hover:bg-white hover:text-black"
           >
-            Manage Categories
+            Categorías
           </Link>
           <Link
             href="/admin/inbox"
