@@ -161,7 +161,7 @@ export default async function ProductPageView({ slug, lang }: { slug: string; la
     <>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(productJsonLd) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(productJsonLd).replace(/</g, "\\u003c") }}
       />
       <Header />
       <main className="min-h-screen bg-[#f7f7f4] text-black">

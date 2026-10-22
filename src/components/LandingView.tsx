@@ -46,7 +46,7 @@ export default function LandingView({ content, lang }: { content: LandingContent
     <>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd).replace(/</g, "\\u003c") }}
       />
       <Header />
       <main className="bg-black text-white">

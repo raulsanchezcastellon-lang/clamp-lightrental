@@ -2,6 +2,7 @@ import { createHash } from "crypto";
 import { NextRequest, NextResponse } from "next/server";
 import prisma from "@/lib/prisma";
 import { hashPassword } from "@/lib/password";
+import { getClientIp, isRateLimited } from "@/lib/rateLimit";
 
 export const dynamic = "force-dynamic";
 
@@ -11,6 +12,10 @@ function hashToken(token: string) {
 
 export async function POST(request: NextRequest) {
   try {
+    if (isRateLimited(`reset:${getClientIp(request)}`, 10, 60 * 60 * 1000)) {
+      return NextResponse.json({ error: "Demasiados intentos. Espera unos minutos." }, { status: 429 });
+    }
+
     const { token, password } = await request.json();
     const resetToken = typeof token === "string" ? token.trim() : "";
     const newPassword = typeof password === "string" ? password : "";
@@ -47,7 +52,7 @@ export async function POST(request: NextRequest) {
 
     await prisma.admin.update({
       where: { id: passwordResetToken.adminId },
-      data: { password: hashedPassword },
+      data: { password: hashedPassword, passwordChangedAt: new Date() },
     });
     await prisma.passwordResetToken.update({
       where: { id: passwordResetToken.id },

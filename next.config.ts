@@ -11,6 +11,8 @@ const securityHeaders = [
   { key: "Referrer-Policy", value: "strict-origin-when-cross-origin" },
   // La web no usa cámara, micrófono ni ubicación.
   { key: "Permissions-Policy", value: "camera=(), microphone=(), geolocation=()" },
+  // Obliga a usar siempre HTTPS (Vercel ya lo envía; así no depende de su configuración).
+  { key: "Strict-Transport-Security", value: "max-age=63072000" },
 ];
 
 const nextConfig: NextConfig = {

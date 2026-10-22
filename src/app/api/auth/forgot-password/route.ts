@@ -1,38 +1,15 @@
 import { randomBytes, createHash } from "crypto";
 import { NextRequest, NextResponse } from "next/server";
-import nodemailer from "nodemailer";
 import prisma from "@/lib/prisma";
 import { getClientIp, isRateLimited } from "@/lib/rateLimit";
+import { sendMailWithRetry } from "@/lib/email";
+import { escapeHtml } from "@/lib/formSecurity";
+import { SITE_URL } from "@/lib/seo";
 
 export const dynamic = "force-dynamic";
 
 function hashToken(token: string) {
   return createHash("sha256").update(token).digest("hex");
-}
-
-function escapeHtml(value: unknown) {
-  return String(value ?? "")
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;")
-    .replace(/"/g, "&quot;")
-    .replace(/'/g, "&#039;");
-}
-
-function getSmtpTransporter() {
-  if (!process.env.SMTP_USER || !process.env.SMTP_PASS) {
-    throw new Error("SMTP_USER and SMTP_PASS are required for password recovery.");
-  }
-
-  return nodemailer.createTransport({
-    host: process.env.SMTP_HOST || "smtp.gmail.com",
-    port: parseInt(process.env.SMTP_PORT || "587", 10),
-    secure: process.env.SMTP_PORT === "465",
-    auth: {
-      user: process.env.SMTP_USER,
-      pass: process.env.SMTP_PASS,
-    },
-  });
 }
 
 export async function POST(request: NextRequest) {
@@ -75,12 +52,12 @@ export async function POST(request: NextRequest) {
       },
     });
 
-    const resetUrl = new URL("/admin/reset-password", request.nextUrl.origin);
+    // Dominio fijo: el enlace nunca depende de la cabecera Host de la petición.
+    const resetUrl = new URL("/admin/reset-password", SITE_URL);
     resetUrl.searchParams.set("token", token);
 
-    const transporter = getSmtpTransporter();
-    await transporter.sendMail({
-      from: `"CLAMP Admin" <${process.env.SMTP_USER}>`,
+    await sendMailWithRetry({
+      from: "CLAMP Admin <web@mail.clamp-lightrental.com>",
       to: admin.email,
       subject: "Recuperar contraseña del panel CLAMP",
       html: `
