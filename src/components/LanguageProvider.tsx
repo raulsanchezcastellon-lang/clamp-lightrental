@@ -134,11 +134,6 @@ type TranslationKey =
   | "footer.privacy"
   | "footer.cookies"
   | "footer.rights"
-  | "cookies.bannerTitle"
-  | "cookies.bannerText"
-  | "cookies.accept"
-  | "cookies.reject"
-  | "cookies.policy"
   | "catalog.all"
   | "privacy.controller"
   | "privacy.purposeContact"
@@ -297,12 +292,6 @@ const translations: Record<Language, Record<TranslationKey, string>> = {
     "footer.privacy": "Privacy Policy",
     "footer.cookies": "Cookie Policy",
     "footer.rights": "All rights reserved.",
-    "cookies.bannerTitle": "Cookie preferences",
-    "cookies.bannerText":
-      "We use essential cookies to make the website work. With your permission, we may also use non-essential cookies to improve the experience and understand how the site is used.",
-    "cookies.accept": "Accept",
-    "cookies.reject": "Reject",
-        "cookies.policy": "Cookie policy",
     "catalog.all": "All",
     "privacy.controller": "Data controller: CLAMP RENTAL SLU.",
     "privacy.purposeContact": "Purpose: to answer your enquiry.",
@@ -460,12 +449,6 @@ const translations: Record<Language, Record<TranslationKey, string>> = {
     "footer.privacy": "Política de privacidad",
     "footer.cookies": "Política de cookies",
     "footer.rights": "Todos los derechos reservados.",
-    "cookies.bannerTitle": "Preferencias de cookies",
-    "cookies.bannerText":
-      "Usamos cookies esenciales para que la web funcione. Con tu permiso, también podríamos usar cookies no esenciales para mejorar la experiencia y entender cómo se utiliza la web.",
-    "cookies.accept": "Aceptar",
-    "cookies.reject": "Rechazar",
-        "cookies.policy": "Política de cookies",
     "catalog.all": "Todo",
     "privacy.controller": "Responsable: CLAMP RENTAL SLU.",
     "privacy.purposeContact": "Finalidad: responder a tu consulta.",

@@ -4,7 +4,6 @@ import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Barlow, Barlow_Condensed } from "next/font/google";
 import { CartProvider } from "@/components/CartProvider";
-import CookieConsentBanner from "@/components/CookieConsentBanner";
 import { LanguageProvider } from "@/components/LanguageProvider";
 import WhatsAppButton from "@/components/WhatsAppButton";
 import LanguageSuggestion from "@/components/LanguageSuggestion";
@@ -176,7 +175,6 @@ export default async function RootLayout({
           <CartProvider>
             {children}
             <LanguageSuggestion />
-            <CookieConsentBanner />
             <WhatsAppButton />
           </CartProvider>
         </LanguageProvider>
