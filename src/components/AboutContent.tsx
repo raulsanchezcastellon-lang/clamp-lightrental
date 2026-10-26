@@ -51,7 +51,7 @@ export default function AboutContent() {
             </div>
           </div>
 
-          <div className="relative min-h-[360px] overflow-hidden rounded-lg bg-black lg:min-h-[560px]">
+          <div className="relative min-h-[360px] overflow-hidden bg-black lg:min-h-[560px]">
             <Image
               src="/warehouse2.png"
               alt="CLAMP lighting equipment"
@@ -75,7 +75,7 @@ export default function AboutContent() {
       </section>
 
       <section className="mx-auto max-w-6xl px-6 py-14 sm:px-8 lg:px-10">
-        <div className="grid gap-px overflow-hidden rounded-lg bg-black/10">
+        <div className="grid gap-px overflow-hidden border border-black/10 bg-black/10">
           {services.map((service, index) => (
             <article key={service.title} className="grid bg-white lg:grid-cols-2">
               <div

@@ -150,7 +150,7 @@ export default function ProductCatalog({
                   value={searchQuery}
                   onChange={(event) => setSearchQuery(event.target.value)}
                   placeholder={t("catalog.search")}
-                  className="h-10 w-full rounded-full border border-black/15 bg-white py-2 pl-10 pr-4 text-base font-medium lg:text-sm outline-none transition placeholder:text-black/35 focus:border-black/45"
+                  className="h-10 w-full border border-black/15 bg-white py-2 pl-10 pr-4 text-base font-medium lg:text-sm outline-none transition placeholder:text-black/35 focus:border-black/45"
                 />
               </div>
             </div>
@@ -166,7 +166,7 @@ export default function ProductCatalog({
                 key={category}
                 type="button"
                 onClick={() => selectCategory(category)}
-                className={`whitespace-nowrap rounded-full border px-4 py-2 text-sm font-black transition ${
+                className={`whitespace-nowrap border px-4 py-2 text-sm font-black transition ${
                   selectedCategory === category
                     ? "border-black bg-black text-white"
                     : "border-black/15 bg-white text-black/60 hover:border-black/35 hover:text-black"
@@ -243,7 +243,7 @@ export default function ProductCatalog({
                       </p>
                     </div>
                     <div className="mt-3 grid grid-cols-1 gap-2 sm:grid-cols-[96px_minmax(0,1fr)]">
-                      <div className="grid grid-cols-3 rounded-full border border-black/10 bg-[#f7f7f4]">
+                      <div className="grid grid-cols-3 border border-black/10 bg-[#f7f7f4]">
                         <button
                           type="button"
                           onClick={() =>
@@ -272,7 +272,7 @@ export default function ProductCatalog({
                         type="button"
                         onClick={() => handleAddProduct(product)}
                         aria-live="polite"
-                        className={`h-9 whitespace-nowrap rounded-full px-3 text-sm font-black transition hover:bg-black hover:text-white ${
+                        className={`h-9 whitespace-nowrap px-3 text-sm font-black transition hover:bg-black hover:text-white ${
                           justAddedId === product.id ? "bg-black text-[#FFED00]" : "bg-[#FFED00] text-black"
                         }`}
                       >

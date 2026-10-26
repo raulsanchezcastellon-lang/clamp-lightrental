@@ -95,7 +95,7 @@ export default function PedidoPage() {
     <>
       <Header />
 
-      <div className="sticky top-[65px] z-40 mt-[65px] border-b border-black/10 bg-white px-4 py-3 text-black shadow-sm sm:hidden">
+      <div className="sticky top-[65px] z-40 mt-[65px] border-b border-black/10 bg-white px-4 py-3 text-black sm:hidden">
         <div className="mx-auto flex max-w-7xl items-center justify-between gap-4">
           <span className="text-xs font-black uppercase tracking-[0.12em] text-black/45">
             {totalItems} {t(totalItems === 1 ? "cart.item" : "cart.items")}
@@ -127,14 +127,14 @@ export default function PedidoPage() {
             </div>
             <Link
               href={href("/catalogo")}
-              className="inline-flex rounded-full border border-black/15 bg-white px-4 py-2 text-sm font-black text-black/60 transition hover:border-black hover:text-black"
+              className="inline-flex border border-black/15 bg-white px-4 py-2 text-sm font-black text-black/60 transition hover:border-black hover:text-black"
             >
               {t("cart.addMore")}
             </Link>
           </div>
 
           {status === "sent" && (
-            <div className="mb-8 rounded-lg border border-emerald-500/20 bg-emerald-50 px-5 py-4">
+            <div className="mb-8 border border-emerald-500/20 bg-emerald-50 px-5 py-4">
               <h2 className="text-lg font-black">{t("cart.sentTitle")}</h2>
               <p className="mt-1 max-w-2xl text-sm font-medium text-black/60">
                 {t("cart.sentText")}
@@ -145,9 +145,9 @@ export default function PedidoPage() {
           <form onSubmit={handleSubmit} className="grid gap-8 lg:grid-cols-[1.1fr_0.9fr]">
               <section className="space-y-3 sm:space-y-4">
                 {!ready ? (
-                  <div className="h-28 animate-pulse rounded-lg border border-black/10 bg-white" />
+                  <div className="h-28 animate-pulse border border-black/10 bg-white" />
                 ) : items.length === 0 ? (
-                  <div className="rounded-lg border border-black/10 bg-white p-8">
+                  <div className=" border border-black/10 bg-white p-8">
                     <h2 className="text-xl font-black">{t("cart.emptyTitle")}</h2>
                     <p className="mt-2 text-black/55">
                       {t("cart.emptyText")}
@@ -157,9 +157,9 @@ export default function PedidoPage() {
                   items.map((item) => (
                     <article
                       key={item.id}
-                      className="grid grid-cols-[48px_minmax(0,1fr)_auto] items-center gap-3 rounded-lg border border-black/10 bg-white p-3 sm:grid-cols-[96px_1fr_auto] sm:gap-4 sm:p-4"
+                      className="grid grid-cols-[48px_minmax(0,1fr)_auto] items-center gap-3 border border-black/10 bg-white p-3 sm:grid-cols-[96px_1fr_auto] sm:gap-4 sm:p-4"
                     >
-                      <div className="flex h-12 w-12 items-center justify-center rounded-md bg-[#f7f7f4] sm:aspect-square sm:h-auto sm:w-auto">
+                      <div className="flex h-12 w-12 items-center justify-center bg-[#f7f7f4] sm:aspect-square sm:h-auto sm:w-auto">
                         {item.image ? (
                           <img
                             src={item.image}
@@ -195,7 +195,7 @@ export default function PedidoPage() {
                       </div>
 
                       <div className="flex flex-col items-end gap-2 sm:gap-3 sm:justify-center">
-                        <div className="grid grid-cols-3 rounded-full border border-black/10 bg-[#f7f7f4]">
+                        <div className="grid grid-cols-3 border border-black/10 bg-[#f7f7f4]">
                           <button
                             type="button"
                             onClick={() => updateQuantity(item.id, item.quantity - 1)}
@@ -232,7 +232,7 @@ export default function PedidoPage() {
                 )}
               </section>
 
-              <section className="rounded-lg border border-black/10 bg-white p-5 lg:sticky lg:top-24 lg:self-start">
+              <section className=" border border-black/10 bg-white p-5 lg:sticky lg:top-24 lg:self-start">
                 <div className="border-b border-black/10 pb-4">
                   <h2 className="text-xl font-black uppercase tracking-[0.02em]">
                     {t("cart.detailsTitle")}
@@ -254,7 +254,7 @@ export default function PedidoPage() {
                       type="text"
                       value={form.name}
                       onChange={(event) => setForm({ ...form, name: event.target.value })}
-                      className="w-full rounded-md border border-black/10 bg-[#f7f7f4] px-4 py-3 outline-none focus:border-black/40"
+                      className="w-full border border-black/10 bg-[#f7f7f4] px-4 py-3 outline-none focus:border-black/40"
                       required
                     />
                   </div>
@@ -270,7 +270,7 @@ export default function PedidoPage() {
                       type="email"
                       value={form.email}
                       onChange={(event) => setForm({ ...form, email: event.target.value })}
-                      className="w-full rounded-md border border-black/10 bg-[#f7f7f4] px-4 py-3 outline-none focus:border-black/40"
+                      className="w-full border border-black/10 bg-[#f7f7f4] px-4 py-3 outline-none focus:border-black/40"
                       required
                     />
                   </div>
@@ -288,7 +288,7 @@ export default function PedidoPage() {
                       type="tel"
                       value={form.phone}
                       onChange={(event) => setForm({ ...form, phone: event.target.value })}
-                      className="w-full rounded-md border border-black/10 bg-[#f7f7f4] px-4 py-3 outline-none focus:border-black/40"
+                      className="w-full border border-black/10 bg-[#f7f7f4] px-4 py-3 outline-none focus:border-black/40"
                     />
                   </div>
 
@@ -304,7 +304,7 @@ export default function PedidoPage() {
                         onChange={(event) =>
                           setForm({ ...form, pickupDate: event.target.value })
                         }
-                        className="w-full rounded-md border border-black/10 bg-[#f7f7f4] px-4 py-3 outline-none focus:border-black/40"
+                        className="w-full border border-black/10 bg-[#f7f7f4] px-4 py-3 outline-none focus:border-black/40"
                         required
                       />
                     </div>
@@ -320,7 +320,7 @@ export default function PedidoPage() {
                         onChange={(event) =>
                           setForm({ ...form, returnDate: event.target.value })
                         }
-                        className="w-full rounded-md border border-black/10 bg-[#f7f7f4] px-4 py-3 outline-none focus:border-black/40"
+                        className="w-full border border-black/10 bg-[#f7f7f4] px-4 py-3 outline-none focus:border-black/40"
                         required
                       />
                     </div>
@@ -337,7 +337,7 @@ export default function PedidoPage() {
                           key={option.value}
                           type="button"
                           onClick={() => setForm({ ...form, delivery: option.value })}
-                          className={`rounded-md border px-4 py-3 text-sm font-black transition ${
+                          className={` border px-4 py-3 text-sm font-black transition ${
                             form.delivery === option.value
                               ? "border-black bg-black text-white"
                               : "border-black/10 bg-[#f7f7f4] text-black/55 hover:border-black/35"
@@ -356,12 +356,12 @@ export default function PedidoPage() {
                       name="comments"
                       value={form.comments}
                       onChange={(event) => setForm({ ...form, comments: event.target.value })}
-                      className="min-h-32 w-full rounded-md border border-black/10 bg-[#f7f7f4] px-4 py-3 outline-none focus:border-black/40"
+                      className="min-h-32 w-full border border-black/10 bg-[#f7f7f4] px-4 py-3 outline-none focus:border-black/40"
                       placeholder={t("cart.commentsPlaceholder")}
                     />
                   </div>
 
-                  <div className="rounded-md bg-[#f7f7f4] p-4">
+                  <div className=" bg-[#f7f7f4] p-4">
                     <div className="flex items-center justify-between">
                       <span className="text-sm font-black uppercase tracking-[0.08em] text-black/45">
                         {t("cart.estimatedTotal")}
@@ -396,7 +396,7 @@ export default function PedidoPage() {
                   <FormPrivacyNotice purpose="order" />
 
                   {status === "error" && (
-                    <p className="rounded-md border border-rose-400/30 bg-rose-50 px-4 py-3 text-sm font-medium text-rose-700">
+                    <p className=" border border-rose-400/30 bg-rose-50 px-4 py-3 text-sm font-medium text-rose-700">
                       {errorMessage}
                     </p>
                   )}
@@ -404,7 +404,7 @@ export default function PedidoPage() {
                   <button
                     type="submit"
                     disabled={items.length === 0 || status === "sending"}
-                    className="w-full rounded-full bg-[#FFED00] px-6 py-4 text-sm font-black uppercase tracking-[0.12em] text-black transition hover:bg-black hover:text-white disabled:cursor-not-allowed disabled:opacity-40"
+                    className="w-full bg-[#FFED00] px-6 py-4 text-sm font-semibold uppercase tracking-[0.14em] text-black transition hover:bg-black hover:text-white disabled:cursor-not-allowed disabled:opacity-40"
                   >
                     {status === "sending" ? t("cart.sending") : t("cart.send")}
                   </button>

@@ -99,7 +99,7 @@ function ContactContent() {
             </div>
           </section>
 
-          <section className="rounded-lg border border-white/10 bg-[#0f0f0f] p-6 shadow-2xl sm:p-8">
+          <section className=" border border-white/10 bg-[#0f0f0f] p-6 sm:p-8">
             <form onSubmit={handleSubmit} className="space-y-6">
               <div>
                 <label htmlFor="contact-name" className="mb-2 block text-sm font-medium text-gray-300">{t("cart.name")}</label>
@@ -111,7 +111,7 @@ function ContactContent() {
                   type="text"
                   value={form.name}
                   onChange={(event) => setForm({ ...form, name: event.target.value })}
-                  className="w-full rounded-lg border border-white/10 bg-[#111111] px-4 py-3 text-white outline-none focus:border-white/50"
+                  className="w-full border border-white/10 bg-[#111111] px-4 py-3 text-white outline-none focus:border-white/50"
                   required
                 />
               </div>
@@ -127,7 +127,7 @@ function ContactContent() {
                     type="email"
                     value={form.email}
                     onChange={(event) => setForm({ ...form, email: event.target.value })}
-                    className="w-full rounded-lg border border-white/10 bg-[#111111] px-4 py-3 text-white outline-none focus:border-white/50"
+                    className="w-full border border-white/10 bg-[#111111] px-4 py-3 text-white outline-none focus:border-white/50"
                     required
                   />
                 </div>
@@ -142,7 +142,7 @@ function ContactContent() {
                     type="tel"
                     value={form.phone}
                     onChange={(event) => setForm({ ...form, phone: event.target.value })}
-                    className="w-full rounded-lg border border-white/10 bg-[#111111] px-4 py-3 text-white outline-none focus:border-white/50"
+                    className="w-full border border-white/10 bg-[#111111] px-4 py-3 text-white outline-none focus:border-white/50"
                   />
                 </div>
               </div>
@@ -155,7 +155,7 @@ function ContactContent() {
                   maxLength={5000}
                   value={form.message}
                   onChange={(event) => setForm({ ...form, message: event.target.value })}
-                  className="min-h-40 w-full rounded-lg border border-white/10 bg-[#111111] px-4 py-3 text-white outline-none focus:border-white/50"
+                  className="min-h-40 w-full border border-white/10 bg-[#111111] px-4 py-3 text-white outline-none focus:border-white/50"
                   required
                 />
               </div>
@@ -176,12 +176,12 @@ function ContactContent() {
               <FormPrivacyNotice purpose="contact" tone="dark" />
 
               {status === "sent" && (
-                <p className="rounded-lg border border-emerald-400/30 bg-emerald-400/10 px-4 py-3 text-emerald-200">
+                <p className=" border border-emerald-400/30 bg-emerald-400/10 px-4 py-3 text-emerald-200">
                   {t("contact.sent")}
                 </p>
               )}
               {status === "error" && (
-                <p className="rounded-lg border border-rose-400/30 bg-rose-400/10 px-4 py-3 text-rose-200">
+                <p className=" border border-rose-400/30 bg-rose-400/10 px-4 py-3 text-rose-200">
                   {t("contact.error")}
                 </p>
               )}
@@ -189,7 +189,7 @@ function ContactContent() {
               <button
                 type="submit"
                 disabled={status === "sending"}
-                className="w-full rounded-lg border border-white px-6 py-3 font-semibold uppercase tracking-[0.16em] text-white transition hover:bg-white hover:text-black disabled:opacity-60"
+                className="w-full bg-[#FFED00] px-6 py-4 text-sm font-semibold uppercase tracking-[0.14em] text-black transition hover:bg-white disabled:opacity-60"
               >
                 {status === "sending" ? t("contact.sending") : t("contact.send")}
               </button>

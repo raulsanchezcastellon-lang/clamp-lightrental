@@ -51,30 +51,33 @@ export default function LandingView({ content, lang }: { content: LandingContent
       <Header />
       <main className="bg-black text-white">
         {/* Hero */}
-        <section className="border-b border-white/10 px-4 pb-16 pt-28 sm:px-6 sm:pt-32 lg:px-8 lg:pt-40">
-          <div className="mx-auto max-w-5xl">
-            <p className="mb-4 text-xs font-black uppercase tracking-[0.2em] text-[#FFED00]">
+        <section className="border-b border-white/10">
+          <div className="mx-auto max-w-[1580px] px-4 pb-16 pt-28 sm:px-6 sm:pt-32 lg:px-8 lg:pb-20 lg:pt-40">
+            <p className="mb-6 text-xs font-semibold uppercase tracking-[0.22em] text-[#FFED00]">
               {hero.kicker}
             </p>
-            <h1 className="max-w-4xl text-4xl font-black uppercase leading-tight tracking-[0.01em] sm:text-5xl lg:text-6xl">
+            <h1 className="max-w-5xl text-5xl leading-[0.92] sm:text-6xl lg:text-7xl">
               {hero.title}
             </h1>
-            <p className="mt-6 max-w-2xl text-lg font-medium leading-relaxed text-white/70">
-              {hero.text}
-            </p>
-            <div className="mt-8 flex flex-wrap gap-4">
-              <Link
-                href={href("/catalogo")}
-                className="inline-flex items-center rounded-full bg-[#FFED00] px-8 py-3 text-sm font-black uppercase tracking-[0.1em] text-black transition hover:bg-white"
-              >
-                {hero.catalogCta}
-              </Link>
-              <Link
-                href={href("/contacto")}
-                className="inline-flex items-center rounded-full border border-white px-8 py-3 text-sm font-black uppercase tracking-[0.1em] text-white transition hover:bg-white hover:text-black"
-              >
-                {hero.quoteCta}
-              </Link>
+            <div className="mt-8 grid gap-8 border-t border-white/20 pt-8 lg:grid-cols-[1fr_auto] lg:items-end">
+              <p className="max-w-2xl text-base leading-relaxed text-white/70 sm:text-lg">{hero.text}</p>
+              <div className="flex flex-col gap-3 sm:flex-row">
+                <Link
+                  href={href("/catalogo")}
+                  className="group inline-flex items-center justify-between gap-6 bg-[#FFED00] px-6 py-4 text-sm font-semibold uppercase tracking-[0.14em] text-black transition hover:bg-white"
+                >
+                  {hero.catalogCta}
+                  <span aria-hidden="true" className="transition-transform group-hover:translate-x-1">
+                    →
+                  </span>
+                </Link>
+                <Link
+                  href={href("/contacto")}
+                  className="inline-flex items-center justify-center border border-white/60 px-6 py-4 text-sm font-semibold uppercase tracking-[0.14em] text-white transition hover:border-white hover:bg-white hover:text-black"
+                >
+                  {hero.quoteCta}
+                </Link>
+              </div>
             </div>
           </div>
         </section>
@@ -96,154 +99,148 @@ export default function LandingView({ content, lang }: { content: LandingContent
           </div>
         </section>
 
-        {/* Casos de uso */}
-        <section className="bg-black py-20">
-          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <h2 className="mb-16 text-center text-4xl font-black uppercase tracking-wide text-white">
+        {/* Casos de uso — columnas numeradas con líneas finas, como la portada */}
+        <section className="bg-black text-white">
+          <div className="mx-auto max-w-[1580px] px-4 py-20 sm:px-6 lg:px-8 lg:py-28">
+            <h2 className="mb-12 max-w-3xl text-4xl leading-[0.95] sm:text-5xl lg:mb-16 lg:text-6xl">
               {useCases.title}
             </h2>
-            <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
-              {useCases.items.map((useCase) => {
-                const cardClasses =
-                  "rounded-lg border border-gray-800 bg-gray-900 p-8 shadow-2xl transition-all duration-300 hover:shadow-3xl";
+            <ol className="grid border-t border-white/15 md:grid-cols-2 lg:grid-cols-4">
+              {useCases.items.map((useCase, index) => {
                 const inner = (
                   <>
-                    <h3 className="mb-3 text-xl font-semibold text-white">{useCase.title}</h3>
-                    <p className="text-gray-400">{useCase.text}</p>
+                    <span className="font-[family-name:var(--font-heading)] text-sm font-extrabold tracking-[0.12em] text-[#FFED00]">
+                      {String(index + 1).padStart(2, "0")}
+                    </span>
+                    <h3 className="mt-10 text-2xl leading-none sm:text-3xl lg:mt-16">{useCase.title}</h3>
+                    <p className="mt-4 max-w-sm text-base leading-relaxed text-white/60">{useCase.text}</p>
                     {useCase.href && useCases.moreLabel && (
-                      <span className="mt-3 inline-block text-sm font-black uppercase tracking-[0.08em] text-[#FFED00]">
+                      <span className="mt-6 inline-block text-sm font-semibold uppercase tracking-[0.14em] text-white underline decoration-white/40 underline-offset-8 transition group-hover:decoration-[#FFED00]">
                         {useCases.moreLabel} →
                       </span>
                     )}
                   </>
                 );
+                const cellClasses =
+                  "border-b border-white/15 py-8 md:px-8 md:py-10 md:odd:pl-0 lg:border-b-0 lg:border-l lg:odd:pl-8 lg:first:border-l-0 lg:first:pl-0";
 
-                return useCase.href ? (
-                  <Link
-                    key={useCase.title}
-                    href={href(useCase.href)}
-                    className={`${cardClasses} block hover:border-gray-600`}
-                  >
-                    {inner}
-                  </Link>
-                ) : (
-                  <div key={useCase.title} className={cardClasses}>
-                    {inner}
-                  </div>
+                return (
+                  <li key={useCase.title} className={cellClasses}>
+                    {useCase.href ? (
+                      <Link href={href(useCase.href)} className="group block">
+                        {inner}
+                      </Link>
+                    ) : (
+                      inner
+                    )}
+                  </li>
                 );
               })}
-            </div>
+            </ol>
           </div>
         </section>
 
         {/* Equipamiento */}
-        <section className="overflow-hidden bg-[#0f1726] px-4 py-16 text-white sm:px-6 lg:px-8">
-          <div className="mx-auto max-w-7xl">
+        <section className="border-t border-white/10 bg-black text-white">
+          <div className="mx-auto max-w-[1580px] px-4 py-20 sm:px-6 lg:px-8">
             <div className="mb-10 max-w-3xl">
-              <p className="mb-3 text-xs font-black uppercase tracking-[0.2em] text-[#FFED00]">
+              <p className="mb-4 text-xs font-semibold uppercase tracking-[0.22em] text-[#FFED00]">
                 {gear.eyebrow}
               </p>
-              <h2 className="text-3xl font-black uppercase leading-tight tracking-[0.02em] sm:text-4xl">
-                {gear.title}
-              </h2>
-              {gear.text && <p className="mt-4 max-w-2xl text-white/60">{gear.text}</p>}
+              <h2 className="text-4xl leading-[0.95] sm:text-5xl">{gear.title}</h2>
+              {gear.text && <p className="mt-6 max-w-2xl leading-relaxed text-white/60">{gear.text}</p>}
             </div>
             {gear.items && (
-              <ul className="grid gap-4 sm:grid-cols-2">
+              <ul className="grid border-t border-white/15 sm:grid-cols-2">
                 {gear.items.map((item) => (
                   <li
                     key={item}
-                    className="flex items-start gap-3 rounded-lg border border-white/10 bg-white/5 p-4 text-white/80"
+                    className="flex items-start gap-4 border-b border-white/15 py-4 text-white/80 sm:odd:pr-8 sm:even:border-l sm:even:pl-8"
                   >
-                    <span
-                      aria-hidden="true"
-                      className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-[#FFED00]"
-                    />
+                    <span aria-hidden="true" className="mt-2.5 h-px w-4 shrink-0 bg-[#FFED00]" />
                     {item}
                   </li>
                 ))}
               </ul>
             )}
             {gear.brands && (
-              <div className="flex flex-wrap gap-3">
+              <ul className="flex w-fit max-w-full flex-wrap gap-px border border-white/15 bg-white/15">
                 {gear.brands.map((brand) => (
-                  <span
+                  <li
                     key={brand}
-                    className="rounded-full border border-white/20 px-5 py-2 text-sm font-semibold uppercase tracking-[0.08em] text-white/80"
+                    className="bg-black px-5 py-3 text-sm font-semibold uppercase tracking-[0.14em] text-white/80"
                   >
                     {brand}
-                  </span>
+                  </li>
                 ))}
-              </div>
+              </ul>
             )}
             <Link
               href={href("/catalogo")}
-              className="mt-8 inline-flex w-fit items-center rounded-full border border-white px-8 py-3 text-sm font-black uppercase tracking-[0.1em] text-white transition hover:bg-white hover:text-black"
+              className="group mt-10 inline-flex w-fit items-center gap-8 border border-white/60 px-6 py-4 text-sm font-semibold uppercase tracking-[0.14em] text-white transition hover:border-white hover:bg-white hover:text-black"
             >
               {gear.cta}
+              <span aria-hidden="true" className="transition-transform group-hover:translate-x-1">
+                →
+              </span>
             </Link>
           </div>
         </section>
 
         {/* Zona de servicio */}
-        <section className="bg-[#f7f7f4] px-4 py-16 text-black sm:px-6 lg:px-8">
+        <section className="bg-[#f7f7f4] px-4 py-16 text-black sm:px-6 lg:px-8 lg:py-24">
           <div
             className={
               coverage.image
-                ? "mx-auto grid max-w-6xl gap-10 lg:grid-cols-[1fr_1fr] lg:items-center"
+                ? "mx-auto grid max-w-[1580px] gap-10 lg:grid-cols-[1fr_1fr] lg:items-center"
                 : "mx-auto max-w-3xl"
             }
           >
             <div>
-              <h2 className="text-3xl font-black uppercase leading-tight tracking-[0.02em] sm:text-4xl">
-                {coverage.title}
-              </h2>
-              <p className="mt-4 max-w-xl text-lg font-medium leading-relaxed text-black/60">
+              <h2 className="text-4xl leading-[0.95] sm:text-5xl">{coverage.title}</h2>
+              <p className="mt-6 max-w-xl text-lg font-medium leading-relaxed text-black/60">
                 {coverage.text}
               </p>
             </div>
             {coverage.image && (
-              <div className="relative min-h-[280px] overflow-hidden rounded-lg bg-black lg:min-h-[360px]">
+              <div className="relative min-h-[280px] overflow-hidden bg-black lg:min-h-[420px]">
                 <Image src={coverage.image.src} alt={coverage.image.alt} fill className="object-cover" />
               </div>
             )}
           </div>
         </section>
 
-        {/* FAQ */}
-        <section className="bg-black px-4 py-20 sm:px-6 lg:px-8">
-          <div className="mx-auto max-w-3xl">
-            <h2 className="mb-10 text-center text-4xl font-black uppercase tracking-wide text-white">
-              {faq.title}
-            </h2>
-            <div className="space-y-4">
-              {faq.items.map((item) => (
-                <details
-                  key={item.q}
-                  className="group rounded-lg border border-gray-800 bg-gray-900 p-6 open:bg-gray-900/80"
-                >
-                  <summary className="flex cursor-pointer list-none items-start justify-between gap-4 text-lg font-semibold text-white marker:content-none [&::-webkit-details-marker]:hidden">
-                    <span>{item.q}</span>
-                    <span
-                      aria-hidden="true"
-                      className="mt-0.5 flex h-7 w-7 shrink-0 items-center justify-center rounded-full border border-white/25 text-base leading-none text-[#FFED00] transition-transform group-open:rotate-45"
-                    >
-                      +
-                    </span>
-                  </summary>
-                  <p className="mt-3 text-gray-400">{item.a}</p>
-                </details>
-              ))}
+        {/* FAQ — lista con líneas finas, sin tarjetas */}
+        <section className="bg-black px-4 py-20 sm:px-6 lg:px-8 lg:py-28">
+          <div className="mx-auto grid max-w-[1580px] gap-10 lg:grid-cols-[1fr_2fr]">
+            <h2 className="text-4xl leading-[0.95] sm:text-5xl">{faq.title}</h2>
+            <div>
+              <div className="border-t border-white/15">
+                {faq.items.map((item) => (
+                  <details key={item.q} className="group border-b border-white/15">
+                    <summary className="flex cursor-pointer list-none items-start justify-between gap-6 py-6 text-lg font-medium text-white marker:content-none [&::-webkit-details-marker]:hidden">
+                      <span>{item.q}</span>
+                      <span
+                        aria-hidden="true"
+                        className="mt-0.5 flex h-7 w-7 shrink-0 items-center justify-center border border-white/25 text-base leading-none text-[#FFED00] transition-transform group-open:rotate-45"
+                      >
+                        +
+                      </span>
+                    </summary>
+                    <p className="max-w-2xl pb-6 leading-relaxed text-white/60">{item.a}</p>
+                  </details>
+                ))}
+              </div>
+              {footerNote && (
+                <p className="mt-10 text-white/50">
+                  {footerNote.text}{" "}
+                  <Link href={href(footerNote.href)} className="underline underline-offset-4 hover:no-underline">
+                    {footerNote.linkText}
+                  </Link>
+                  .
+                </p>
+              )}
             </div>
-            {footerNote && (
-              <p className="mt-10 text-center text-white/50">
-                {footerNote.text}{" "}
-                <Link href={href(footerNote.href)} className="underline underline-offset-4 hover:no-underline">
-                  {footerNote.linkText}
-                </Link>
-                .
-              </p>
-            )}
           </div>
         </section>
       </main>
