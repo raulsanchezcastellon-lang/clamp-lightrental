@@ -9,20 +9,16 @@ export default function PoliticaCookies() {
       </section>
 
       <section className="mb-8">
-        <h2 className="text-xl font-semibold mb-3">2. Tipos de cookies que utilizamos</h2>
+        <h2 className="text-xl font-semibold mb-3">2. Qué utiliza este sitio web</h2>
+        <p>Este sitio web <strong>solo utiliza cookies y almacenamiento local técnicos</strong>, imprescindibles para su funcionamiento (por ejemplo, recordar el carrito de pedido). Al ser estrictamente necesarios, no requieren consentimiento.</p>
+        <p className="mt-3">No utilizamos cookies publicitarias, de seguimiento ni de terceros.</p>
 
-        <h3 className="font-semibold mt-4 mb-2">Cookies técnicas (necesarias)</h3>
-        <p>Son imprescindibles para el funcionamiento del sitio web. No requieren consentimiento del usuario. Permiten la navegación y el uso de las funcionalidades básicas del sitio.</p>
-
-        <h3 className="font-semibold mt-4 mb-2">Cookies de preferencias</h3>
-        <p>Permiten recordar información como el idioma seleccionado o la región desde la que se accede, para ofrecer contenidos personalizados.</p>
-
-        <h3 className="font-semibold mt-4 mb-2">Cookies analíticas</h3>
-        <p>Nos ayudan a entender cómo los usuarios interactúan con el sitio web, recopilando información de forma anónima. Utilizamos esta información para mejorar el contenido y la experiencia de usuario.</p>
+        <h3 className="font-semibold mt-4 mb-2">Medición de visitas sin cookies</h3>
+        <p>Para conocer el número de visitas y el rendimiento de la web utilizamos Vercel Web Analytics y Vercel Speed Insights. Estas herramientas no instalan cookies ni almacenan nada en su dispositivo, y solo generan estadísticas agregadas y anónimas (páginas visitadas, país, tipo de dispositivo) que no permiten identificar a ninguna persona.</p>
       </section>
 
       <section className="mb-8">
-        <h2 className="text-xl font-semibold mb-3">3. Tabla de cookies</h2>
+        <h2 className="text-xl font-semibold mb-3">3. Tabla de cookies y almacenamiento</h2>
         <div className="overflow-x-auto mt-2">
           <table className="w-full border-collapse text-xs">
             <thead>
@@ -35,16 +31,22 @@ export default function PoliticaCookies() {
             </thead>
             <tbody>
               <tr>
-                <td className="border border-gray-300 px-3 py-2">session</td>
-                <td className="border border-gray-300 px-3 py-2">Técnica</td>
-                <td className="border border-gray-300 px-3 py-2">Mantener la sesión del usuario</td>
-                <td className="border border-gray-300 px-3 py-2">Sesión</td>
+                <td className="border border-gray-300 px-3 py-2">auth-token</td>
+                <td className="border border-gray-300 px-3 py-2">Cookie técnica</td>
+                <td className="border border-gray-300 px-3 py-2">Mantener la sesión del panel de administración (solo personal de CLAMP; los visitantes no la reciben)</td>
+                <td className="border border-gray-300 px-3 py-2">7 días</td>
               </tr>
               <tr>
-                <td className="border border-gray-300 px-3 py-2">lang</td>
-                <td className="border border-gray-300 px-3 py-2">Preferencias</td>
-                <td className="border border-gray-300 px-3 py-2">Recordar idioma seleccionado</td>
-                <td className="border border-gray-300 px-3 py-2">1 año</td>
+                <td className="border border-gray-300 px-3 py-2">clamp-cart</td>
+                <td className="border border-gray-300 px-3 py-2">Almacenamiento local técnico</td>
+                <td className="border border-gray-300 px-3 py-2">Guardar los productos añadidos al carrito de pedido</td>
+                <td className="border border-gray-300 px-3 py-2">Hasta que se vacía el carrito o se borran los datos del navegador</td>
+              </tr>
+              <tr>
+                <td className="border border-gray-300 px-3 py-2">clamp-lang-suggestion-dismissed</td>
+                <td className="border border-gray-300 px-3 py-2">Almacenamiento local técnico</td>
+                <td className="border border-gray-300 px-3 py-2">Recordar que se ha cerrado el aviso de versión en otro idioma</td>
+                <td className="border border-gray-300 px-3 py-2">Hasta que se borran los datos del navegador</td>
               </tr>
             </tbody>
           </table>
@@ -73,7 +75,7 @@ export default function PoliticaCookies() {
         <p>Para cualquier consulta sobre el uso de cookies, puede contactar con nosotros en <strong>raul@clamp-lightrental.com</strong>.</p>
       </section>
 
-      <p className="text-gray-500 mt-10">Última actualización: mayo de 2025</p>
+      <p className="text-gray-500 mt-10">Última actualización: octubre de 2026</p>
     </main>
   );
 }
