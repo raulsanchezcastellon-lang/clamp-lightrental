@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import prisma from "@/lib/prisma";
-import { hashPassword, verifyPassword } from "@/lib/password";
+import { verifyPassword } from "@/lib/password";
 import { createToken } from "@/lib/auth";
 import { getClientIp, isRateLimited } from "@/lib/rateLimit";
 
@@ -20,7 +20,7 @@ export async function POST(request: NextRequest) {
     }
 
     const admin = await prisma.admin.findUnique({
-      where: { email },
+      where: { email: email.trim().toLowerCase() },
     });
 
     if (!admin) {

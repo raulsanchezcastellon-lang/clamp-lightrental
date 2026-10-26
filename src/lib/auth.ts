@@ -1,6 +1,7 @@
 import jwt from "jsonwebtoken";
 import { cookies } from "next/headers";
 import { NextResponse } from "next/server";
+import prisma from "@/lib/prisma";
 
 /**
  * Sin JWT_SECRET no hay sesiones: nunca se usa un valor por defecto, porque
@@ -32,7 +33,23 @@ export async function getAdminFromToken() {
 
   if (!token) return null;
 
-  return verifyToken(token);
+  const payload = await verifyToken(token);
+  if (!payload) return null;
+
+  // La sesión solo vale si el administrador sigue existiendo y no ha cambiado la
+  // contraseña después de iniciarla (así un cambio de contraseña cierra las demás sesiones).
+  const admin = await prisma.admin.findUnique({
+    where: { id: payload.adminId },
+    select: { passwordChangedAt: true },
+  });
+  if (!admin) return null;
+
+  if (admin.passwordChangedAt) {
+    const changedAtSeconds = Math.floor(admin.passwordChangedAt.getTime() / 1000);
+    if (payload.iat < changedAtSeconds) return null;
+  }
+
+  return payload;
 }
 
 /**

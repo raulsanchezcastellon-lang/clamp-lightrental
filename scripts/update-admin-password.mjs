@@ -20,7 +20,7 @@ try {
   const password = await bcrypt.hash(newPassword, 10);
   const admin = await prisma.admin.update({
     where: { email },
-    data: { password },
+    data: { password, passwordChangedAt: new Date() },
     select: { email: true, name: true, updatedAt: true },
   });
 
