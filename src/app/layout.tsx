@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import { headers } from "next/headers";
+import { Analytics } from "@vercel/analytics/next";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Barlow, Barlow_Condensed } from "next/font/google";
 import { CartProvider } from "@/components/CartProvider";
 import CookieConsentBanner from "@/components/CookieConsentBanner";
@@ -178,6 +180,8 @@ export default async function RootLayout({
             <WhatsAppButton />
           </CartProvider>
         </LanguageProvider>
+        <Analytics />
+        <SpeedInsights />
       </body>
     </html>
   );
