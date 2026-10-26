@@ -34,7 +34,7 @@ export default function ProductDetailActions({
 
   return (
     <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center">
-      <div className="grid w-32 grid-cols-3 rounded-full border border-black/15 bg-white">
+      <div className="grid w-32 grid-cols-3 border border-black/15 bg-white">
         <button
           type="button"
           onClick={() => setQuantity((q) => Math.max(1, q - 1))}
@@ -58,20 +58,20 @@ export default function ProductDetailActions({
       <button
         type="button"
         onClick={handleAdd}
-        className="h-11 rounded-full bg-[#FFED00] px-6 text-sm font-black text-black transition hover:bg-black hover:text-white"
+        className="h-11 bg-[#FFED00] px-6 text-sm font-semibold uppercase tracking-[0.14em] text-black transition hover:bg-black hover:text-white"
       >
         {t("product.add")}
       </button>
       <Link
         href={href(`/contacto?product=${encodeURIComponent(product.name)}${listingType === "sale" ? "&type=sale" : ""}`)}
-        className="inline-flex h-11 items-center justify-center rounded-full border border-black px-6 text-sm font-black text-black transition hover:bg-black hover:text-white"
+        className="inline-flex h-11 items-center justify-center border border-black px-6 text-sm font-semibold uppercase tracking-[0.14em] text-black transition hover:bg-black hover:text-white"
       >
         {t("product.quote")}
       </Link>
       {added && (
         <p
           role="status"
-          className="flex w-full items-center gap-3 rounded-lg bg-black px-4 py-3 text-sm font-bold text-white"
+          className="flex w-full items-center gap-3 bg-black px-4 py-3 text-sm font-bold text-white"
         >
           <span aria-hidden="true" className="text-[#FFED00]">✓</span>
           <span>{t("product.added")}</span>
