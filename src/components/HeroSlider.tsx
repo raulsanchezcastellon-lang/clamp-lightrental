@@ -16,7 +16,9 @@ type Slide = {
 const SLIDES: Slide[] = [
   { image: "/CS32_Lifesytle.jpg", mobileImage: "/CS32_mobile.jpg", mobilePosition: "center top" },
   { image: "/main1.webp", mobilePosition: "50% center" },
+  { image: "/aputure_family.jpg", mobilePosition: "74% center" },
   { image: "/main3.webp", mobilePosition: "68% center" },
+  { image: "/storm1200xbeyond.jpg", mobilePosition: "62% center" },
 ];
 const SLIDE_DURATION_MS = 6000;
 
