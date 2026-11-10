@@ -14,10 +14,10 @@ type Slide = {
 };
 
 const SLIDES: Slide[] = [
-  { image: "/CS32_Lifesytle.jpg", mobileImage: "/CS32_mobile.jpg" },
-  { image: "/about2.webp" },
-  { image: "/main1.webp" },
-  { image: "/main3.webp" },
+  { image: "/CS32_Lifesytle.jpg", mobileImage: "/CS32_mobile.jpg", mobilePosition: "center top" },
+  { image: "/about2.webp", mobilePosition: "25% center" },
+  { image: "/main1.webp", mobilePosition: "50% center" },
+  { image: "/main3.webp", mobilePosition: "68% center" },
 ];
 const SLIDE_DURATION_MS = 6000;
 
@@ -40,8 +40,9 @@ export default function HeroSlider() {
   }, [activeIndex]);
 
   return (
-    <section className="relative min-h-screen overflow-hidden bg-black text-white supports-[height:100svh]:min-h-[100svh]">
-      <div className="absolute inset-0">
+    <section className="relative overflow-hidden bg-black text-white md:min-h-screen md:supports-[height:100svh]:min-h-[100svh]">
+      {/* Phones: picture in its own band under the header, text below it. Tablet/desktop: full-bleed picture behind the text. */}
+      <div className="absolute inset-x-0 top-16 h-[50svh] md:inset-0 md:h-auto">
         {SLIDES.map((slide, index) => (
           <div
             key={slide.image}
@@ -57,12 +58,13 @@ export default function HeroSlider() {
             }
           />
         ))}
-        <div className="absolute inset-0 bg-gradient-to-t from-black via-black/55 to-black/25" />
-        <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/20 to-transparent" />
+        <div className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-black to-transparent md:hidden" />
+        <div className="absolute inset-0 hidden bg-gradient-to-t from-black via-black/55 to-black/25 md:block" />
+        <div className="absolute inset-0 hidden bg-gradient-to-r from-black/70 via-black/20 to-transparent md:block" />
       </div>
 
-      <div className="relative z-10 mx-auto flex min-h-screen max-w-[1580px] flex-col justify-end px-4 pb-14 pt-32 supports-[height:100svh]:min-h-[100svh] sm:px-6 lg:px-8 lg:pb-16">
-        <ul className="mb-6 flex flex-wrap items-center gap-x-4 gap-y-2 text-[0.7rem] font-semibold uppercase tracking-[0.22em] text-white/70 sm:text-xs">
+      <div className="relative z-10 mx-auto flex max-w-[1580px] flex-col justify-end px-4 pb-10 pt-[calc(4rem+50svh-1.5rem)] sm:px-6 md:min-h-screen md:pb-14 md:pt-32 md:supports-[height:100svh]:min-h-[100svh] lg:px-8 lg:pb-16">
+        <ul className="mb-6 hidden flex-wrap items-center gap-x-4 gap-y-2 text-[0.7rem] font-semibold uppercase tracking-[0.22em] text-white/70 sm:text-xs md:flex">
           {kickerParts.map((part, index) => (
             <li key={part} className="flex items-center gap-4">
               {index > 0 && <span aria-hidden="true" className="h-1 w-1 bg-[#FFED00] sm:h-px sm:w-6" />}
@@ -71,16 +73,16 @@ export default function HeroSlider() {
           ))}
         </ul>
 
-        <h1 className="max-w-5xl text-5xl leading-[0.92] tracking-[-0.005em] sm:text-7xl lg:text-[6.75rem]">
+        <h1 className="max-w-5xl text-[2.6rem] leading-[0.92] tracking-[-0.005em] sm:text-7xl lg:text-[6.75rem]">
           {t("hero.title")}
         </h1>
 
-        <div className="mt-8 grid gap-10 border-t border-white/20 pt-8 lg:grid-cols-[1fr_auto] lg:items-end">
+        <div className="mt-6 grid gap-8 border-t border-white/20 pt-6 md:mt-8 md:gap-10 md:pt-8 lg:grid-cols-[1fr_auto] lg:items-end">
           <div>
-            <p className="max-w-xl text-base leading-relaxed text-white/75 sm:text-lg">
+            <p className="max-w-xl text-[0.95rem] leading-relaxed text-white/75 sm:text-lg">
               {t("hero.subtitle")}
             </p>
-            <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+            <div className="mt-6 flex flex-col gap-3 sm:flex-row md:mt-8">
               <Link
                 href={href("/catalogo")}
                 className="group inline-flex items-center justify-between gap-6 bg-[#FFED00] px-6 py-4 text-sm font-semibold uppercase tracking-[0.14em] text-black transition hover:bg-white"
@@ -92,7 +94,7 @@ export default function HeroSlider() {
               </Link>
               <Link
                 href={href("/contacto")}
-                className="inline-flex items-center justify-center border border-white/60 px-6 py-4 text-sm font-semibold uppercase tracking-[0.14em] text-white transition hover:border-white hover:bg-white hover:text-black"
+                className="hidden items-center justify-center border border-white/60 px-6 py-4 text-sm font-semibold uppercase tracking-[0.14em] text-white transition hover:border-white hover:bg-white hover:text-black md:inline-flex"
               >
                 {t("hero.quote")}
               </Link>
