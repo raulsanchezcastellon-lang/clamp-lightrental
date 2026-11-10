@@ -69,3 +69,15 @@ h3 {
   font-weight: 800;
   text-transform: uppercase;
 }
+
+/* Hero slider: portrait image + focal point on phones, wide image from tablet up */
+.hero-slide {
+  background-image: var(--slide-mobile);
+  background-position: var(--slide-mobile-position, center);
+}
+@media (min-width: 768px) {
+  .hero-slide {
+    background-image: var(--slide-desktop);
+    background-position: center;
+  }
+}

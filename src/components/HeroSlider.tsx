@@ -2,9 +2,23 @@
 
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import type React from "react";
 import { useLanguage } from "@/components/LanguageProvider";
 
-const SLIDES = [{ image: "about2.webp" }, { image: "main1.webp" }, { image: "main3.webp" }];
+type Slide = {
+  image: string;
+  /** Optional portrait version used on phones, so the subject stays visible. */
+  mobileImage?: string;
+  /** Focal point used when cropping on phones if there is no mobile image (CSS background-position). */
+  mobilePosition?: string;
+};
+
+const SLIDES: Slide[] = [
+  { image: "/CS32_Lifesytle.jpg", mobileImage: "/CS32_mobile.jpg" },
+  { image: "/about2.webp" },
+  { image: "/main1.webp" },
+  { image: "/main3.webp" },
+];
 const SLIDE_DURATION_MS = 6000;
 
 const pad = (value: number) => String(value).padStart(2, "0");
@@ -31,10 +45,16 @@ export default function HeroSlider() {
         {SLIDES.map((slide, index) => (
           <div
             key={slide.image}
-            className={`absolute inset-0 bg-cover bg-center transition-opacity duration-1000 ${
+            className={`hero-slide absolute inset-0 bg-cover transition-opacity duration-1000 ${
               index === activeIndex ? "opacity-100" : "opacity-0"
             }`}
-            style={{ backgroundImage: `url(${slide.image})` }}
+            style={
+              {
+                "--slide-desktop": `url(${slide.image})`,
+                "--slide-mobile": `url(${slide.mobileImage ?? slide.image})`,
+                "--slide-mobile-position": slide.mobilePosition ?? "center",
+              } as React.CSSProperties
+            }
           />
         ))}
         <div className="absolute inset-0 bg-gradient-to-t from-black via-black/55 to-black/25" />
